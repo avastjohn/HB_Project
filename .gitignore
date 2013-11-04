@@ -1,5 +1,12 @@
 *.py[co]
 
+# My dev environment
+projenv
+
+# Databases..? "*.db"
+
+
+
 # Packages
 *.egg
 *.egg-info
@@ -26,5 +33,3 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-# My dev environment
-projenv
