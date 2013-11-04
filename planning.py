@@ -6,3 +6,4 @@
 
 ####### make a gitignore!! #########
 
+# Working stuff out with github and stuff
