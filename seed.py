@@ -34,11 +34,45 @@ def load_levels():
     l3 = model.Level(map = "GGGt GGpp GppG apGG")
     model.session.add(l3)
 
+def load_user_levels():
+    # pinkie does levels 1 and 2
+    u_l1 = model.UserLevel(user_id=1, 
+                        level_id=1,
+                        current_level_input="rr",
+                        complete=1)
+    model.session.add(u_l1)
+
+    u_l2 = model.UserLevel(user_id=1, 
+                        level_id=2,
+                        current_level_input="ru",
+                        complete=0)
+    model.session.add(u_l2)
+
+    # twilight does three levels
+    u_l3 = model.UserLevel(user_id=3, 
+                        level_id=1,
+                        current_level_input="rr",
+                        complete=1)
+    model.session.add(u_l3)
+
+    u_l4 = model.UserLevel(user_id=3, 
+                        level_id=2,
+                        current_level_input="rur",
+                        complete=1)
+    model.session.add(u_l4)
+
+    u_l5 = model.UserLevel(user_id=3, 
+                        level_id=3,
+                        current_level_input="ruR",
+                        complete=1)
+    model.session.add(u_l5)
+
 
 def main():
     model.create_tables()
     load_users()
     load_levels()
+    load_user_levels()
     model.session.commit()
 
 if __name__ == "__main__":

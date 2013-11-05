@@ -47,16 +47,14 @@ class Level(Base):
     map = Column(String(64), nullable=False)
 
 
-    """
-    created_at = Column(DateTime, nullable=False, default=datetime.now)
-    posted_at = Column(DateTime, nullable=True, default=None)
-    """
-
 class UserLevel(Base):
     __tablename__ = "user_levels"
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     level_id = Column(Integer, ForeignKey("levels.id"))
+    last_saved = Column(DateTime, nullable=False, default=datetime.now)
+    current_level_input = Column(String(64), nullable=False, default=" ")
+    complete = Column(Integer, default=0)
 
     levels = relationship("Level")
 
