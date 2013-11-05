@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
-from model import User, Post
+from model import User, Level
 from flask.ext.login import LoginManager, login_required, login_user, current_user
 from flaskext.markdown import Markdown
 import config
@@ -25,9 +25,9 @@ Markdown(app)
 
 @app.route("/")
 def index():
-    posts = Post.query.all()
-    return render_template("index.html", posts=posts)
-
+    levels = Level.query.all()
+    return render_template("index.html", levels=levels)
+"""
 @app.route("/post/<int:id>")
 def view_post(id):
     post = Post.query.get(id)
@@ -77,6 +77,6 @@ def authenticate():
     login_user(user)
     return redirect(request.args.get("next", url_for("index")))
 
-
+"""
 if __name__ == "__main__":
     app.run(debug=True)

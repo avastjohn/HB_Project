@@ -2,8 +2,9 @@
 
 # skaffold - auto generates views for you based on your model
 # flask wtforms - this field is required, this field must be a number, this field must be a datetime
-# flask_template from Christian's github
 
-####### make a gitignore!! #########
 
-# Working stuff out with github and stuff
+# Nov 4 (Mon):
+# got github repo working
+# cloned templates
+# figured out structure for db, made proto in sqlite3

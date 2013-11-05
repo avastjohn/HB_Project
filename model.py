@@ -21,42 +21,56 @@ Base.query = session.query_property()
 class User(Base, UserMixin):
     __tablename__ = "users" 
     id = Column(Integer, primary_key=True)
-    email = Column(String(64), nullable=False)
-    password = Column(String(64), nullable=False)
+    username = Column(String(64), nullable=False)
+    pettype = Column(String(64), nullable=False)
+    petname = Column(String(64), nullable=False)
     salt = Column(String(64), nullable=False)
+    pw = Column(String(64), nullable=False)
 
-    posts = relationship("Post", uselist=True)
+    user_levels = relationship("UserLevel", uselist=True)
 
     def set_password(self, password):
         self.salt = bcrypt.gensalt()
         password = password.encode("utf-8")
-        self.password = bcrypt.hashpw(password, self.salt)
+        self.pw = bcrypt.hashpw(password, self.salt)
 
     def authenticate(self, password):
         password = password.encode("utf-8")
-        return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.password
+        return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.pw
 
-class Post(Base):
-    __tablename__ = "posts"
+
+
+class Level(Base):
+    __tablename__ = "levels"
     
     id = Column(Integer, primary_key=True)
-    title = Column(String(64), nullable=False)
-    body = Column(Text, nullable=False)
+    map = Column(String(64), nullable=False)
+
+
+    """
     created_at = Column(DateTime, nullable=False, default=datetime.now)
     posted_at = Column(DateTime, nullable=True, default=None)
-    user_id = Column(Integer, ForeignKey("users.id"))
+    """
 
-    user = relationship("User")
+class UserLevel(Base):
+    __tablename__ = "user_levels"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    level_id = Column(Integer, ForeignKey("levels.id"))
+
+    levels = relationship("Level")
 
 
 def create_tables():
     Base.metadata.create_all(engine)
-    u = User(email="test@test.com")
-    u.set_password("unicorn")
-    session.add(u)
-    p = Post(title="This is a test post", body="This is the body of a test post.")
-    u.posts.append(p)
-    session.commit()
+# put the stuff in seed.py for creating a starter db, but keep create tables in here.
+    # u = User(email="test@test.com")
+    # u.set_password("unicorn")
+    # session.add(u)
+    # p = Post(title="This is a test post", body="This is the body of a test post.")
+    # u.posts.append(p)
+    # session.commit()
+
 
 if __name__ == "__main__":
     create_tables()
