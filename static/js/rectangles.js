@@ -11,8 +11,8 @@ window.onload = function() {
     var tiles = {
         "G": "#197c57",
         "p": "#96b124",
-        "a": "http://i278.photobucket.com/albums/kk90/thrila_from_manila/tiny%20graphics/bth_56916f0f.gif",
-        "t": "http://a0.twimg.com/profile_images/2187028467/tiny_star_normal.png"
+        "a": "http://i.imgur.com/3i4vM4S.png",
+        "t": "http://i.imgur.com/F1n6SZW.png"
     }
 
     var mkSquare = function(x, y, color) {
