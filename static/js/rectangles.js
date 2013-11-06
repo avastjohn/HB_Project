@@ -42,12 +42,6 @@ window.onload = function() {
         }
     }
 
-    // var square1 = mkSquare(0, 0, "Gold");
-    // var square2 = mkSquare(0, 1, "Blue");
-    // var square3 = mkSquare(1, 0, "HotPink");
-    // var square4 = mkSquare(2, 0, "Orange")
-
-    // var tester = parseMap("I heart ponies");
     var tester = drawMap(sampleMap);
 
 }

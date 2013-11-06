@@ -79,11 +79,18 @@ def load_user_levels():
                         complete=1)
     model.session.add(u_l5)
 
+    # fluttershy does two levels
     u_l6 = model.UserLevel(user_id=5,
                         level_id=1,
-                        current_level_input=" ",
-                        complete=0)
+                        current_level_input="rr",
+                        complete=1)
     model.session.add(u_l6)
+
+    u_l7 = model.UserLevel(user_id=5,
+                        level_id=2,
+                        current_level_input="rrrrrr",
+                        complete=0)
+    model.session.add(u_l7)
 
 def main():
     model.create_tables()

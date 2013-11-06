@@ -1,10 +1,11 @@
-# Planning for my project:
-
-# skaffold - auto generates views for you based on your model
-# flask wtforms - this field is required, this field must be a number, this field must be a datetime
-
+# Progress:
 
 # Nov 4 (Mon):
 # got github repo working
 # cloned templates
 # figured out structure for db, made proto in sqlite3
+
+# Nov 5 (Tues)
+# made seed.py/put in sample data
+# got databse working
+# created canvas with js functions that convert map string to actual squares on canvas
