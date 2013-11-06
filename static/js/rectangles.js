@@ -5,8 +5,15 @@ window.onload = function() {
 
     var UNIT_SIZE = 100;
 
-    var backMap = "GGGp GGpp GppG ppGG"
-    var foreMap = "nnnt nnnn nnnn annn"
+        // level one
+    var backMap = "GGG ppp GGG"
+    var foreMap = "nnn ant nnn"
+        // level two
+    // var backMap = "GGGG GppG ppGG GGGG"
+    // var foreMap = "nnnn nntn annn nnnn"
+        // level three
+    // var backMap = "GGGp GGpp GppG ppGG"
+    // var foreMap = "nnnt nnnn nnnn annn"
 
     var tiles = {
         "G": "#197c57",
@@ -25,11 +32,17 @@ window.onload = function() {
         context.stroke();
     }
 
-    var placeGraphic = function(x, y, imgsrc) {
+    var placeGraphic = function(x, y, imgsrc, tall) {
         var graphic = new Image();
-        graphic.onload = function() {
-            context.drawImage(graphic, (x*UNIT_SIZE+30), (y*UNIT_SIZE+30));
-        };
+        if (tall == true) {
+            graphic.onload = function() {
+                context.drawImage(graphic, (x*UNIT_SIZE+30), (y*UNIT_SIZE));
+            };
+        } else {
+            graphic.onload = function() {
+                context.drawImage(graphic, (x*UNIT_SIZE+30), (y*UNIT_SIZE+30));
+            };
+        }
         graphic.src = imgsrc;
     }
 
@@ -57,8 +70,10 @@ window.onload = function() {
         var parsedMap = parseMap(mapString);
         for (var i=0; i < parsedMap.length; i++) {
             for (var j=0; j < parsedMap[i].length; j++) {
-                if (parsedMap[i][j] == "a" || parsedMap[i][j] == "t") {
-                    placeGraphic(j, i, tiles[parsedMap[i][j]]);
+                if (parsedMap[i][j] == "a") {
+                    placeGraphic(j, i, tiles[parsedMap[i][j]], true);
+                } else if (parsedMap[i][j] == "t") {
+                    placeGraphic(j, i, tiles[parsedMap[i][j]], false);
                 }
             }
         }
