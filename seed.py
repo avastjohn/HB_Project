@@ -8,31 +8,36 @@ import model
 def load_users():
     u1 = model.User(username="pinkiepie", 
                     pettype="alligator",
-                    petname="Gummy")
+                    petname="Gummy",
+                    petgender="m")
     u1.set_password("balloons")    
     model.session.add(u1)
 
     u2 = model.User(username="rainbowdash", 
                     pettype="tortoise",
-                    petname="Tank")
+                    petname="Tank",
+                    petgender="m")
     u2.set_password("lightning")    
     model.session.add(u2)
 
     u3 = model.User(username="twilightsparkle", 
                     pettype="owl",
-                    petname="Owlewiscious")
+                    petname="Owlewiscious",
+                    petgender="m")
     u3.set_password("stars")    
     model.session.add(u3) 
 
     u4 = model.User(username="applejack", 
                     pettype="dog",
-                    petname="Winona")
+                    petname="Winona",
+                    petgender="f")
     u4.set_password("apples")    
     model.session.add(u4) 
 
     u5 = model.User(username="fluttershy", 
                     pettype="bunny",
-                    petname="Angel")
+                    petname="Angel",
+                    petgender="m")
     u5.set_password("butterflies")    
     model.session.add(u5) 
 

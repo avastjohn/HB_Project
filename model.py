@@ -24,6 +24,7 @@ class User(Base, UserMixin):
     username = Column(String(64), nullable=False)
     pettype = Column(String(64), nullable=False)
     petname = Column(String(64), nullable=False)
+    petgender = Column(String(64), nullable=False)
     salt = Column(String(64), nullable=False)
     pw = Column(String(64), nullable=False)
 
