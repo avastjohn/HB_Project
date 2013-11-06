@@ -24,6 +24,18 @@ def load_users():
     u3.set_password("stars")    
     model.session.add(u3) 
 
+    u4 = model.User(username="applejack", 
+                    pettype="dog",
+                    petname="Winona")
+    u4.set_password("apples")    
+    model.session.add(u4) 
+
+    u5 = model.User(username="fluttershy", 
+                    pettype="bunny",
+                    petname="Angel")
+    u5.set_password("butterflies")    
+    model.session.add(u5) 
+
 def load_levels():
     l1 = model.Level(map = "GGG apt GGG")
     model.session.add(l1)
@@ -67,6 +79,11 @@ def load_user_levels():
                         complete=1)
     model.session.add(u_l5)
 
+    u_l6 = model.UserLevel(user_id=5,
+                        level_id=1,
+                        current_level_input=" ",
+                        complete=0)
+    model.session.add(u_l6)
 
 def main():
     model.create_tables()

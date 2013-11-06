@@ -61,14 +61,6 @@ class UserLevel(Base):
 
 def create_tables():
     Base.metadata.create_all(engine)
-# put the stuff in seed.py for creating a starter db, but keep create tables in here.
-    # u = User(email="test@test.com")
-    # u.set_password("unicorn")
-    # session.add(u)
-    # p = Post(title="This is a test post", body="This is the body of a test post.")
-    # u.posts.append(p)
-    # session.commit()
-
 
 if __name__ == "__main__":
     create_tables()
