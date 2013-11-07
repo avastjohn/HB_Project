@@ -7,19 +7,21 @@ window.onload = function() {
 
         // level one
     var backMap = "GGG ppp GGG"
-    var foreMap = "nnn ant nnn"
+    var foreMap = "nnn dnb nnn"
         // level two
     // var backMap = "GGGG GppG ppGG GGGG"
-    // var foreMap = "nnnn nntn annn nnnn"
+    // var foreMap = "nnnn nnbn dnnn nnnn"
         // level three
     // var backMap = "GGGp GGpp GppG ppGG"
-    // var foreMap = "nnnt nnnn nnnn annn"
+    // var foreMap = "nnnb nnnn nnnn dnnn"
 
     var tiles = {
         "G": "#197c57",
         "p": "#96b124",
         "a": "http://i.imgur.com/3i4vM4S.png",
-        "t": "http://i.imgur.com/F1n6SZW.png"
+        "t": "http://i.imgur.com/F1n6SZW.png",
+        "d": "http://i.imgur.com/sPvA7yE.png",
+        "b": "http://i.imgur.com/nczpv7L.png"
     }
 
     var mkSquare = function(x, y, color) {
@@ -70,9 +72,9 @@ window.onload = function() {
         var parsedMap = parseMap(mapString);
         for (var i=0; i < parsedMap.length; i++) {
             for (var j=0; j < parsedMap[i].length; j++) {
-                if (parsedMap[i][j] == "a") {
+                if (parsedMap[i][j] == "d") {
                     placeGraphic(j, i, tiles[parsedMap[i][j]], true);
-                } else if (parsedMap[i][j] == "t") {
+                } else if (parsedMap[i][j] == "b") {
                     placeGraphic(j, i, tiles[parsedMap[i][j]], false);
                 }
             }
