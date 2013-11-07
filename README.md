@@ -1,5 +1,9 @@
 #Progress so far:
 
+##Plan for Nov 7 (Thurs):
+- organize rectangles.js into classes
+- try to get hard-coded arrow string to execute movement of bunny/dog
+
 ##Nov 6 (Wed):
 
 - created bunny and carrot graphics to use on the game board
