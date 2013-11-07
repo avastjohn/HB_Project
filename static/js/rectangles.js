@@ -15,6 +15,7 @@ window.onload = function() {
     // var backMap = "GGGp GGpp GppG ppGG"
     // var foreMap = "nnnb nnnn nnnn dnnn"
 
+// split this dictionary into two and choose image according to pettype
     var tiles = {
         "G": "#197c57",
         "p": "#96b124",
