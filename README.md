@@ -18,4 +18,4 @@
 
 - got github repo working
 - cloned templates
-- figured out structure for db, made proto in `sqlite3`
+- figured out structure for db, made proto in sqlite3
