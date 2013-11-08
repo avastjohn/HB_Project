@@ -74,9 +74,9 @@ var pet = function(pettype, petname, gender) {
     };
 
     this.images = {
-        "bunny": "http://i.imgur.com/3i4vM4S.png",
+        "bunny": "http://i.imgur.com/3V353g6.png",
         "carrot": "http://i.imgur.com/F1n6SZW.png",
-        "dog": "http://i.imgur.com/sPvA7yE.png",
+        "dog": "http://i.imgur.com/SImMv4T.png",
         "bone": "http://i.imgur.com/nczpv7L.png"
     }
 
@@ -84,23 +84,36 @@ var pet = function(pettype, petname, gender) {
     this.treat = this.treats[this.pettype];
     this.treatImage = this.images[this.treat];
 
+    var petImageObj = new Image();
+    var treatImageObj = new Image();
+
     this.drawPet = function(pos) {
-        //draw pet at position (later will call function by passing in petStart)
-        var petImage = new Image();
-            petImage.onload = function() {
-                context.drawImage(petImage, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE));
-            };
-        petImage.src = this.image;
+        petImageObj.onload = function() {
+            context.drawImage(petImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE)+30);
+        };
+        petImageObj.src = this.image;
     };
 
     this.drawTreat = function(pos) {
-        // draw treat at position (later will call function by passing in treatPos)
-        return;
+        treatImageObj.onload = function() {
+            context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE+30));
+        };
+        treatImageObj.src = this.treatImage;
     };
 
+
     this.move = function(direction) {
-        // change coordinates? or delete and redraw...
         return;
+
+        // if (direction == "up") {
+
+        // } else if (direction == "down") {
+
+        // } else if (direction == "right") {
+
+        // } else if (direction == "left") {
+
+        // };
     };
 
     this.sleep = function(delay) {
@@ -123,5 +136,6 @@ window.onload = function() {
 
     var mrSnuffles = new pet("bunny", "Mr. Suffles", "m");
     mrSnuffles.drawPet(petStart3);
+    mrSnuffles.drawTreat(treatPos3);
     
 };
