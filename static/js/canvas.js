@@ -5,22 +5,19 @@ var myCanvas = document.getElementById('myCanvas');
 var context = myCanvas.getContext("2d");
 
 
-// this data will eventually come from the database:
-                    // level one
-                var backMap1 = "GGG ppp GGG";
-                var petStart1 = [0,1];
-                var treatPos1 = [2,1];
-                    // level two
-                var backMap2 = "GGGG GppG ppGG GGGG";
-                var petStart2 = [0,2];
-                var treatPos2 = [2,1];
-                    // level three
-                var backMap3 = "GGGp GGpp GppG ppGG";
-                var petStart3 = [0,3];
-                var treatPos3 = [3,0];
-
-var gameBoard = function(backMap) {
+var level = function(backMap, petStart, treatPos) {
     this.backMap = backMap;
+    this.petStart = petStart;
+    this.treatPos = treatPos;
+}
+
+// this data will eventually come from the database:
+var level1 = new level("GGG ppp GGG", [0,1], [2,1]);
+var level2 = new level("GGGG GppG ppGG GGGG", [0,2], [2,1]);
+var level3 = new level("GGGp GGpp GppG ppGG", [0,3], [3,0]);
+
+var gameBoard = function(level) {
+    this.level = level;
 
     this.tiles = {
         "G": "#197c57",
@@ -29,7 +26,7 @@ var gameBoard = function(backMap) {
 
     this.parseMap = function() {
         // takes mapstring and parses into an array of arrays
-        var rows = this.backMap.split(" ");
+        var rows = this.level.backMap.split(" ");
         var parsedRows = [];
         for (var i=0; i < rows.length; i++) {
             var letters = rows[i].split("");
@@ -60,13 +57,15 @@ var gameBoard = function(backMap) {
             }
         }
     };
-
 };
 
-var pet = function(pettype, petname, gender) {
+var pet = function(pettype, petname, gender, level) {
     this.pettype = pettype;
     this.petname = petname;
     this.gender = gender;
+    this.level = level;
+    this.currentPos = level.petStart;
+    this.treatPos = level.treatPos;
 
     this.treats = {
         "dog": "bone",
@@ -92,6 +91,7 @@ var pet = function(pettype, petname, gender) {
             context.drawImage(petImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE)+30);
         };
         petImageObj.src = this.image;
+        this.currentPos = pos;
     };
 
     this.drawTreat = function(pos) {
@@ -101,19 +101,17 @@ var pet = function(pettype, petname, gender) {
         treatImageObj.src = this.treatImage;
     };
 
-
-    this.move = function(direction) {
-        return;
-
-        // if (direction == "up") {
-
-        // } else if (direction == "down") {
-
-        // } else if (direction == "right") {
-
-        // } else if (direction == "left") {
-
-        // };
+    this.move = function(direction, gameBoard, level) {
+        gameBoard.drawBoard();
+        if (direction == "up") {
+            this.drawPet([this.currentPos[0], this.currentPos[1] - 1]);
+        } else if (direction == "down") {
+            this.drawPet([this.currentPos[0], this.currentPos[1] + 1]);
+        } else if (direction == "right") {
+            this.drawPet([this.currentPos[0] + 1, this.currentPos[1]]);
+        } else if (direction == "left") {
+            this.drawPet([this.currentPos[0] - 1, this.currentPos[1]]);
+        };
     };
 
     this.sleep = function(delay) {
@@ -131,11 +129,17 @@ var pet = function(pettype, petname, gender) {
 
 window.onload = function() {
 
-    var currentBoard = new gameBoard(backMap3);
+    var currentBoard = new gameBoard(level3);
     currentBoard.drawBoard();
 
-    var mrSnuffles = new pet("bunny", "Mr. Suffles", "m");
-    mrSnuffles.drawPet(petStart3);
-    mrSnuffles.drawTreat(treatPos3);
+    var mrSnuffles = new pet("bunny", "Mr. Suffles", "m", level3);
+    mrSnuffles.drawPet(mrSnuffles.currentPos);
+    mrSnuffles.drawTreat(mrSnuffles.treatPos);
+
+    mrSnuffles.move("right", currentBoard);
+    mrSnuffles.move("up", currentBoard);
+    mrSnuffles.move("right", currentBoard);
+    mrSnuffles.move("up", currentBoard);
+    mrSnuffles.move("left", currentBoard);
     
 };
