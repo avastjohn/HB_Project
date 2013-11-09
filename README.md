@@ -1,9 +1,16 @@
 ##Progress so far:
 
-plans for Nov 8 (Fri):
+
+
+plans for Monday:
 - figure out how to move pet from one spot to another
 - figure out how to use setTimeout to delay between movements of pet
 - try to get hard-coded arrow string to inform execution of movement of pet
+
+Nov 8 (Fri):
+- tried to get setTimeout to work, couldn't figure out why it wasn't redrawing the pet and treat
+    --> turns out my pet and treat draw methods only work for onload
+- tried to load the image of the pet, save a snapshot of the image using getImageData() and putImageData(), but it turns out it will not save any actual images - just what's been drawn on the canvas
 
 Nov 7 (Thurs):
 - organized rectangles.js into classes
