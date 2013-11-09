@@ -14,7 +14,7 @@ var level = function(backMap, petStart, treatPos) {
 // this data will eventually come from the database:
 var level1 = new level("GGG ppp GGG", [0,1], [2,1]);
 var level2 = new level("GGGG GppG ppGG GGGG", [0,2], [2,1]);
-var level3 = new level("GGGp GGpp GppG gpGG", [0,3], [3,0]);
+var level3 = new level("GGGp GGpp GppG ppGG", [0,3], [3,0]);
 
 // gameBoard class
 var gameBoard = function(level) {
@@ -129,7 +129,7 @@ var pet = function(pettype, petname, gender, level) {
         var that = this;
         setTimeout(function() {
             gameBoard.drawBoard();
-            //this.redrawTreat(this.treatPos);
+            that.redrawTreat(that.treatPos);
             if (direction == "up") {
                 that.redrawPet([that.currentPos[0], that.currentPos[1] - 1]);
             } else if (direction == "down") {
@@ -150,8 +150,8 @@ var pet = function(pettype, petname, gender, level) {
     };
 };
 
-var mrSnuffles = new pet("bunny", "Mr. Suffles", "m", level1);
-var currentBoard = new gameBoard(level1);
+var mrSnuffles = new pet("bunny", "Mr. Suffles", "m", level3);
+var currentBoard = new gameBoard(level3);
 
 // onload function
 window.onload = function() {
@@ -161,6 +161,10 @@ window.onload = function() {
     mrSnuffles.move("up", currentBoard);
     mrSnuffles.move("right", currentBoard);
     mrSnuffles.move("down", currentBoard);
+    mrSnuffles.move("right", currentBoard);
+    mrSnuffles.move("up", currentBoard);
+    mrSnuffles.move("left", currentBoard);
+
 };
 
 
