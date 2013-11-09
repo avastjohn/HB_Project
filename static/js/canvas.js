@@ -109,6 +109,10 @@ var pet = function(pettype, petname, gender, level) {
         treatImageObj.src = this.treatImage;
     };
 
+    this.redrawTreat = function(pos) {
+        context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE)+30);
+    };
+
     this.sleep = function(millsec) {
         // time delay keep bunny in same place
         var start = new Date().getTime();
@@ -119,27 +123,25 @@ var pet = function(pettype, petname, gender, level) {
         }
     };
 
+    var time = 0;
+
     this.move = function(direction, gameBoard) {
-        // gameBoard.drawBoard();
-        var savedPet = context.getImageData(this.currentPos[0]*UNIT_SIZE+30, 
-                                            this.currentPos[1]*UNIT_SIZE+30, 
-                                            UNIT_SIZE, UNIT_SIZE);
-        
-        // this.drawTreat(this.treatPos);
-        if (direction == "up") {
-            context.putImageData(savedPet, this.currentPos[0]*UNIT_SIZE+30, (this.currentPos[1] - 1)*UNIT_SIZE+30);
-        } else if (direction == "down") {
-            this.drawPet([this.currentPos[0], this.currentPos[1] + 1]);
-        } else if (direction == "right") {
-            this.drawPet([this.currentPos[0] + 1, this.currentPos[1]]);
-        } else if (direction == "left") {
-            this.drawPet([this.currentPos[0] - 1, this.currentPos[1]]);
-        } else {
-            console.log("grrrrrrr");
-        };
+        var that = this;
+        setTimeout(function() {
+            gameBoard.drawBoard();
+            //this.redrawTreat(this.treatPos);
+            if (direction == "up") {
+                that.redrawPet([that.currentPos[0], that.currentPos[1] - 1]);
+            } else if (direction == "down") {
+                that.redrawPet([that.currentPos[0], that.currentPos[1] + 1]);
+            } else if (direction == "right") {
+                that.redrawPet([that.currentPos[0] + 1, that.currentPos[1]]);
+            } else if (direction == "left") {
+                that.redrawPet([that.currentPos[0] - 1, that.currentPos[1]]);
+            }
+        }, (time + 1000));
+        time += 1000;
     };
-
-
 
     this.eatTreat = function() {
         // make this function later. it will make stars 
@@ -153,11 +155,12 @@ var currentBoard = new gameBoard(level1);
 
 // onload function
 window.onload = function() {
-    mrSnuffles.drawPet(mrSnuffles.currentPos);
     currentBoard.drawBoard();
-
+    mrSnuffles.drawPet(mrSnuffles.currentPos);
     mrSnuffles.drawTreat(mrSnuffles.treatPos);
-    setTimeout(function() {mrSnuffles.redrawPet([2,2]);}, 2000);
+    mrSnuffles.move("up", currentBoard);
+    mrSnuffles.move("right", currentBoard);
+    mrSnuffles.move("down", currentBoard);
 };
 
 
