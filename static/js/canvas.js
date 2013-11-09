@@ -97,6 +97,11 @@ var pet = function(pettype, petname, gender, level) {
         this.currentPos = pos;
     };
 
+    this.redrawPet = function(pos) {
+        context.drawImage(petImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE)+30);
+        this.currentPos = pos;
+    };    
+
     this.drawTreat = function(pos) {
         treatImageObj.onload = function() {
             context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE+30));
@@ -143,8 +148,8 @@ var pet = function(pettype, petname, gender, level) {
     };
 };
 
-var mrSnuffles = new pet("bunny", "Mr. Suffles", "m", level3);
-var currentBoard = new gameBoard(level3);
+var mrSnuffles = new pet("bunny", "Mr. Suffles", "m", level1);
+var currentBoard = new gameBoard(level1);
 
 // onload function
 window.onload = function() {
@@ -152,13 +157,7 @@ window.onload = function() {
     currentBoard.drawBoard();
 
     mrSnuffles.drawTreat(mrSnuffles.treatPos);
-//    mrSnuffles.move("up", currentBoard);
-    
-    //mrSnuffles.move("up", currentBoard);
+    setTimeout(function() {mrSnuffles.redrawPet([2,2]);}, 2000);
 };
 
-
-// mrSnuffles.move("right", currentBoard);
-// mrSnuffles.move("up", currentBoard);
-// mrSnuffles.move("left", currentBoard);
 
