@@ -14,7 +14,7 @@ var level = function(backMap, petStart, treatPos) {
 // this data will eventually come from the database:
 var level1 = new level("GGG ppp GGG", [0,1], [2,1]);
 var level2 = new level("GGGG GppG ppGG GGGG", [0,2], [2,1]);
-var level3 = new level("GGGp GGpp GppG ppGG", [0,3], [3,0]);
+var level3 = new level("GGGp GGpp GppG gpGG", [0,3], [3,0]);
 
 // gameBoard class
 var gameBoard = function(level) {
@@ -59,7 +59,19 @@ var gameBoard = function(level) {
             }
         }
     };
+
+    this.getSquare = function(x, y) {
+        // takes coordinates and returns what kind of square is at that spot
+        var rows = this.level.backMap.split(" ");
+        if ((x < 0) || (x > rows[0].length - 1) || (y < 0) || (y > rows.length - 1)) {
+            return "outside";
+        } else {
+            return rows[y][x];
+        }
+    };
 };
+
+
 
 // pet class
 var pet = function(pettype, petname, gender, level) {
@@ -143,6 +155,20 @@ var pet = function(pettype, petname, gender, level) {
         time += 1000;
     };
 
+    var movementCode = {
+        "r":"right",
+        "l":"left",
+        "u":"up",
+        "d":"down"
+    };
+
+    this.run = function(runList, gameBoard) {
+        for (var i = 0; i < runList.length; i++) {
+            this.move(movementCode[runList[i]], gameBoard);
+        }
+    };
+
+
     this.eatTreat = function() {
         // make this function later. it will make stars 
         // appear or something when bunny reaches carrot.
@@ -158,13 +184,7 @@ window.onload = function() {
     currentBoard.drawBoard();
     mrSnuffles.drawPet(mrSnuffles.currentPos);
     mrSnuffles.drawTreat(mrSnuffles.treatPos);
-    mrSnuffles.move("up", currentBoard);
-    mrSnuffles.move("right", currentBoard);
-    mrSnuffles.move("down", currentBoard);
-    mrSnuffles.move("right", currentBoard);
-    mrSnuffles.move("up", currentBoard);
-    mrSnuffles.move("left", currentBoard);
-
+    mrSnuffles.run(["u", "r", "u", "r", "d", "d", "l"], currentBoard);
 };
 
 
