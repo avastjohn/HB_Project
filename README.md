@@ -3,8 +3,12 @@
 
 
 plans for Monday:
-- get hard-coded arrow string to inform execution of movement of pet
 - put restrictions on when pet can move in certain directions
+- create pet reaction when tries to move somewhere it can't.
+
+Weekend:
+- got hard-coded list to inform execution of movement of pet
+- made getSquare function to figure out what kind of square is on any given part of the gameboard. 
 
 Nov 8 (Fri):
 - made move() method that redraws the board and redraws pet in new location after delay
