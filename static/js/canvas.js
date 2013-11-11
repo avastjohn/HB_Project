@@ -14,7 +14,7 @@ var level = function(backMap, petStart, treatPos) {
 // this data will eventually come from the database:
 var level1 = new level("GGG ppp GGG", [0,1], [2,1]);
 var level2 = new level("GGGG GppG ppGG GGGG", [0,2], [2,1]);
-var level3 = new level("GGGp GGpp GppG gpGG", [0,3], [3,0]);
+var level3 = new level("GGGp GGpp GppG ppGG", [0,3], [3,0]);
 
 // gameBoard class
 var gameBoard = function(level) {
@@ -84,14 +84,17 @@ var pet = function(pettype, petname, gender, level) {
 
     this.treats = {
         "dog": "bone",
-        "bunny": "carrot"
+        "bunny": "carrot",
+        "penguin": "fish"
     };
 
     this.images = {
         "bunny": "http://i.imgur.com/3V353g6.png",
-        "carrot": "http://i.imgur.com/F1n6SZW.png",
+        "carrot": "http://i.imgur.com/0e4zWUp.png",
         "dog": "http://i.imgur.com/SImMv4T.png",
-        "bone": "http://i.imgur.com/nczpv7L.png"
+        "bone": "http://i.imgur.com/KXDEPVW.png",
+        "penguin": "http://i.imgur.com/xBJDNUs.png",
+        "fish": "http://i.imgur.com/SxB5DrK.png"
     }
 
     this.image = this.images[this.pettype];
