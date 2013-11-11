@@ -71,8 +71,6 @@ var gameBoard = function(level) {
     };
 };
 
-
-
 // pet class
 var pet = function(pettype, petname, gender, level) {
     this.pettype = pettype;
@@ -179,7 +177,7 @@ var pet = function(pettype, petname, gender, level) {
     };
 };
 
-var mrSnuffles = new pet("bunny", "Mr. Suffles", "m", level3);
+var mrSnuffles = new pet("penguin", "Mr. Suffles", "m", level3);
 var currentBoard = new gameBoard(level3);
 
 // onload function
@@ -187,7 +185,7 @@ window.onload = function() {
     currentBoard.drawBoard();
     mrSnuffles.drawPet(mrSnuffles.currentPos);
     mrSnuffles.drawTreat(mrSnuffles.treatPos);
-    mrSnuffles.run(["u", "r", "u", "r", "d", "d", "l"], currentBoard);
+    mrSnuffles.run(["r", "u", "r", "u", "r"], currentBoard);
 };
 
 
