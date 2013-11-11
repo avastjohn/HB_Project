@@ -69,6 +69,10 @@ var gameBoard = function(level) {
             return rows[y][x];
         }
     };
+
+    this.authorize = function(x, y) {
+        return ((this.getSquare(x, y) != "G") && (this.getSquare(x, y) != "outside"));
+    };
 };
 
 // pet class
@@ -136,21 +140,32 @@ var pet = function(pettype, petname, gender, level) {
         }
     };
 
+    this.getNextPos = function(direction) {
+        var that = this;
+        var nextPos;
+        if (direction == "up") {
+            that.nextPos = [that.currentPos[0], that.currentPos[1] - 1];
+        } else if (direction == "down") {
+            that.nextPos = [that.currentPos[0], that.currentPos[1] + 1];
+        } else if (direction == "right") {
+            that.nextPos = [that.currentPos[0] + 1, that.currentPos[1]];
+        } else if (direction == "left") {
+            that.nextPos = [that.currentPos[0] - 1, that.currentPos[1]];
+        }
+    }
+
     var time = 0;
 
     this.move = function(direction, gameBoard) {
         var that = this;
         setTimeout(function() {
-            gameBoard.drawBoard();
-            that.redrawTreat(that.treatPos);
-            if (direction == "up") {
-                that.redrawPet([that.currentPos[0], that.currentPos[1] - 1]);
-            } else if (direction == "down") {
-                that.redrawPet([that.currentPos[0], that.currentPos[1] + 1]);
-            } else if (direction == "right") {
-                that.redrawPet([that.currentPos[0] + 1, that.currentPos[1]]);
-            } else if (direction == "left") {
-                that.redrawPet([that.currentPos[0] - 1, that.currentPos[1]]);
+            that.getNextPos(direction);
+            if (gameBoard.authorize(that.nextPos[0], that.nextPos[1])) {
+                gameBoard.drawBoard();
+                that.redrawTreat(that.treatPos);
+                that.redrawPet(that.nextPos);
+            } else {
+                console.log("Not authorized!!");
             }
         }, (time + 1000));
         time += 1000;
@@ -177,7 +192,7 @@ var pet = function(pettype, petname, gender, level) {
     };
 };
 
-var mrSnuffles = new pet("penguin", "Mr. Suffles", "m", level3);
+var mrSnuffles = new pet("bunny", "Mr. Suffles", "m", level3);
 var currentBoard = new gameBoard(level3);
 
 // onload function
@@ -185,7 +200,7 @@ window.onload = function() {
     currentBoard.drawBoard();
     mrSnuffles.drawPet(mrSnuffles.currentPos);
     mrSnuffles.drawTreat(mrSnuffles.treatPos);
-    mrSnuffles.run(["r", "u", "r", "u", "r"], currentBoard);
+    mrSnuffles.run(["l", "u", "r", "d"], currentBoard);
 };
 
 
