@@ -158,14 +158,13 @@ var pet = function(pettype, petname, gender, level) {
 
     this.move = function(direction, gameBoard) {
         var that = this;
-        that.mover = setTimeout(function() {
+        setTimeout(function() {
             that.getNextPos(direction);
             if (gameBoard.authorize(that.nextPos[0], that.nextPos[1])) {
                 gameBoard.drawBoard();
                 that.redrawTreat(that.treatPos);
                 that.redrawPet(that.nextPos);
             } else {
-                clearTimeout(that.mover);
                 console.log("Not authorized!!");
             }
         }, (time + 1000));
@@ -201,6 +200,6 @@ window.onload = function() {
     currentBoard.drawBoard();
     mrSnuffles.drawPet(mrSnuffles.currentPos);
     mrSnuffles.drawTreat(mrSnuffles.treatPos);
-    mrSnuffles.run(["r", "u", "r", "u", "l", "r"], currentBoard);
+    mrSnuffles.run(["r", "u", "r", "u", "l"], currentBoard);
 };
 
