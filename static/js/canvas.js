@@ -5,7 +5,7 @@ var myCanvas = document.getElementById('myCanvas');
 var context = myCanvas.getContext("2d");
 
 var message = document.getElementById('message');
-
+message.innerHTML = "<h3>Help Mr. Snuffles get to his carrot!</h3>"
 
 // level class
 var level = function(backMap, petStart, treatPos) {
@@ -42,7 +42,7 @@ var gameBoard = function(level) {
     this.mkSquare = function(x, y, color) {
         // draws a square at position specified and of specified color
         context.beginPath();
-        context.rect((x*UNIT_SIZE+30), (y*UNIT_SIZE+30), UNIT_SIZE, UNIT_SIZE);
+        context.rect((x*UNIT_SIZE), (y*UNIT_SIZE), UNIT_SIZE, UNIT_SIZE);
         context.fillStyle = color;
         context.fill();
         context.lineWidth = 2;
@@ -110,26 +110,26 @@ var pet = function(pettype, petname, gender, level) {
 
     this.drawPet = function(pos) {
         petImageObj.onload = function() {
-            context.drawImage(petImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE)+30);
+            context.drawImage(petImageObj, (pos[0]*UNIT_SIZE), (pos[1]*UNIT_SIZE));
         };
         petImageObj.src = this.image;
         this.currentPos = pos;
     };
 
     this.redrawPet = function(pos) {
-        context.drawImage(petImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE)+30);
+        context.drawImage(petImageObj, (pos[0]*UNIT_SIZE), (pos[1]*UNIT_SIZE));
         this.currentPos = pos;
     };    
 
     this.drawTreat = function(pos) {
         treatImageObj.onload = function() {
-            context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE+30));
+            context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE), (pos[1]*UNIT_SIZE));
         };
         treatImageObj.src = this.treatImage;
     };
 
     this.redrawTreat = function(pos) {
-        context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+30), (pos[1]*UNIT_SIZE)+30);
+        context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE), (pos[1]*UNIT_SIZE));
     };
 
     this.sleep = function(millsec) {

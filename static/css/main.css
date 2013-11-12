@@ -1,3 +1,11 @@
+        #message {
+            margin-left: 40px;
+            margin-top: 20px;
+            font: 18px "Arial" sans-serif;
+        }
+        #myCanvas {
+            margin-left: 30px;
+        }
         #codeBoxes {
             margin-left: 30px;
             height: 54px;
@@ -12,7 +20,9 @@
             float: left;
         }
         #arrowsbuttons {
-            float: left;
+            width: 378px;
+            height: 170px;
+
         }
         #arrows {
             height: 160px;
@@ -21,6 +31,7 @@
             border: 3px solid #88ff88;
             margin-left: 30px;
             margin-top: 30px;
+            float: left;
         }
         .arrow {
             height: 50px;
@@ -32,9 +43,16 @@
         .button {
             height: 40px;
             width: 80px;
-            font: 30px "Arial" sans-serif;
+            font: 23px "Arial" sans-serif;
             text-align: center;
-            background-color: HotPink;
-            border: 2px solid DeepPink;
             border-radius: 5px;
+            margin: 20px;
+        }
+        .go {
+            background-color: #bbffbb;
+            border: 3px solid #88ff88;
+        }
+        .save {
+            background-color: LightBlue;
+            border: 3px solid DeepSkyBlue;
         }
