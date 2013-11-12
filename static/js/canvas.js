@@ -4,6 +4,9 @@ var UNIT_SIZE = 100;
 var myCanvas = document.getElementById('myCanvas');
 var context = myCanvas.getContext("2d");
 
+var message = document.getElementById('message');
+
+
 // level class
 var level = function(backMap, petStart, treatPos) {
     this.backMap = backMap;
@@ -19,7 +22,6 @@ var level3 = new level("GGGp GGpp GppG ppGG", [0,3], [3,0]);
 // gameBoard class
 var gameBoard = function(level) {
     this.level = level;
-
     this.tiles = {
         "G": "#197c57",
         "p": "#96b124",

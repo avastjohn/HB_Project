@@ -1,0 +1,40 @@
+        #codeBoxes {
+            margin-left: 30px;
+            height: 54px;
+            width: 378px;
+            border: 2px solid DeepSkyBlue;
+        }
+        .codeBox {
+            height: 50px;
+            width: 50px;
+            background-color: LightBlue;
+            border: 2px solid DeepSkyBlue;
+            float: left;
+        }
+        #arrowsbuttons {
+            float: left;
+        }
+        #arrows {
+            height: 160px;
+            width: 230px;
+            background-color: #bbffbb;
+            border: 3px solid #88ff88;
+            margin-left: 30px;
+            margin-top: 30px;
+        }
+        .arrow {
+            height: 50px;
+            width: 50px;
+            float: left;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        .button {
+            height: 40px;
+            width: 80px;
+            font: 30px "Arial" sans-serif;
+            text-align: center;
+            background-color: HotPink;
+            border: 2px solid DeepPink;
+            border-radius: 5px;
+        }

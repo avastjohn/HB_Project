@@ -2,46 +2,13 @@
 
 <html>
 <head>
-    <title>Game Grid</title>
-    <style>
-        #myCanvas
-        {
-            /*border: 3px solid DeepPink;*/
-            /*background-color: HotPink;*/
-        }
-        #codeBoxes
-        {
-            margin-left: 30px;
-        }
-        .codeBox
-        {
-            height: 50px;
-            width: 50px;
-            background-color: LightBlue;
-            border: 2px solid DeepSkyBlue;
-            float: left;
-        }
-        #buttons
-        {
-            height: 160px;
-            width: 230px;
-            background-color: #bbffbb;
-            border: 3px solid #88ff88;
-            float: left;
-            margin-left: 30px;
-        }
-        .button{
-            height: 50px;
-            width: 50px;
-            float: left;
-            margin-left: 20px;
-            margin-top: 20px;
-        }
-    </style>
-
+    <title>Ava's Game</title>
+    <link href="../static/css/main.css" rel="stylesheet">
 </head>
     <body>
         <div id="canvasContainer">
+            <div id="message">
+            </div>
             <canvas id= "myCanvas" width="500" height="500"></canvas>
             <script src="../static/js/canvas.js"></script>
         </div>
@@ -54,12 +21,17 @@
             <div class="codeBox"></div>
             <div class="codeBox"></div>
         </div>
-        <div id="buttons">
-            <img src="http://i.imgur.com/jFlM0wy.png" class="button" id="down"></img>
-            <img src="http://i.imgur.com/ftOgzLm.png" class="button" id="up"></img>
-            <img src="http://i.imgur.com/0bN0OjD.png" class="button" id="loop"></img>
-            <img src="http://i.imgur.com/6IyQk2a.png" class="button" id="right"></img>
-            <img src="http://i.imgur.com/PZAl1GC.png" class="button" id="left"></img>
+        <div id="arrowsbuttons">
+            <div id="arrows">
+                <img src="http://i.imgur.com/jFlM0wy.png" class="arrow down"></img>
+                <img src="http://i.imgur.com/ftOgzLm.png" class="arrow up"></img>
+                <img src="http://i.imgur.com/0bN0OjD.png" class="arrow loop"></img>
+                <img src="http://i.imgur.com/6IyQk2a.png" class="arrow right"></img>
+                <img src="http://i.imgur.com/PZAl1GC.png" class="arrow left"></img>
+            </div>
+            <form>
+                <input type="submit" class="button" value="go">
+            </form>
         </div>
 
     </body>
