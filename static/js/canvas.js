@@ -5,7 +5,6 @@ var myCanvas = document.getElementById('myCanvas');
 var context = myCanvas.getContext("2d");
 
 var message = document.getElementById('message');
-message.innerHTML = "<h3>Help Mr. Snuffles get to his carrot!</h3>"
 
 // level class
 var level = function(backMap, petStart, treatPos) {
@@ -42,7 +41,7 @@ var gameBoard = function(level) {
     this.mkSquare = function(x, y, color) {
         // draws a square at position specified and of specified color
         context.beginPath();
-        context.rect((x*UNIT_SIZE), (y*UNIT_SIZE), UNIT_SIZE, UNIT_SIZE);
+        context.rect((x*UNIT_SIZE+2), (y*UNIT_SIZE+2), UNIT_SIZE, UNIT_SIZE);
         context.fillStyle = color;
         context.fill();
         context.lineWidth = 2;
@@ -110,26 +109,26 @@ var pet = function(pettype, petname, gender, level) {
 
     this.drawPet = function(pos) {
         petImageObj.onload = function() {
-            context.drawImage(petImageObj, (pos[0]*UNIT_SIZE), (pos[1]*UNIT_SIZE));
+            context.drawImage(petImageObj, (pos[0]*UNIT_SIZE+2), (pos[1]*UNIT_SIZE)+2);
         };
         petImageObj.src = this.image;
         this.currentPos = pos;
     };
 
     this.redrawPet = function(pos) {
-        context.drawImage(petImageObj, (pos[0]*UNIT_SIZE), (pos[1]*UNIT_SIZE));
+        context.drawImage(petImageObj, (pos[0]*UNIT_SIZE+2), (pos[1]*UNIT_SIZE)+2);
         this.currentPos = pos;
     };    
 
     this.drawTreat = function(pos) {
         treatImageObj.onload = function() {
-            context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE), (pos[1]*UNIT_SIZE));
+            context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+2), (pos[1]*UNIT_SIZE+2));
         };
         treatImageObj.src = this.treatImage;
     };
 
     this.redrawTreat = function(pos) {
-        context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE), (pos[1]*UNIT_SIZE));
+        context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+2), (pos[1]*UNIT_SIZE)+2);
     };
 
     this.sleep = function(millsec) {
@@ -166,9 +165,10 @@ var pet = function(pettype, petname, gender, level) {
                 gameBoard.drawBoard();
                 that.redrawTreat(that.treatPos);
                 that.redrawPet(that.nextPos);
+                message.innerHTML = "<h3>" + mrSnuffles.petname + " went " + direction + "</h3>";
             } else {
                 clearTimeout(that.mover);
-                console.log("Not authorized!!");
+                message.innerHTML = "<h3>Uh-oh, " + mrSnuffles.petname + " cannot go " + direction + " :(</h3>";
             }
         }, (time + 1000));
         time += 1000;
@@ -195,7 +195,7 @@ var pet = function(pettype, petname, gender, level) {
     };
 };
 
-var mrSnuffles = new pet("bunny", "Mr. Suffles", "m", level3);
+var mrSnuffles = new pet("bunny", "Mr. Snuffles", "m", level3);
 var currentBoard = new gameBoard(level3);
 
 // onload function
@@ -204,5 +204,6 @@ window.onload = function() {
     mrSnuffles.drawPet(mrSnuffles.currentPos);
     mrSnuffles.drawTreat(mrSnuffles.treatPos);
     mrSnuffles.run(["r", "u", "r", "u", "l", "r"], currentBoard);
+    message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to his " + mrSnuffles.treat + "!</h3>";
 };
 
