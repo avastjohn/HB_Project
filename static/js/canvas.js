@@ -6,6 +6,11 @@ var context = myCanvas.getContext("2d");
 
 var message = document.getElementById('message');
 
+// $(function() {
+//     $(".codeBox").droppable();
+//     $(".arrow").draggable();
+// });
+
 // level class
 var level = function(backMap, petStart, treatPos) {
     this.backMap = backMap;
@@ -131,16 +136,6 @@ var pet = function(pettype, petname, gender, level) {
         context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+2), (pos[1]*UNIT_SIZE)+2);
     };
 
-    this.sleep = function(millsec) {
-        // time delay keep bunny in same place
-        var start = new Date().getTime();
-        for (var i = 0; i < 999999999; i++) {
-            if ((new Date().getTime() - start ) > millsec) {
-                break;
-            }
-        }
-    };
-
     this.getNextPos = function(direction) {
         var that = this;
         var nextPos;
@@ -161,11 +156,15 @@ var pet = function(pettype, petname, gender, level) {
         var that = this;
         that.mover = setTimeout(function() {
             that.getNextPos(direction);
-            if (gameBoard.authorize(that.nextPos[0], that.nextPos[1])) {
+            if (that.nextPos == that.treatPos) {
+                message.innerHTML = "<h3>Yay!!!!!!</h3>";
+            } else if (gameBoard.authorize(that.nextPos[0], that.nextPos[1])) {
                 gameBoard.drawBoard();
                 that.redrawTreat(that.treatPos);
                 that.redrawPet(that.nextPos);
                 message.innerHTML = "<h3>" + mrSnuffles.petname + " went " + direction + "</h3>";
+                console.log("treatPos: " + that.treatPos);
+                console.log("nextPos: " + that.nextPos);
             } else {
                 clearTimeout(that.mover);
                 message.innerHTML = "<h3>Uh-oh, " + mrSnuffles.petname + " cannot go " + direction + " :(</h3>";
@@ -203,7 +202,7 @@ window.onload = function() {
     currentBoard.drawBoard();
     mrSnuffles.drawPet(mrSnuffles.currentPos);
     mrSnuffles.drawTreat(mrSnuffles.treatPos);
-    mrSnuffles.run(["r", "u", "r", "u", "l", "r"], currentBoard);
+    mrSnuffles.run(["r", "u", "r", "u", "r", "u"], currentBoard);
     message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to his " + mrSnuffles.treat + "!</h3>";
 };
 
