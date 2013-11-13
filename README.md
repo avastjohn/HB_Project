@@ -1,7 +1,8 @@
 ##Progress so far:
 
-goal for Tues:
-- create pet reaction when tries to move somewhere it can't.
+Nov 12 (Tues):
+- created customized message that updates as events occur
+- researched jquery, took a couple of lessons on codecademy, tried to download jquery
 
 Nov 11 (Mon):
 - put restrictions on when pet can move in certain directions
