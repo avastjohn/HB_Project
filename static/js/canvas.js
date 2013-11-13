@@ -12,11 +12,22 @@ $(document).ready(function() {
         $(".arrow").draggable();
     });
 });
+// position class
+var position = function(x, y) {
+    this.x = x;
+    this.y = y;
+
+    this.eq = function(pos) {
+        // returns true if the two positions are equivilant
+        return ((this.x == pos.x) && (this.y == pos.y))
+    };
+};
+
 // level class
 var level = function(backMap, petStart, treatPos) {
     this.backMap = backMap;
-    this.petStart = petStart;
-    this.treatPos = treatPos;
+    this.petStart = new position(petStart[0], petStart[1]);
+    this.treatPos = new position(treatPos[0], treatPos[1]);
 }
 
 // this data will eventually come from the database:
@@ -118,12 +129,14 @@ var pet = function(pettype, petname, gender, level) {
             context.drawImage(petImageObj, (pos[0]*UNIT_SIZE+2), (pos[1]*UNIT_SIZE)+2);
         };
         petImageObj.src = this.image;
-        this.currentPos = pos;
+        this.currentPos.x = pos[0];
+        this.currentPos.y = pos[1];
     };
 
     this.redrawPet = function(pos) {
         context.drawImage(petImageObj, (pos[0]*UNIT_SIZE+2), (pos[1]*UNIT_SIZE)+2);
-        this.currentPos = pos;
+        this.currentPos.x = pos[0];
+        this.currentPos.y = pos[1];
     };    
 
     this.drawTreat = function(pos) {
@@ -138,37 +151,37 @@ var pet = function(pettype, petname, gender, level) {
     };
 
     this.getNextPos = function(direction) {
-        var that = this;
+        var pet = this;
         var nextPos;
         if (direction == "up") {
-            that.nextPos = [that.currentPos[0], that.currentPos[1] - 1];
+            pet.nextPos = new position(pet.currentPos.x, (pet.currentPos.y - 1));
         } else if (direction == "down") {
-            that.nextPos = [that.currentPos[0], that.currentPos[1] + 1];
+            pet.nextPos = new position(pet.currentPos.x, pet.currentPos.y + 1);
         } else if (direction == "right") {
-            that.nextPos = [that.currentPos[0] + 1, that.currentPos[1]];
+            pet.nextPos = new position(pet.currentPos.x + 1, pet.currentPos.y);
         } else if (direction == "left") {
-            that.nextPos = [that.currentPos[0] - 1, that.currentPos[1]];
+            pet.nextPos = new position(pet.currentPos.x - 1, pet.currentPos.y);
         }
-    }
+    };
 
     var time = 0;
 
     this.move = function(direction, gameBoard) {
-        var that = this;
-        that.mover = setTimeout(function() {
-            that.getNextPos(direction);
-            if (that.nextPos == that.treatPos) {
+        var pet = this;
+        pet.mover = setTimeout(function() {
+            pet.getNextPos(direction);
+            console.log(pet.nextPos);
+            if (pet.nextPos.eq(pet.treatPos)) {
+                console.log("Arrived");
                 message.innerHTML = "<h3>Yay!!!!!!</h3>";
-            } else if (gameBoard.authorize(that.nextPos[0], that.nextPos[1])) {
+            } else if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
                 gameBoard.drawBoard();
-                that.redrawTreat(that.treatPos);
-                that.redrawPet(that.nextPos);
-                message.innerHTML = "<h3>" + mrSnuffles.petname + " went " + direction + "</h3>";
-                console.log("treatPos: " + that.treatPos);
-                console.log("nextPos: " + that.nextPos);
+                pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+                pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
+                message.innerHTML = "<h3>" + pet.petname + " went " + direction + "</h3>";
             } else {
-                clearTimeout(that.mover);
-                message.innerHTML = "<h3>Uh-oh, " + mrSnuffles.petname + " cannot go " + direction + " :(</h3>";
+                clearTimeout(pet.mover);
+                message.innerHTML = "<h3>Uh-oh, " + pet.petname + " cannot go " + direction + " :(</h3>";
             }
         }, (time + 1000));
         time += 1000;
@@ -201,8 +214,8 @@ var currentBoard = new gameBoard(level3);
 // onload function
 window.onload = function() {
     currentBoard.drawBoard();
-    mrSnuffles.drawPet(mrSnuffles.currentPos);
-    mrSnuffles.drawTreat(mrSnuffles.treatPos);
+    mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
+    mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
     mrSnuffles.run(["r", "u", "r", "u", "r", "u"], currentBoard);
     message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to his " + mrSnuffles.treat + "!</h3>";
 };
