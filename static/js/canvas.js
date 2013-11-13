@@ -6,11 +6,12 @@ var context = myCanvas.getContext("2d");
 
 var message = document.getElementById('message');
 
-// $(function() {
-//     $(".codeBox").droppable();
-//     $(".arrow").draggable();
-// });
-
+$(document).ready(function() {
+    $(function() {
+        $(".codeBox").droppable();
+        $(".arrow").draggable();
+    });
+});
 // level class
 var level = function(backMap, petStart, treatPos) {
     this.backMap = backMap;
