@@ -6,8 +6,8 @@ blockers:
 Nov 13 (Wed):
 - got jQuery ui functions working - can drag arrows around screen
 - created position class with method that evaluates whether two positions are equivalent or not
-- run() now evaluates when the pet has reached the treat
-- made the pet's position reset to petStart once an "error" in the code list has been detected
+- run() now evaluates when the pet has reached the treat, and all timers get cleared
+- made the pet's position reset to petStart once an "error" in the code list has been detected, and all timers get cleared
 
 Nov 12 (Tues):
 - created customized message that updates as events occur
