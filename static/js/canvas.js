@@ -99,7 +99,7 @@ var pet = function(pettype, petname, gender, level) {
     this.petname = petname;
     this.gender = gender;
     this.level = level;
-    this.currentPos = level.petStart;
+    this.currentPos = new position(level.petStart.x, level.petStart.y);
     this.treatPos = level.treatPos;
 
     this.treats = {
@@ -163,6 +163,17 @@ var pet = function(pettype, petname, gender, level) {
             pet.nextPos = new position(pet.currentPos.x - 1, pet.currentPos.y);
         }
     };
+    this.tryAgain = function(direction, gameBoard) {
+        var pet = this;
+        message.innerHTML = "<h3>Uh-oh, " + pet.petname + " cannot go " + direction + " :(</h3>";
+        pet.startOver = setTimeout(function() {
+            message.innerHTML = "<h3>Try again!</h3>";
+            pet.currentPos = pet.level.petStart;
+            gameBoard.drawBoard();
+            pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+            pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
+        }, 3000);
+    };
 
     var time = 0;
 
@@ -170,10 +181,9 @@ var pet = function(pettype, petname, gender, level) {
         var pet = this;
         pet.mover = setTimeout(function() {
             pet.getNextPos(direction);
-            console.log(pet.nextPos);
             if (pet.nextPos.eq(pet.treatPos)) {
-                console.log("Arrived");
                 message.innerHTML = "<h3>Yay!!!!!!</h3>";
+                clearTimeout(pet.mover);
             } else if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
                 gameBoard.drawBoard();
                 pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
@@ -181,10 +191,10 @@ var pet = function(pettype, petname, gender, level) {
                 message.innerHTML = "<h3>" + pet.petname + " went " + direction + "</h3>";
             } else {
                 clearTimeout(pet.mover);
-                message.innerHTML = "<h3>Uh-oh, " + pet.petname + " cannot go " + direction + " :(</h3>";
+                pet.tryAgain(direction, gameBoard);
             }
-        }, (time + 1000));
-        time += 1000;
+        }, (time + 800));
+        time += 800;
     };
 
     var movementCode = {
