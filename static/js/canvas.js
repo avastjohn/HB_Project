@@ -9,7 +9,7 @@ var message = document.getElementById('message');
 $(document).ready(function() {
     $(function() {
         $(".codeBox").droppable();
-        $(".arrow").draggable();
+        $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner" });
     });
 });
 // Position class
@@ -164,9 +164,8 @@ var Pet = function(pettype, petname, gender, level) {
             pet.nextPos = new Position(pet.currentPos.x - 1, pet.currentPos.y);
         }
     };
-    this.tryAgain = function(direction, gameBoard) {
+    this.tryAgain = function(gameBoard) {
         var pet = this;
-        message.innerHTML = "<h3>Uh-oh, " + pet.petname + " cannot go " + direction + " :(</h3>";
         pet.startOver = setTimeout(function() {
             message.innerHTML = "<h3>Try again!</h3>";
             pet.currentPos = pet.level.petStart;
@@ -175,13 +174,15 @@ var Pet = function(pettype, petname, gender, level) {
             pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
         }, 3000);
     };
-
+    var runListLength = 0;
     var time = 0;
 
     this.move = function(direction, gameBoard) {
+        // takes a direction and a gameBoard and moves the pet in that direction if allowable
         var pet = this;
         pet.moveTimer = setTimeout(function() {
             pet.getNextPos(direction);
+            // case: pet reaches treat
             if (pet.nextPos.eq(pet.treatPos)) {
                 message.innerHTML = "<h3>You made " + pet.petname + " very happy! Yay!!!!!!</h3>";
                 for (var i=0; i < pet.movers.length; i++) {
@@ -190,20 +191,22 @@ var Pet = function(pettype, petname, gender, level) {
                 gameBoard.drawBoard()
                 pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
                 pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+            // case: pet hasn't reached treat and the next move is allowable
             } else if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
                 gameBoard.drawBoard();
                 pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
                 pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
                 message.innerHTML = "<h3>" + pet.petname + " went " + direction + "</h3>";
+            // case: pet hasn't reached treat and the next move is not allowable
             } else {
                 for (var i=0; i < pet.movers.length; i++) {
                     clearTimeout(pet.movers[i]);
                 }
-                pet.tryAgain(direction, gameBoard);
+                message.innerHTML = "<h3>Uh-oh, " + pet.petname + " cannot go " + direction + " :(</h3>";
+                pet.tryAgain(gameBoard);
             }
         }, (time + 800));
         pet.movers.push(pet.moveTimer);
-        console.log(pet.movers);
         time += 800;
     };
 
@@ -215,6 +218,8 @@ var Pet = function(pettype, petname, gender, level) {
     };
 
     this.run = function(runList, gameBoard) {
+        // takes a list of movement commands and moves pet accordingly
+        var pet = this;
         for (var i = 0; i < runList.length; i++) {
             this.move(movementCode[runList[i]], gameBoard);
         }
@@ -237,11 +242,11 @@ window.onload = function() {
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
         // case: win
-    mrSnuffles.run(["r", "u", "r", "u", "r", "u", "r", "u", "l", "d"], currentBoard);
+    //mrSnuffles.run(["r", "u", "r", "u", "r", "u", "r", "u", "l", "d"], currentBoard);
         // case: not win
-    //mrSnuffles.run(["r", "u", "r", "u", "l", "u", "r", "u", "l", "d"], currentBoard);
+    //mrSnuffles.run(["r", "u", "l", "u", "l", "u", "r", "u", "l", "d"], currentBoard);
         // case: not finish
-    //mrSnuffles.run(["r", "u", "r", "u"], currentBoard);
+    mrSnuffles.run(["r", "u", "r"], currentBoard);
     message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the " + mrSnuffles.treat + "!</h3>";
 };
 

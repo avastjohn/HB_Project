@@ -8,21 +8,21 @@
         }
         #codeBoxes {
             margin-left: 30px;
-            height: 54px;
-            width: 378px;
-            border: 2px solid DeepSkyBlue;
+            height: 56px;
+            width: 374px;
+            background-color: DeepSkyBlue;
         }
         .codeBox {
             height: 50px;
             width: 50px;
             background-color: LightBlue;
-            border: 2px solid DeepSkyBlue;
             float: left;
+            margin-top: 3px;
+            margin-left: 3px;
         }
         #arrowsbuttons {
             width: 378px;
             height: 170px;
-
         }
         #arrows {
             height: 160px;
