@@ -2,6 +2,7 @@
 
 blockers:
 - I so don't get html/css. Why can't I position the buttons in the right place?
+- I am struggling to understand how to make the droppable function actually do something
 
 Nov 13 (Wed):
 - got jQuery ui functions working - can drag arrows around screen
