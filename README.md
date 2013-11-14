@@ -2,12 +2,12 @@
 
 blockers:
 - I so don't get html/css. Why can't I position the buttons in the right place?
-- I can't seem to reset pet's position to petStart
 
 Nov 13 (Wed):
 - got jQuery ui functions working - can drag arrows around screen
 - created position class with method that evaluates whether two positions are equivalent or not
 - run() now evaluates when the pet has reached the treat
+- made the pet's position reset to petStart once an "error" in the code list has been detected
 
 Nov 12 (Tues):
 - created customized message that updates as events occur
