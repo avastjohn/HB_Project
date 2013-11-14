@@ -101,6 +101,7 @@ var pet = function(pettype, petname, gender, level) {
     this.level = level;
     this.currentPos = new position(level.petStart.x, level.petStart.y);
     this.treatPos = level.treatPos;
+    this.movers = [];
 
     this.treats = {
         "dog": "bone",
@@ -179,21 +180,27 @@ var pet = function(pettype, petname, gender, level) {
 
     this.move = function(direction, gameBoard) {
         var pet = this;
-        pet.mover = setTimeout(function() {
+        pet.moveTimer = setTimeout(function() {
             pet.getNextPos(direction);
             if (pet.nextPos.eq(pet.treatPos)) {
                 message.innerHTML = "<h3>Yay!!!!!!</h3>";
-                clearTimeout(pet.mover);
+                for (var i=0; i < pet.movers.length; i++) {
+                    clearTimeout(pet.movers[i]);
+                }
             } else if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
                 gameBoard.drawBoard();
                 pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
                 pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
                 message.innerHTML = "<h3>" + pet.petname + " went " + direction + "</h3>";
             } else {
-                clearTimeout(pet.mover);
+                for (var i=0; i < pet.movers.length; i++) {
+                    clearTimeout(pet.movers[i]);
+                }
                 pet.tryAgain(direction, gameBoard);
             }
         }, (time + 800));
+        pet.movers.push(pet.moveTimer);
+        console.log(pet.movers);
         time += 800;
     };
 
@@ -226,7 +233,7 @@ window.onload = function() {
     currentBoard.drawBoard();
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
-    mrSnuffles.run(["r", "u", "r", "u", "r", "u"], currentBoard);
+    mrSnuffles.run(["r", "u", "r", "d", "r", "u", "l", "d", "l", "d"], currentBoard);
     message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to his " + mrSnuffles.treat + "!</h3>";
 };
 
