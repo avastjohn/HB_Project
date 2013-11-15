@@ -1,8 +1,18 @@
 ##Progress Log
 
-blockers:
-- I so don't get html/css. Why can't I position the buttons in the right place?
-- I am struggling to understand how to make the droppable function actually do something
+goals for today/this weekend:
+- be able to read code from arrows dropped in codeboxes
+- fix droppables so that arrows snap-to better
+- make arrows jump back to original position if not dropped in droppable
+
+Nov 15 (Fri):
+- implemented changes to move() and run() so that pet tries again if arrowcode is unfinished
+
+Nov 14 (Thurs):
+- figured out way to make pet try again if arrowcode is unfinished but correct so far
+- made droppable actually do something
+- make the draggable arrows stick to the codeboxes
+- fixed the button placements
 
 Nov 13 (Wed):
 - got jQuery ui functions working - can drag arrows around screen
