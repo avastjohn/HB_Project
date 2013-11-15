@@ -2,11 +2,12 @@
 
 goals for today/this weekend:
 - be able to read code from arrows dropped in codeboxes
-- fix droppables so that arrows snap-to better
-- make arrows jump back to original position if not dropped in droppable
+- start login page/login data persistence?
 
 Nov 15 (Fri):
 - implemented changes to move() and run() so that pet tries again if arrowcode is unfinished
+- made arrows revert when not dropped
+- tried to read what type of arrow has been dropped, failed miserably
 
 Nov 14 (Thurs):
 - figured out way to make pet try again if arrowcode is unfinished but correct so far

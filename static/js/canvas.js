@@ -3,9 +3,7 @@ var UNIT_SIZE = 100;
 
 var myCanvas = document.getElementById('myCanvas');
 var context = myCanvas.getContext("2d");
-
 var message = document.getElementById('message');
-
 
 // Position class
 var Position = function(x, y) {
@@ -23,12 +21,7 @@ var Level = function(backMap, petStart, treatPos) {
     this.backMap = backMap;
     this.petStart = new Position(petStart[0], petStart[1]);
     this.treatPos = new Position(treatPos[0], treatPos[1]);
-}
-
-// this data will eventually come from the database:
-var level1 = new Level("GGG ppp GGG", [0,1], [2,1]);
-var level2 = new Level("GGGG GppG ppGG GGGG", [0,2], [2,1]);
-var level3 = new Level("GGGp GGpp GppG ppGG", [0,3], [3,0]);
+};
 
 // GameBoard class
 var GameBoard = function(level) {
@@ -88,6 +81,11 @@ var GameBoard = function(level) {
     };
 };
 
+// Arrow class
+var Arrow = function(dirCode) {
+    this.dirCode = dirCode;
+};
+
 // Pet class
 var Pet = function(pettype, petname, gender, level) {
     this.pettype = pettype;
@@ -97,13 +95,14 @@ var Pet = function(pettype, petname, gender, level) {
     this.currentPos = new Position(level.petStart.x, level.petStart.y);
     this.treatPos = level.treatPos;
     this.movers = [];
+    this.runList = [];
         //////////// for testing purposes
         // case: win
-    this.runList = ["r", "u", "r", "u", "r", "u", "r", "u", "l", "d"];
+    //this.runList = ["r", "u", "r", "u", "r", "u", "r", "u", "l", "d"];
         // case: not win
     //this.runList = ["r", "u", "l", "u", "l", "u", "r", "u", "l", "d"];
         // case: not finish
-    //this.runList = ["r", "u", "r", "u"];
+    this.runList = ["r", "u", "r"];
 
     this.treats = {
         "dog": "bone",
@@ -150,6 +149,7 @@ var Pet = function(pettype, petname, gender, level) {
     };
 
     this.redrawTreat = function(pos) {
+        // why won't you let me collapse this, sublimetext?
         context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+2), (pos[1]*UNIT_SIZE)+2);
     };
 
@@ -179,7 +179,7 @@ var Pet = function(pettype, petname, gender, level) {
     };
 
     this.eatTreat = function(gameBoard) {
-    // improve this function later
+        // improve this function later
         var pet = this;
         gameBoard.drawBoard();
         pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
@@ -235,19 +235,33 @@ var Pet = function(pettype, petname, gender, level) {
             i+=1;
         },1000);
     };
-
 };
 
+// this data will eventually come from the database:
+var level1 = new Level("GGG ppp GGG", [0,1], [2,1]);
+var level2 = new Level("GGGG GppG ppGG GGGG", [0,2], [2,1]);
+var level3 = new Level("GGGp GGpp GppG ppGG", [0,3], [3,0]);
 var mrSnuffles = new Pet("bunny", "Mr. Snuffles", "m", level3);
 var currentBoard = new GameBoard(level3);
+
+
+var codeBox0 = document.getElementById("codeBox0");
+var codeBox1 = document.getElementById("codeBox1");
+var codeBox2 = document.getElementById("codeBox2");
+var codeBox3 = document.getElementById("codeBox3");
+var codeBox4 = document.getElementById("codeBox4");
+var codeBox5 = document.getElementById("codeBox5");
+var codeBox6 = document.getElementById("codeBox6");
 
 // on pageload:
 $(function() {
     $(".codeBox").droppable({ drop: function(event, ui){
-        mrSnuffles.runList.push("d");
+        // if (codebox 0 has gets an arrow in it) {
+        //     mrSnuffles.runList[0] = that arrow;
+        // }
         console.log(mrSnuffles.runList);
     }});
-    $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner" });
+    $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
     currentBoard.drawBoard();
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
