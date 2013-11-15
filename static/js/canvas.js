@@ -103,7 +103,7 @@ var Pet = function(pettype, petname, gender, level) {
         // case: not win
     //this.runList = ["r", "u", "l", "u", "l", "u", "r", "u", "l", "d"];
         // case: not finish
-    //this.runList = ["r", "u", "r"];
+    //this.runList = ["r", "u", "r", "u"];
 
     this.treats = {
         "dog": "bone",
@@ -166,6 +166,7 @@ var Pet = function(pettype, petname, gender, level) {
             pet.nextPos = new Position(pet.currentPos.x - 1, pet.currentPos.y);
         }
     };
+
     this.tryAgain = function(gameBoard) {
         var pet = this;
         pet.startOver = setTimeout(function() {
@@ -176,73 +177,65 @@ var Pet = function(pettype, petname, gender, level) {
             pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
         }, 3000);
     };
-    var runListLength = 0;
-    var time = 0;
 
-    this.move = function(direction, gameBoard) {
-
-        // have this.move just move the pet, not have timers or logic
-
-        // takes a direction and a gameBoard and moves the pet in that direction if allowable
+    this.eatTreat = function(gameBoard) {
+    // improve this function later
         var pet = this;
-        pet.moveTimer = setTimeout(function() {
-            pet.getNextPos(direction);
-            // case: pet reaches treat
-            if (pet.nextPos.eq(pet.treatPos)) {
-                message.innerHTML = "<h3>You made " + pet.petname + " very happy! Yay!!!!!!</h3>";
-                for (var i=0; i < pet.movers.length; i++) {
-                    clearTimeout(pet.movers[i]);
-                }
-                gameBoard.drawBoard()
-                pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
-                pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
-            // case: pet hasn't reached treat and the next move is allowable
-            } else if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
-                gameBoard.drawBoard();
-                pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
-                pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
-                message.innerHTML = "<h3>" + pet.petname + " went " + direction + "</h3>";
-            // case: pet hasn't reached treat and the next move is not allowable
-            } else {
-                for (var i=0; i < pet.movers.length; i++) {
-                    clearTimeout(pet.movers[i]);
-                }
-                message.innerHTML = "<h3>Uh-oh, " + pet.petname + " cannot go " + direction + " :(</h3>";
-                pet.tryAgain(gameBoard);
-            }
-        }, (time + 800));
-        pet.movers.push(pet.moveTimer);
-        time += 800;
+        gameBoard.drawBoard();
+        pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
+        pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+    };
+
+    this.move = function(gameBoard) {
+        // moves the pet to the nextPos
+        var pet = this;
+        gameBoard.drawBoard();
+        pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+        pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
     };
 
     var movementCode = {
         "r":"right",
         "l":"left",
         "u":"up",
-        "d":"down"
+        "d":"down",
+        "L":"loop"
     };
 
     this.run = function(gameBoard) {
         // takes a list of movement commands and moves pet accordingly
-
-        // var i = 0
-        // var interval_id = set interval (takes function, time in ms)
-        // check runList[i] -> authorize/move, i+=1
-        //                  -> if need to stop, clear interval
-
         var pet = this;
-        for (var i = 0; i < pet.runList.length; i++) {
-            // isLast - a boolean that gets passed to move()
-            this.move(movementCode[pet.runList[i]], gameBoard);
-        }
+        var i = 0;
+        var isLast = false;
+        intervalID = setInterval(function() {
+            if (i == pet.runList.length - 1) {
+                isLast = true;
+            }
+            var direction = movementCode[pet.runList[i]]
+            pet.getNextPos(direction);
+            // case: pet reaches treat
+            if (pet.nextPos.eq(pet.treatPos)) {
+                message.innerHTML = "<h3>You made " + pet.petname + " very happy! Yay!!!!!!</h3>";
+                pet.eatTreat(gameBoard);
+                clearInterval(intervalID);
+            // case: pet hasn't reached treat and the next move is legal
+            } else if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
+                if (isLast) {
+                    pet.tryAgain(gameBoard);
+                } else {
+                    message.innerHTML = "<h3>" + pet.petname + " went " + direction + "</h3>";
+                    pet.move(gameBoard);
+                }
+            // case: pet hasn't reached treat and the next move is illegal
+            } else {
+                message.innerHTML = "<h3>Uh-oh, " + pet.petname + " cannot go " + direction + " :(</h3>";
+                clearInterval(intervalID);
+                pet.tryAgain(gameBoard);
+            }
+            i+=1;
+        },1000);
     };
 
-
-    this.eatTreat = function() {
-        // make this function later. it will make stars 
-        // appear or something when bunny reaches carrot.
-        return;
-    };
 };
 
 var mrSnuffles = new Pet("bunny", "Mr. Snuffles", "m", level3);
@@ -259,6 +252,6 @@ $(function() {
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
     message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the " + mrSnuffles.treat + "!</h3>";
-    // for testing purposes
+    // for testing purposes:
     mrSnuffles.run(currentBoard);
 });
