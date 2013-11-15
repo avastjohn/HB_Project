@@ -2,11 +2,13 @@
 
 goals for today/this weekend:
 - be able to read code from arrows dropped in codeboxes
+- make multiples of each arrow so that user can use more than one
 - start login page/login data persistence?
 
 Nov 15 (Fri):
 - implemented changes to move() and run() so that pet tries again if arrowcode is unfinished
 - made arrows revert when not dropped
+- added "loop" as a direction, which makes your arrow code repeat over and over from the beginning
 - tried to read what type of arrow has been dropped, failed miserably
 
 Nov 14 (Thurs):
