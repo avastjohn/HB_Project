@@ -6,12 +6,7 @@ var context = myCanvas.getContext("2d");
 
 var message = document.getElementById('message');
 
-$(document).ready(function() {
-    $(function() {
-        $(".codeBox").droppable();
-        $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner" });
-    });
-});
+
 // Position class
 var Position = function(x, y) {
     this.x = x;
@@ -102,6 +97,13 @@ var Pet = function(pettype, petname, gender, level) {
     this.currentPos = new Position(level.petStart.x, level.petStart.y);
     this.treatPos = level.treatPos;
     this.movers = [];
+        //////////// for testing purposes
+        // case: win
+    this.runList = ["r", "u", "r", "u", "r", "u", "r", "u", "l", "d"];
+        // case: not win
+    //this.runList = ["r", "u", "l", "u", "l", "u", "r", "u", "l", "d"];
+        // case: not finish
+    //this.runList = ["r", "u", "r"];
 
     this.treats = {
         "dog": "bone",
@@ -116,7 +118,7 @@ var Pet = function(pettype, petname, gender, level) {
         "bone": "http://i.imgur.com/KXDEPVW.png",
         "penguin": "http://i.imgur.com/xBJDNUs.png",
         "fish": "http://i.imgur.com/SxB5DrK.png"
-    }
+    };
 
     this.image = this.images[this.pettype];
     this.treat = this.treats[this.pettype];
@@ -178,6 +180,9 @@ var Pet = function(pettype, petname, gender, level) {
     var time = 0;
 
     this.move = function(direction, gameBoard) {
+
+        // have this.move just move the pet, not have timers or logic
+
         // takes a direction and a gameBoard and moves the pet in that direction if allowable
         var pet = this;
         pet.moveTimer = setTimeout(function() {
@@ -217,11 +222,18 @@ var Pet = function(pettype, petname, gender, level) {
         "d":"down"
     };
 
-    this.run = function(runList, gameBoard) {
+    this.run = function(gameBoard) {
         // takes a list of movement commands and moves pet accordingly
+
+        // var i = 0
+        // var interval_id = set interval (takes function, time in ms)
+        // check runList[i] -> authorize/move, i+=1
+        //                  -> if need to stop, clear interval
+
         var pet = this;
-        for (var i = 0; i < runList.length; i++) {
-            this.move(movementCode[runList[i]], gameBoard);
+        for (var i = 0; i < pet.runList.length; i++) {
+            // isLast - a boolean that gets passed to move()
+            this.move(movementCode[pet.runList[i]], gameBoard);
         }
     };
 
@@ -236,17 +248,17 @@ var Pet = function(pettype, petname, gender, level) {
 var mrSnuffles = new Pet("bunny", "Mr. Snuffles", "m", level3);
 var currentBoard = new GameBoard(level3);
 
-// onload function
-window.onload = function() {
+// on pageload:
+$(function() {
+    $(".codeBox").droppable({ drop: function(event, ui){
+        mrSnuffles.runList.push("d");
+        console.log(mrSnuffles.runList);
+    }});
+    $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner" });
     currentBoard.drawBoard();
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
-        // case: win
-    //mrSnuffles.run(["r", "u", "r", "u", "r", "u", "r", "u", "l", "d"], currentBoard);
-        // case: not win
-    //mrSnuffles.run(["r", "u", "l", "u", "l", "u", "r", "u", "l", "d"], currentBoard);
-        // case: not finish
-    mrSnuffles.run(["r", "u", "r"], currentBoard);
     message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the " + mrSnuffles.treat + "!</h3>";
-};
-
+    // for testing purposes
+    mrSnuffles.run(currentBoard);
+});
