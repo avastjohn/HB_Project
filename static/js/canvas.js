@@ -102,7 +102,7 @@ var Pet = function(pettype, petname, gender, level) {
         // case: not win
     //this.runList = ["r", "u", "l", "u", "l", "u", "r", "u", "l", "d"];
         // case: not finish
-    this.runList = ["r", "u", "r"];
+    //this.runList = ["u", "r", "r", "L"];
 
     this.treats = {
         "dog": "bone",
@@ -211,7 +211,12 @@ var Pet = function(pettype, petname, gender, level) {
             if (i == pet.runList.length - 1) {
                 isLast = true;
             }
-            var direction = movementCode[pet.runList[i]]
+            var direction = movementCode[pet.runList[i]];
+            if (direction == "loop") {
+                i = 0;
+                isLast = false;
+                direction = movementCode[pet.runList[i]];
+            }
             pet.getNextPos(direction);
             // case: pet reaches treat
             if (pet.nextPos.eq(pet.treatPos)) {
@@ -238,34 +243,42 @@ var Pet = function(pettype, petname, gender, level) {
 };
 
 // this data will eventually come from the database:
+                    //  backMap, petStart, treatPos
 var level1 = new Level("GGG ppp GGG", [0,1], [2,1]);
 var level2 = new Level("GGGG GppG ppGG GGGG", [0,2], [2,1]);
 var level3 = new Level("GGGp GGpp GppG ppGG", [0,3], [3,0]);
-var mrSnuffles = new Pet("bunny", "Mr. Snuffles", "m", level3);
-var currentBoard = new GameBoard(level3);
-
-
-var codeBox0 = document.getElementById("codeBox0");
-var codeBox1 = document.getElementById("codeBox1");
-var codeBox2 = document.getElementById("codeBox2");
-var codeBox3 = document.getElementById("codeBox3");
-var codeBox4 = document.getElementById("codeBox4");
-var codeBox5 = document.getElementById("codeBox5");
-var codeBox6 = document.getElementById("codeBox6");
+var level4 = new Level("GGGGp GGppp pppGG pGGGG", [0,3], [4,0]);
+var mrSnuffles = new Pet("bunny", "Mr. Snuffles", "m", level4);
+var currentBoard = new GameBoard(level4);
 
 // on pageload:
 $(function() {
-    $(".codeBox").droppable({ drop: function(event, ui){
-        // if (codebox 0 has gets an arrow in it) {
-        //     mrSnuffles.runList[0] = that arrow;
-        // }
+    // the drop is the event, the ui.draggable is the arrow
+    for (var i = 0; i < 7; i++) {
+        $(".box"+i).droppable();
+        $(".box"+i).on('drop', null, {boxNum:i}, dropResponder);
+    }    
+    
+    function dropResponder(event, ui){
+        if (ui.draggable.hasClass("down")) {
+            mrSnuffles.runList[event.data.boxNum] = "d";
+        } else if (ui.draggable.hasClass("up")) {
+            mrSnuffles.runList[event.data.boxNum] = "u";
+        } else if (ui.draggable.hasClass("left")) {
+            mrSnuffles.runList[event.data.boxNum] = "l";
+        } else if (ui.draggable.hasClass("right")) {
+            mrSnuffles.runList[event.data.boxNum] = "r";
+        } else if (ui.draggable.hasClass("loop")) {
+            mrSnuffles.runList[event.data.boxNum] = "L";
+        }
         console.log(mrSnuffles.runList);
-    }});
+    }
+
     $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
     currentBoard.drawBoard();
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
     message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the " + mrSnuffles.treat + "!</h3>";
     // for testing purposes:
-    mrSnuffles.run(currentBoard);
+    //mrSnuffles.run(currentBoard);
 });
