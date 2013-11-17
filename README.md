@@ -1,9 +1,12 @@
 ##Progress Log
 
-goals for today/this weekend:
-- be able to read code from arrows dropped in codeboxes
+next goals:
+- make it so that arrows moved out of the codebar update the runList also
 - make multiples of each arrow so that user can use more than one
 - start login page/login data persistence?
+
+Weekend:
+- codebar reads arrows and updates runList accordingly, but moving them out of the codebar doesn't change anything
 
 Nov 15 (Fri):
 - implemented changes to move() and run() so that pet tries again if arrowcode is unfinished
