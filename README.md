@@ -1,12 +1,20 @@
 ##Progress Log
 
 next goals:
+- fix run button so that it doesn't just keep calling run over and over!
+- start registration page/registration data persistence
+- be able to save arrowcode for each user
 - make it so that arrows moved out of the codebar update the runList also
 - make multiples of each arrow so that user can use more than one
-- start login page/login data persistence?
+
+Nov 18 (Mon):
+- login page actually manages the session
+- logout link allows user to log out for the session
+- game loads according to the current level that the user is on and takes their pettype, petname, petgender from the database
 
 Weekend:
 - codebar reads arrows and updates runList accordingly, but moving them out of the codebar doesn't change anything
+- created login page but doesn't actually manage session properly...?
 
 Nov 15 (Fri):
 - implemented changes to move() and run() so that pet tries again if arrowcode is unfinished
