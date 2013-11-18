@@ -47,12 +47,11 @@ def load_users():
     model.session.add(u5) 
 
 def load_levels():
-# why isn't the treat postition loading correctly???
     l1 = model.Level(map = "GGG ppp GGG",
                     petStart = "0 1",
                     treatPos = "2 1")
     model.session.add(l1)
-# why isn't the treat postition loading correctly???
+    
     l2 = model.Level(map = "GGGG GppG ppGG GGGG",
                     petStart = "0 2",
                     treatPos = "2 1")
