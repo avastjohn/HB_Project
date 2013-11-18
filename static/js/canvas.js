@@ -19,6 +19,8 @@ var Position = function(x, y) {
 // Level class
 var Level = function(backMap, petStart, treatPos) {
     this.backMap = backMap;
+    petStart = petStart.split(" ");
+    treatPos = treatPos.split(" ");
     this.petStart = new Position(petStart[0], petStart[1]);
     this.treatPos = new Position(treatPos[0], treatPos[1]);
 };
@@ -85,6 +87,10 @@ var GameBoard = function(level) {
 var Arrow = function(dirCode) {
     this.dirCode = dirCode;
 };
+
+var completeLevel = function() {
+    return;
+}
 
 // Pet class
 var Pet = function(pettype, petname, gender, level) {
@@ -223,6 +229,7 @@ var Pet = function(pettype, petname, gender, level) {
                 message.innerHTML = "<h3>You made " + pet.petname + " very happy! Yay!!!!!!</h3>";
                 pet.eatTreat(gameBoard);
                 clearInterval(intervalID);
+
             // case: pet hasn't reached treat and the next move is legal
             } else if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
                 if (isLast) {
@@ -244,12 +251,7 @@ var Pet = function(pettype, petname, gender, level) {
 
 // this data will eventually come from the database:
                     //  backMap, petStart, treatPos
-var level1 = new Level("GGG ppp GGG", [0,1], [2,1]);
-var level2 = new Level("GGGG GppG ppGG GGGG", [0,2], [2,1]);
-var level3 = new Level("GGGp GGpp GppG ppGG", [0,3], [3,0]);
-var level4 = new Level("GGGGp GGppp pppGG pGGGG", [0,3], [4,0]);
-var mrSnuffles = new Pet("bunny", "Mr. Snuffles", "m", level4);
-var currentBoard = new GameBoard(level4);
+
 
 // on pageload:
 $(function() {
@@ -281,5 +283,6 @@ $(function() {
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
     message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the " + mrSnuffles.treat + "!</h3>";
     // for testing purposes:
+    $(".go").click(function() {mrSnuffles.run(currentBoard)} );
     //mrSnuffles.run(currentBoard);
 });

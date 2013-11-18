@@ -10,6 +10,7 @@
 
             <div id="message">
             </div>
+            <a href="{{url_for('logout')}}">Log out</a>
             <canvas id= "myCanvas" width="500" height="500"></canvas>
         </div>
         <div id="codeBoxes">
@@ -29,16 +30,20 @@
                 <img src="http://i.imgur.com/6IyQk2a.png" class="ui-widget-content arrow right"></img>
                 <img src="http://i.imgur.com/PZAl1GC.png" class="ui-widget-content arrow left"></img>
             </div>
-            <form action="/run">
-                <input type="submit" class="go button" value="go">
-            </form>
+            <div id="buttons">
+                <div class="go button">go</div>
                 <br>
-            <form action="/savedata">
-                <input type="submit" class="save button" value="save">
-            </form>
+                <div class="save button">save</div>
+            </div>
         </div>
         <script type="text/javascript" src="../static/js/jquery-2.0.3.min.js "></script>
         <script type="text/javascript" src="../static/js/jquery-ui-1.10.3.custom.min.js "></script>
         <script src="../static/js/canvas.js"></script>
+        <script type="text/javascript">
+            var currentLevel = {{user.current_level}};
+            var level = new Level("{{level.map}}", "{{level.petStart}}", "{{level.treatPos}}");
+            var mrSnuffles = new Pet("{{user.pettype}}", "{{user.petname}}", "{{user.petgender}}", level);
+            var currentBoard = new GameBoard(level);
+        </script>
     </body>
 </html>

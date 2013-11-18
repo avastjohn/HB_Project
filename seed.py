@@ -7,49 +7,66 @@ import model
 
 def load_users():
     u1 = model.User(username="pinkiepie", 
-                    pettype="alligator",
+                    pettype="dog",
                     petname="Gummy",
-                    petgender="m")
+                    petgender="m",
+                    current_level=2)
     u1.set_password("balloons")    
     model.session.add(u1)
 
     u2 = model.User(username="rainbowdash", 
-                    pettype="tortoise",
+                    pettype="penguin",
                     petname="Tank",
-                    petgender="m")
+                    petgender="m",
+                    current_level=1)
     u2.set_password("lightning")    
     model.session.add(u2)
 
     u3 = model.User(username="twilightsparkle", 
-                    pettype="owl",
+                    pettype="penguin",
                     petname="Owlewiscious",
-                    petgender="m")
+                    petgender="m",
+                    current_level=4)
     u3.set_password("stars")    
     model.session.add(u3) 
 
     u4 = model.User(username="applejack", 
                     pettype="dog",
                     petname="Winona",
-                    petgender="f")
+                    petgender="f",
+                    current_level=1)
     u4.set_password("apples")    
     model.session.add(u4) 
 
     u5 = model.User(username="fluttershy", 
                     pettype="bunny",
                     petname="Angel",
-                    petgender="m")
+                    petgender="m",
+                    current_level=3)
     u5.set_password("butterflies")    
     model.session.add(u5) 
 
 def load_levels():
-    l1 = model.Level(map = "GGG apt GGG")
+# why isn't the treat postition loading correctly???
+    l1 = model.Level(map = "GGG ppp GGG",
+                    petStart = "0 1",
+                    treatPos = "2 1")
     model.session.add(l1)
-
-    l2 = model.Level(map = "GGGG GptG apGG GGGG")
+# why isn't the treat postition loading correctly???
+    l2 = model.Level(map = "GGGG GppG ppGG GGGG",
+                    petStart = "0 2",
+                    treatPos = "2 1")
     model.session.add(l2)   
 
-    l3 = model.Level(map = "GGGt GGpp GppG apGG")
+    l3 = model.Level(map = "GGGp GGpp GppG ppGG",
+                    petStart = "0 3",
+                    treatPos = "3 0")
     model.session.add(l3)
+
+    l4 = model.Level(map = "GGGGp GGppp pppGG pGGGG",
+                    petStart = "0 3",
+                    treatPos = "4 0")
+    model.session.add(l4)
 
 def load_user_levels():
     # pinkie does levels 1 and 2
@@ -93,8 +110,8 @@ def load_user_levels():
 
     u_l7 = model.UserLevel(user_id=5,
                         level_id=2,
-                        current_level_input="rrrrrr",
-                        complete=0)
+                        current_level_input="rur",
+                        complete=1)
     model.session.add(u_l7)
 
 def main():

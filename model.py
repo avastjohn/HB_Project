@@ -27,6 +27,7 @@ class User(Base, UserMixin):
     petgender = Column(String(64), nullable=False)
     salt = Column(String(64), nullable=False)
     pw = Column(String(64), nullable=False)
+    current_level = Column(Integer, default=1)
 
     user_levels = relationship("UserLevel", uselist=True)
 
@@ -46,6 +47,8 @@ class Level(Base):
     
     id = Column(Integer, primary_key=True)
     map = Column(String(64), nullable=False)
+    petStart = Column(String(64), nullable=False)
+    treatPos = Column(String(64), nullable=False)
 
 
 class UserLevel(Base):

@@ -29,6 +29,10 @@
             margin-top: 30px;
             float: left;
         }
+        #buttons {
+            float: left;
+            padding-top: 20px;
+        }
         .arrow {
             height: 50px;
             width: 50px;

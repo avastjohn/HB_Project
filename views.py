@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
 from model import User, Level
-from flask.ext.login import LoginManager, login_required, login_user, current_user
+from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from flaskext.markdown import Markdown
 import config
 import forms
@@ -41,14 +41,24 @@ def load_user(user_id):
     return User.query.get(user_id)
 # End login stuff
 
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("index"))
 
 @app.route("/canvas")
 @login_required
 def canvas():
-    return render_template("canvas.html")
+    user = current_user.get_id()
+    user = User.query.get(user)
+    if user.current_level:
+        level = Level.query.get(user.current_level)
+    else:
+        level = Level.query.get(1)
+    return render_template("canvas.html", user=user, level=level)
 
-@app.route("/run")
-def run():
+@app.route("/completed")
+def completed():
     pass
 
 # @app.route("/post/new", methods=["POST"])
