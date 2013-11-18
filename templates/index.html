@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
-{% block body %}
-{% for level in levels %}
-<div class="post">
-    <h2>{{ level.map }}</a></h2>
-<!--     <p>
-        {{post.body | markdown}}
-    </p> -->
-    
-</div>
-{% endfor %}
-{% endblock %}
+    {% block body %}
+    <div class="maincontainer">
+        <div class="maincontent">
+            <h1><center>Someday my game will have a real title</center></h1>
+
+            <h2 class="signin-heading">Login</h2>
+            <p>{{ error }}</p>
+            <form action="/login" class="signin" method="POST">
+                Username: <input type="text" class="form-control" name="username"><br>
+                Password: <input type="password" class="form-control" name="password"><br>
+                <input type="submit" class="btn" value="Sign In">
+            </form>
+
+            <br><br>
+
+            <h2 class="signin-heading">Create a new account</h2>
+            <form action="/create_account" class="signin" method="POST">
+                New Username: <input type="text" class="form-control" name="username"><br>
+                New Password: <input type="password" class="form-control" name="password"><br>
+                <input type="submit" class="btn" value="Start playing now!">
+            </form>
+        </div>
+    </div>
+    {% endblock %}

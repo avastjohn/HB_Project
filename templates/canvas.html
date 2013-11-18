@@ -7,6 +7,7 @@
 </head>
     <body>
         <div id="canvasContainer">
+
             <div id="message">
             </div>
             <canvas id= "myCanvas" width="500" height="500"></canvas>
@@ -28,9 +29,11 @@
                 <img src="http://i.imgur.com/6IyQk2a.png" class="ui-widget-content arrow right"></img>
                 <img src="http://i.imgur.com/PZAl1GC.png" class="ui-widget-content arrow left"></img>
             </div>
-            <form>
+            <form action="/run">
                 <input type="submit" class="go button" value="go">
+            </form>
                 <br>
+            <form action="/savedata">
                 <input type="submit" class="save button" value="save">
             </form>
         </div>

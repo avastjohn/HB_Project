@@ -276,6 +276,7 @@ $(function() {
 
     $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
     currentBoard.drawBoard();
+    $("#arrows").droppable();
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
     message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the " + mrSnuffles.treat + "!</h3>";
