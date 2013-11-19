@@ -1,11 +1,14 @@
 ##Progress Log
 
 next goals:
-- fix run button so that it doesn't just keep calling run over and over!
 - start registration page/registration data persistence
 - be able to save arrowcode for each user
 - make it so that arrows moved out of the codebar update the runList also
 - make multiples of each arrow so that user can use more than one
+
+Nov 19 (Tues):
+- fixed run button so that it doesn't just freak out when you press it
+- rearranged/debugged Pet.run(), created GameBoard.getGameState() and GameBoard.updateMessage()
 
 Nov 18 (Mon):
 - login page actually manages the session
