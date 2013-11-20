@@ -202,10 +202,7 @@ var Pet = function(pettype, petname, gender, level) {
         var pet = this;
         pet.startOver = setTimeout(function() {
             gameBoard.message.innerHTML = "<h3>Try again!</h3>";
-            console.log("currentPos before: " + pet.currentPos.x, pet.currentPos.y);
-            console.log("petStart: " + pet.level.petStart.x, pet.level.petStart.y);
             pet.currentPos = new Position(pet.level.petStart.x, pet.level.petStart.y);
-            console.log("currentPos after: " + pet.currentPos.x, pet.currentPos.y);
             gameBoard.drawBoard();
             pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
             pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);

@@ -36,6 +36,10 @@ def authenticate():
     login_user(user)
     return redirect(url_for("canvas"))
 
+@app.route("/register", methods=["POST"])
+def goToRegPage():
+    return render_template("register.html")
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="maincontainer">
+        <div class="maincontent">
+            <h1><center>Want to play fluffyTrails?</center></h1>
+
+            <h2 class="signin-heading">Sign Up Here</h2>
+            <p>{{ error }}</p>
+            <form action="/create_account" class="signin" method="POST">
+                Choose a username: <input type="text" class="form-control" name="username"><br><br>
+                Choose a password: <input type="password" class="form-control" name="password"><br><br>
+                Choose a pet: <br>
+                    <input type="radio" value="bunny" name="pettype"> bunny<br>
+                    <input type="radio" value="dog" name="pettype"> dog<br>
+                    <input type="radio" value="penguin" name="pettype"> penguin<br><br>
+                Name your pet: <input type="text" class="form-control" name="petname"><br><br>
+                Is your pet a boy <input type="radio" value="boy" name="petgender"> or a girl <input type="radio" value="girl" name="petgender"> ? <br>
+                <input type="submit" class="btn" value="Start Playing!">
+        </div>
+    </div>
+{% endblock %}
