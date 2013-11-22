@@ -6,6 +6,14 @@ next goals:
 - create registration data persistence
 - be able to save arrowcode for each user
 
+Nov 21 (Thurs):
+- spent most of the day doing a workshop in class
+- worked on css a little
+- did some testing
+
+Nov 20 (Wed): 
+- slept a lot and tried to not be sick
+
 Nov 19 (Tues):
 - fixed run button so that it doesn't just freak out when you press it
 - rearranged/debugged Pet.run(), created GameBoard.getGameState() and GameBoard.updateMessage()
