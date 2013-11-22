@@ -40,6 +40,9 @@ class User(Base, UserMixin):
         password = password.encode("utf-8")
         return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.pw
 
+    # def register_new_user(self, username, pettype, petgender, petname, pw)
+    #     salt = self.set_password(pw)
+    #     new_user = User()
 
 
 class Level(Base):

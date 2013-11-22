@@ -40,6 +40,37 @@ def authenticate():
 def goToRegPage():
     return render_template("register.html")
 
+# @app.route("/create_account", methods=["POST"])
+# def createAccount():
+#     username = request.form.get("username")
+#     password = request.form.get("password")
+#     pettype = request.form.get("pettype")
+#     petgender = request.form.get("petgender")
+#     petname = request.form.get("petname")
+#     return render_template(url_for("canvas"))
+
+
+
+# @app.route("/post/new", methods=["POST"])
+# @login_required
+# def create_post():
+#     form = forms.NewPostForm(request.form)
+#     if not form.validate():
+#         flash("Error, all fields are required")
+#         return render_template("new_post.html")
+
+#     post = Post(title=form.title.data, body=form.body.data)
+#     current_user.posts.append(post) 
+    
+#     model.session.commit()
+#     model.session.refresh(post)
+
+#     return redirect(url_for("view_post", id=post.id))
+
+
+
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
@@ -65,21 +96,7 @@ def canvas():
 def completed():
     pass
 
-# @app.route("/post/new", methods=["POST"])
-# @login_required
-# def create_post():
-#     form = forms.NewPostForm(request.form)
-#     if not form.validate():
-#         flash("Error, all fields are required")
-#         return render_template("new_post.html")
 
-#     post = Post(title=form.title.data, body=form.body.data)
-#     current_user.posts.append(post) 
-    
-#     model.session.commit()
-#     model.session.refresh(post)
-
-#     return redirect(url_for("view_post", id=post.id))
 
 
 

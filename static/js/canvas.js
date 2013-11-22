@@ -225,6 +225,22 @@ var Pet = function(pettype, petname, gender, level) {
         pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
     };
 
+    this.getDirectionFromArrows = function(image) {
+        image = $(image)
+        if (image.hasClass("down")) {
+            return "d";
+        } else if (image.hasClass("up")) {
+            return "u";
+        } else if (image.hasClass("left")) {
+            return "l";
+        } else if (image.hasClass("right")) {
+            return "r";
+        } else if (image.hasClass("loop")) {
+            return "L";
+        }
+
+    };
+
     this.run = function(gameBoard) {
         // takes a list of movement commands and moves pet accordingly
         var pet = this;
@@ -237,29 +253,33 @@ var Pet = function(pettype, petname, gender, level) {
             "L":"loop"
         };
         var intervalID = setInterval(function() {
-            var direction = movementCode[pet.runList[i]];
-            pet.getNextPos(direction);
-            gameBoard.updateMessage(pet);
-            if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
-                pet.move(gameBoard)
-                if ((pet.nextPos).eq(pet.treatPos)) {
-                    pet.eatTreat(gameBoard);
+            var direction = movementCode[pet.getDirectionFromArrows(pet.runList[i])];
+            if (direction) {
+                pet.getNextPos(direction);
+                gameBoard.updateMessage(pet);
+                if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
+                    pet.move(gameBoard)
+                    if ((pet.nextPos).eq(pet.treatPos)) {
+                        pet.eatTreat(gameBoard);
+                        clearInterval(intervalID);
+                        return;
+                    }
+                } else {
                     clearInterval(intervalID);
+                    pet.tryAgain(gameBoard);
+                }
+                if (direction == "loop") {
+                    i = 0;
                     return;
                 }
+                if (i >= (pet.runList.length - 1)) {
+                    clearInterval(intervalID);
+                    pet.tryAgain(gameBoard);
+                }
+                i+=1;
             } else {
                 clearInterval(intervalID);
-                pet.tryAgain(gameBoard);
             }
-            if (direction == "loop") {
-                i = 0;
-                return;
-            }
-            if (i >= (pet.runList.length - 1)) {
-                clearInterval(intervalID);
-                pet.tryAgain(gameBoard);
-            }
-            i+=1;
         },1000);
     };
 };
@@ -270,25 +290,27 @@ $(function() {
     for (var i = 0; i < 7; i++) {
         $(".box"+i).droppable();
         $(".box"+i).on('drop', null, {boxNum:i}, dropResponder);
-        $(".box"+i).on('dropout', function clearArrow(event, ui) {});  ///  uuuummmmmmmmm
+        $(".box"+i).on('dropout', clearArrow);
     }    
-    for
     // also have it repopulate the div
     // use drop out() to listen for arrow leaving div
 
     function dropResponder(event, ui){
-        if (ui.draggable.hasClass("down")) {
-            mrSnuffles.runList[event.data.boxNum] = "d";
-        } else if (ui.draggable.hasClass("up")) {
-            mrSnuffles.runList[event.data.boxNum] = "u";
-        } else if (ui.draggable.hasClass("left")) {
-            mrSnuffles.runList[event.data.boxNum] = "l";
-        } else if (ui.draggable.hasClass("right")) {
-            mrSnuffles.runList[event.data.boxNum] = "r";
-        } else if (ui.draggable.hasClass("loop")) {
-            mrSnuffles.runList[event.data.boxNum] = "L";
-        }
+        console.log("dropped ui" + ui.draggable[0].src);
+        mrSnuffles.runList[event.data.boxNum] = ui.draggable[0];
+
+
         ui.draggable.addClass("dropped");
+        //console.log(mrSnuffles.runList);
+    }
+
+    function clearArrow(event, ui){
+        console.log("called clearArrow()");
+        for (var i = 0; i < mrSnuffles.runList.length; i++){
+            if (ui.draggable[0] == mrSnuffles.runList[i]) {
+                mrSnuffles.runList[i] = null;
+            }
+        }
     }
 
     $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
@@ -300,6 +322,7 @@ $(function() {
                          + mrSnuffles.treat + "!</h3>";
 
     $(".go").click(function() {
+
         mrSnuffles.run(currentBoard)} );
     // for testing:
     //mrSnuffles.run(currentBoard);
