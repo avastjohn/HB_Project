@@ -10,12 +10,12 @@
             margin-left: 30px;
             height: 56px;
             width: 374px;
-            background-color: DeepSkyBlue;
+            background-color: #7AB5F7;
         }
         .codeBox {
             height: 50px;
             width: 50px;
-            background-color: LightBlue;
+            background-color: #A3D1FF;
             float: left;
             margin-top: 3px;
             margin-left: 3px;
@@ -23,8 +23,8 @@
         #arrows {
             height: 160px;
             width: 230px;
-            background-color: #bbffbb;
-            border: 3px solid #88ff88;
+            background-color: #F2A3FF;
+            border: 3px solid #CF80F0;
             margin-left: 30px;
             margin-top: 30px;
             float: left;
@@ -32,6 +32,7 @@
         #buttons {
             float: left;
             padding-top: 20px;
+
         }
         .arrow {
             height: 50px;
@@ -50,9 +51,9 @@
         }
         .go {
             background-color: #bbffbb;
-            border: 3px solid #88ff88;
+            border: 3px solid #83EE88;
         }
         .save {
-            background-color: LightBlue;
-            border: 3px solid DeepSkyBlue;
+            background-color: #A3D1FF;
+            border: 3px solid #7AB5F7;
         }

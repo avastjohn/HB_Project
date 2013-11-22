@@ -131,7 +131,7 @@ var Pet = function(pettype, petname, gender, level) {
         // case: win
     //this.runList = ["r", "u", "r"];
         // case: not win
-    //this.runList = ["r", "u", "l", "u", "l", "u", "r", "u", "l", "d"];
+    //this.runList = ["r", "u", "l", "u", "l"];
         // case: not finish
     //this.runList = ["r", "u"];
 
@@ -270,8 +270,12 @@ $(function() {
     for (var i = 0; i < 7; i++) {
         $(".box"+i).droppable();
         $(".box"+i).on('drop', null, {boxNum:i}, dropResponder);
+        $(".box"+i).on('dropout', function clearArrow(event, ui) {});  ///  uuuummmmmmmmm
     }    
-    
+    for
+    // also have it repopulate the div
+    // use drop out() to listen for arrow leaving div
+
     function dropResponder(event, ui){
         if (ui.draggable.hasClass("down")) {
             mrSnuffles.runList[event.data.boxNum] = "d";
@@ -284,7 +288,7 @@ $(function() {
         } else if (ui.draggable.hasClass("loop")) {
             mrSnuffles.runList[event.data.boxNum] = "L";
         }
-        console.log(mrSnuffles.runList);
+        ui.draggable.addClass("dropped");
     }
 
     $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
@@ -296,7 +300,6 @@ $(function() {
                          + mrSnuffles.treat + "!</h3>";
 
     $(".go").click(function() {
-        console.log(currentBoard);
         mrSnuffles.run(currentBoard)} );
     // for testing:
     //mrSnuffles.run(currentBoard);
