@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
 from model import User, Level
-from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
+from flask.ext.login import LoginManager,login_required,login_user,current_user,logout_user
 from flaskext.markdown import Markdown
 import config
 import forms
@@ -9,7 +9,6 @@ import model
 app = Flask(__name__)
 app.config.from_object(config)
 
-# Stuff to make login easier
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
@@ -40,41 +39,20 @@ def authenticate():
 def goToRegPage():
     return render_template("register.html")
 
-# @app.route("/create_account", methods=["POST"])
-# def createAccount():
-#     username = request.form.get("username")
-#     password = request.form.get("password")
-#     pettype = request.form.get("pettype")
-#     petgender = request.form.get("petgender")
-#     petname = request.form.get("petname")
-#     return render_template(url_for("canvas"))
-
-
-
-# @app.route("/post/new", methods=["POST"])
-# @login_required
-# def create_post():
-#     form = forms.NewPostForm(request.form)
-#     if not form.validate():
-#         flash("Error, all fields are required")
-#         return render_template("new_post.html")
-
-#     post = Post(title=form.title.data, body=form.body.data)
-#     current_user.posts.append(post) 
-    
-#     model.session.commit()
-#     model.session.refresh(post)
-
-#     return redirect(url_for("view_post", id=post.id))
-
-
-
-
+@app.route("/create_account", methods=["POST"])
+def createAccount():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    pettype = request.form.get("pettype")
+    petgender = request.form.get("petgender")
+    petname = request.form.get("petname")
+    user = model.register_new_user(username, pettype, petgender, petname, password)
+    level = Level.query.get(1)
+    return redirect(url_for("index"))
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
-# End login stuff
 
 @app.route("/logout")
 def logout():
@@ -95,11 +73,6 @@ def canvas():
 @app.route("/completed")
 def completed():
     pass
-
-
-
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)

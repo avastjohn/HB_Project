@@ -40,10 +40,6 @@ class User(Base, UserMixin):
         password = password.encode("utf-8")
         return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.pw
 
-    # def register_new_user(self, username, pettype, petgender, petname, pw)
-    #     salt = self.set_password(pw)
-    #     new_user = User()
-
 
 class Level(Base):
     __tablename__ = "levels"
@@ -65,6 +61,20 @@ class UserLevel(Base):
 
     levels = relationship("Level")
 
+
+def register_new_user(username, pettype, petgender, petname, pw):
+    new_user = User(username = username, pettype = pettype, petgender = petgender, 
+                    petname = petname)
+    new_user.set_password(pw)
+    session.add(new_user)
+    session.commit()
+
+def get_user_id():
+    user = session.query(User).filter_by(username = username).all()
+    if user == []:
+        return None
+    else:
+        return user[0]
 
 def create_tables():
     Base.metadata.create_all(engine)

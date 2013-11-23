@@ -293,13 +293,6 @@ var Pet = function(pettype, petname, gender, level) {
 
 // on pageload:
 $(function() {
-    // initialize drawing of board, pet, treat, message for this level
-    currentBoard.drawBoard();
-    mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
-    mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
-    currentBoard.message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the "
-                         + mrSnuffles.treat + "!</h3>";
-
     for (var i = 0; i < 7; i++) {
         // loop through the codeboxes to make them droppable
         $(".box"+i).droppable();
@@ -321,6 +314,13 @@ $(function() {
             }
         }
     };
+
+    // initialize drawing of board, pet, treat, message for this level
+    currentBoard.drawBoard();
+    mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
+    mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
+    currentBoard.message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the "
+                         + mrSnuffles.treat + "!</h3>";
 
     // make arrows droppable, snap-to, and revert when dropped in an illegal place
     $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
