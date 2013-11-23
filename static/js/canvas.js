@@ -26,16 +26,19 @@ var Level = function(backMap, petStart, treatPos) {
 
 // GameBoard class
 var GameBoard = function(level) {
+    // message indicates what is happening in the game
     this.message = document.getElementById('message');
     this.level = level;
     this.tiles = {
+        // G spaces are illegal, p (path) spaces are legal, 
+        // g spaces don't have a raison d'être yet
         "G": "#197c57",
         "p": "#96b124",
         "g": "Gold"
     };
 
     this.getGameState = function(pet) {
-        // uses the pet's position to determines the gamestate
+        // uses the pet's position to determine the gamestate
         if (this.authorize(pet.nextPos.x, pet.nextPos.y)) {
             gameState = "valid";
             if ((pet.nextPos).eq(pet.treatPos)) {
@@ -48,6 +51,7 @@ var GameBoard = function(level) {
     };
 
     this.updateMessage = function(pet) {
+        // updates message based on gamestate
         gameBoard = this;
         var messages = {
             "solved": "<h3>You made " + pet.petname + " very happy! Yay!!!!!!</h3>",
@@ -104,13 +108,9 @@ var GameBoard = function(level) {
     };
 
     this.authorize = function(x, y) {
+        // determines whether the space is legal or not
         return ((this.getSquare(x, y) != "G") && (this.getSquare(x, y) != "outside"));
     };
-};
-
-// Arrow class
-var Arrow = function(dirCode) {
-    this.dirCode = dirCode;
 };
 
 var completeLevel = function() {
@@ -125,15 +125,7 @@ var Pet = function(pettype, petname, gender, level) {
     this.level = level;
     this.currentPos = new Position(level.petStart.x, level.petStart.y);
     this.treatPos = level.treatPos;
-    this.movers = [];
     this.runList = [];
-        //////////// for testing purposes
-        // case: win
-    //this.runList = ["r", "u", "r"];
-        // case: not win
-    //this.runList = ["r", "u", "l", "u", "l"];
-        // case: not finish
-    //this.runList = ["r", "u"];
 
     this.treats = {
         "dog": "bone",
@@ -141,6 +133,7 @@ var Pet = function(pettype, petname, gender, level) {
         "penguin": "fish"
     };
 
+    // image sources
     this.images = {
         "bunny": "http://i.imgur.com/3V353g6.png",
         "carrot": "http://i.imgur.com/0e4zWUp.png",
@@ -150,6 +143,7 @@ var Pet = function(pettype, petname, gender, level) {
         "fish": "http://i.imgur.com/SxB5DrK.png"
     };
 
+    // assigning image sources to the pet and treat, according to pettype
     this.image = this.images[this.pettype];
     this.treat = this.treats[this.pettype];
     this.treatImage = this.images[this.treat];
@@ -180,11 +174,11 @@ var Pet = function(pettype, petname, gender, level) {
     };
 
     this.redrawTreat = function(pos) {
-        // why won't you let me collapse this, sublimetext?
         context.drawImage(treatImageObj, (pos[0]*UNIT_SIZE+2), (pos[1]*UNIT_SIZE)+2);
     };
 
     this.getNextPos = function(direction) {
+        // uses direction and current position to determine next position
         var pet = this;
         if (direction == "up") {
             pet.nextPos = new Position(pet.currentPos.x, (pet.currentPos.y - 1));
@@ -199,6 +193,7 @@ var Pet = function(pettype, petname, gender, level) {
     };
 
     this.tryAgain = function(gameBoard) {
+        // waits three seconds, then moves the pet back to the starting position
         var pet = this;
         pet.startOver = setTimeout(function() {
             gameBoard.message.innerHTML = "<h3>Try again!</h3>";
@@ -210,7 +205,7 @@ var Pet = function(pettype, petname, gender, level) {
     };
 
     this.eatTreat = function(gameBoard) {
-        // improve this function later
+        // improve this function later - reaction when pet reaches treat
         var pet = this;
         gameBoard.drawBoard();
         pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
@@ -226,6 +221,7 @@ var Pet = function(pettype, petname, gender, level) {
     };
 
     this.getDirectionFromArrows = function(image) {
+        // uses arrow images' class to determine the direction
         image = $(image)
         if (image.hasClass("down")) {
             return "d";
@@ -238,12 +234,12 @@ var Pet = function(pettype, petname, gender, level) {
         } else if (image.hasClass("loop")) {
             return "L";
         }
-
     };
 
     this.run = function(gameBoard) {
         // takes a list of movement commands and moves pet accordingly
         var pet = this;
+        // iterator
         var i = 0;
         var movementCode = {
             "r":"right",
@@ -252,78 +248,86 @@ var Pet = function(pettype, petname, gender, level) {
             "d":"down",
             "L":"loop"
         };
+        // sets interval, call function every second
         var intervalID = setInterval(function() {
+            // determine the direction of the i-th item of the runList
             var direction = movementCode[pet.getDirectionFromArrows(pet.runList[i])];
             if (direction) {
                 pet.getNextPos(direction);
                 gameBoard.updateMessage(pet);
+                // case: this move is legal
                 if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
                     pet.move(gameBoard)
+                    // case: this move also means the pet has reached the treat
                     if ((pet.nextPos).eq(pet.treatPos)) {
                         pet.eatTreat(gameBoard);
                         clearInterval(intervalID);
                         return;
                     }
+                // case: this move is not legal
                 } else {
                     clearInterval(intervalID);
                     pet.tryAgain(gameBoard);
                 }
+                // case: loop - loops back to beginning of code
                 if (direction == "loop") {
                     i = 0;
                     return;
                 }
+                // case this was the last item in the runList and the pet has 
+                // not yet reached the treat
                 if (i >= (pet.runList.length - 1)) {
                     clearInterval(intervalID);
                     pet.tryAgain(gameBoard);
                 }
                 i+=1;
+            // if there isn't a direction (to prevent the run button from doing 
+            // weird things when the runList is empty)
             } else {
                 clearInterval(intervalID);
             }
+        // interval in ms between each function call
         },1000);
     };
 };
 
 // on pageload:
 $(function() {
-    // the drop is the event, the ui.draggable is the arrow
-    for (var i = 0; i < 7; i++) {
-        $(".box"+i).droppable();
-        $(".box"+i).on('drop', null, {boxNum:i}, dropResponder);
-        $(".box"+i).on('dropout', clearArrow);
-    }    
-    // also have it repopulate the div
-    // use drop out() to listen for arrow leaving div
-
-    function dropResponder(event, ui){
-        console.log("dropped ui" + ui.draggable[0].src);
-        mrSnuffles.runList[event.data.boxNum] = ui.draggable[0];
-
-
-        ui.draggable.addClass("dropped");
-        //console.log(mrSnuffles.runList);
-    }
-
-    function clearArrow(event, ui){
-        console.log("called clearArrow()");
-        for (var i = 0; i < mrSnuffles.runList.length; i++){
-            if (ui.draggable[0] == mrSnuffles.runList[i]) {
-                mrSnuffles.runList[i] = null;
-            }
-        }
-    }
-
-    $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
+    // initialize drawing of board, pet, treat, message for this level
     currentBoard.drawBoard();
-    $("#arrows").droppable();
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
     currentBoard.message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the "
                          + mrSnuffles.treat + "!</h3>";
 
-    $(".go").click(function() {
+    for (var i = 0; i < 7; i++) {
+        // loop through the codeboxes to make them droppable
+        $(".box"+i).droppable();
+        $(".box"+i).on('drop', null, {boxNum:i}, dropResponder);
+        $(".box"+i).on('dropout', clearArrow);
+    }  
 
-        mrSnuffles.run(currentBoard)} );
-    // for testing:
-    //mrSnuffles.run(currentBoard);
+    function dropResponder(event, ui){
+        // updates the runList when an arrow is dropped into a codebox
+        mrSnuffles.runList[event.data.boxNum] = ui.draggable[0];
+        ui.draggable.addClass("dropped");
+    };
+
+    function clearArrow(event, ui){
+        // updates the runList when an arrow is removed from a codebox
+        for (var i = 0; i < mrSnuffles.runList.length; i++){
+            if (ui.draggable[0] == mrSnuffles.runList[i]) {
+                mrSnuffles.runList[i] = null;
+            }
+        }
+    };
+
+    // make arrows droppable, snap-to, and revert when dropped in an illegal place
+    $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
+    // make arrow box also droppable (so that user can remove arrows)
+    $("#arrows").droppable();
+    // call run method when user clicks go button
+    $(".go").click(function() {
+        mrSnuffles.run(currentBoard)
+    });
 });
