@@ -1,10 +1,13 @@
 ##Progress Log
 
 next goals:
-- make it so that arrows moved out of the codebar update the runList also
-- make multiples of each arrow so that user can use more than one
 - create registration data persistence
+- make multiples of each arrow so that user can use more than one
 - be able to save arrowcode for each user
+
+Nov 22 (Fri):
+- made it so that arrows moved out of the codebar update the runList also
+- tried to create registration data persistence, still struggling on that one
 
 Nov 21 (Thurs):
 - spent most of the day doing a workshop in class
