@@ -1,13 +1,14 @@
 ##Progress Log
 
 next goals:
-- create registration data persistence
+- create registration username check
 - make multiples of each arrow so that user can use more than one
 - be able to save arrowcode for each user
+- create level changes
 
 Nov 22 (Fri):
 - made it so that arrows moved out of the codebar update the runList also
-- tried to create registration data persistence, still struggling on that one
+- created registration data persistence
 
 Nov 21 (Thurs):
 - spent most of the day doing a workshop in class
