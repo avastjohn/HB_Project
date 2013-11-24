@@ -1,10 +1,15 @@
 ##Progress Log
 
 next goals:
-- create registration username check
 - make multiples of each arrow so that user can use more than one
 - be able to save arrowcode for each user
 - create level changes
+- create registration username check
+
+Weekend:
+- fixed message changes (no longer says "Gummy went loop")
+- fixed weird buggy game state problems
+- stylistic changes
 
 Nov 22 (Fri):
 - made it so that arrows moved out of the codebar update the runList also
