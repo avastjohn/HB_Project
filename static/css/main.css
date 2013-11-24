@@ -2,14 +2,13 @@
             background: url("../img/game_background9.png");
             /*background-color: #f7b2ce;*/
         }
-        #message {
-            margin-bottom: 40px;
 
-        }
+
         #message h3 {
             font: 30px "Arial" sans-serif;
             color: HotPink;
             text-align: center;
+            margin-bottom: 40px;
         }
         #myCanvas {
             margin-top: 13px;
@@ -57,11 +56,14 @@
         }
         .button {
             height: 40px;
-            width: 80px;
-            font: 23px "Arial" sans-serif;
+            width: 82px;
+            font: 26px "Arial" sans-serif;
             text-align: center;
             border-radius: 5px;
-            margin: 20px;
+            margin: 15px;
+            margin-left: 30px;
+            color: black;
+            padding-top: 7px;
         }
         .go {
             background-color: #bbffbb;
