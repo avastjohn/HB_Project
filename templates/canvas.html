@@ -3,8 +3,8 @@
 <html>
 <head>
     <title>Ava's Game</title>
-    <link href="../static/css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link href="../static/css/main.css" rel="stylesheet">
     <script type="text/javascript" src="../static/js/jquery-2.0.3.min.js "></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
     <script type="text/javascript" src="../static/js/jquery-ui-1.10.3.custom.min.js "></script>
@@ -20,35 +20,39 @@
                 </div>
             </div>
         </div>
-        <div id="canvasContainer">
-            <div id="message">
+        <div id="wholeGame">
+            <div id="canvasContainer">
+                
+                <canvas id= "myCanvas" width="550" height="500"></canvas>
             </div>
-            <canvas id= "myCanvas" width="550" height="500"></canvas>
-        </div>
-        <div id="codeBoxes">
-            <div class="codeBox box0 ui-widget-header snaptarget"></div>
-            <div class="codeBox box1 ui-widget-header snaptarget"></div>
-            <div class="codeBox box2 ui-widget-header snaptarget"></div>
-            <div class="codeBox box3 ui-widget-header snaptarget"></div>
-            <div class="codeBox box4 ui-widget-header snaptarget"></div>
-            <div class="codeBox box5 ui-widget-header snaptarget"></div>
-            <div class="codeBox box6 ui-widget-header snaptarget"></div>
-        </div>
-        <div id="arrowsbuttons">
-            <div id="arrows">
-                <div class="d"><img src="http://i.imgur.com/jFlM0wy.png" class="ui-widget-content arrow down"></img></div>
-                <div class="u"><img src="http://i.imgur.com/ftOgzLm.png" class="ui-widget-content arrow up"></img></div>
-                <div class="L"><img src="http://i.imgur.com/0bN0OjD.png" class="ui-widget-content arrow loop"></img></div>
-                <div class="r"><img src="http://i.imgur.com/6IyQk2a.png" class="ui-widget-content arrow right"></img></div>
-                <div class="l"><img src="http://i.imgur.com/PZAl1GC.png" class="ui-widget-content arrow left"></img></div>
+            <div id="boxesArrowsButtons">
+                <div id="message">
+                </div>
+                <div id="codeBoxes">
+                    <div class="codeBox box0 ui-widget-header snaptarget"></div>
+                    <div class="codeBox box1 ui-widget-header snaptarget"></div>
+                    <div class="codeBox box2 ui-widget-header snaptarget"></div>
+                    <div class="codeBox box3 ui-widget-header snaptarget"></div>
+                    <div class="codeBox box4 ui-widget-header snaptarget"></div>
+                    <div class="codeBox box5 ui-widget-header snaptarget"></div>
+                    <div class="codeBox box6 ui-widget-header snaptarget"></div>
+                </div>
+                <div id="arrowsbuttons">
+                    <div id="arrows">
+                        <div class="d"><img src="http://i.imgur.com/jFlM0wy.png" class="ui-widget-content arrow down"></img></div>
+                        <div class="u"><img src="http://i.imgur.com/ftOgzLm.png" class="ui-widget-content arrow up"></img></div>
+                        <div class="L"><img src="http://i.imgur.com/0bN0OjD.png" class="ui-widget-content arrow loop"></img></div>
+                        <div class="r"><img src="http://i.imgur.com/6IyQk2a.png" class="ui-widget-content arrow right"></img></div>
+                        <div class="l"><img src="http://i.imgur.com/PZAl1GC.png" class="ui-widget-content arrow left"></img></div>
+                    </div>
+                    <div id="buttons">
+                        <div class="go button">go</div>
+                        <br>
+                        <div class="save button">save</div>
+                    </div>
+                </div>
             </div>
-            <div id="buttons">
-                <div class="go button">go</div>
-                <br>
-                <div class="save button">save</div>
-            </div>
         </div>
-
         <script src="../static/js/canvas.js"></script>
         <script type="text/javascript">
             var currentLevel = {{user.current_level}};

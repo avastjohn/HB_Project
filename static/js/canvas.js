@@ -39,7 +39,9 @@ var GameBoard = function(level) {
 
     this.getGameState = function(pet) {
         // uses the pet's position to determine the gamestate
-        if (this.authorize(pet.nextPos.x, pet.nextPos.y)) {
+        if (pet.nextPos.x == 100) {
+            gameState = "tryAgain";
+        } else if (this.authorize(pet.nextPos.x, pet.nextPos.y)) {
             gameState = "valid";
             if ((pet.nextPos).eq(pet.treatPos)) {
                 gameState = "solved";
@@ -58,6 +60,9 @@ var GameBoard = function(level) {
             "valid": "<h3>" + pet.petname + " went " + pet.direction + "</h3>",
             "notValid": "<h3>Uh-oh, " + pet.petname + " cannot go " + pet.direction + " :(</h3>"
         };
+        if (gameBoard.getGameState(pet) == "tryAgain") {
+            return;
+        }
         gameBoard.message.innerHTML = messages[gameBoard.getGameState(pet)];
     };
 
@@ -188,6 +193,8 @@ var Pet = function(pettype, petname, gender, level) {
             pet.nextPos = new Position(parseInt(pet.currentPos.x) + 1, pet.currentPos.y);
         } else if (direction == "left") {
             pet.nextPos = new Position(pet.currentPos.x - 1, pet.currentPos.y);
+        } else {
+            pet.nextPos = new Position(100, 100);
         }
         pet.direction = direction;
     };
@@ -201,7 +208,7 @@ var Pet = function(pettype, petname, gender, level) {
             gameBoard.drawBoard();
             pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
             pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
-        }, 3000);
+        }, 2200);
     };
 
     this.eatTreat = function(gameBoard) {
@@ -233,6 +240,8 @@ var Pet = function(pettype, petname, gender, level) {
             return "r";
         } else if (image.hasClass("loop")) {
             return "L";
+        } else {
+            return "n";
         }
     };
 
@@ -246,7 +255,8 @@ var Pet = function(pettype, petname, gender, level) {
             "l":"left",
             "u":"up",
             "d":"down",
-            "L":"loop"
+            "L":"loop",
+            "n":"none"
         };
         // sets interval, call function every second
         var intervalID = setInterval(function() {
@@ -264,15 +274,14 @@ var Pet = function(pettype, petname, gender, level) {
                         clearInterval(intervalID);
                         return;
                     }
+                // case: loop - loops back to beginning of code
+                } else if (direction == "loop") {
+                    i = 0;
+                    return;
                 // case: this move is not legal
                 } else {
                     clearInterval(intervalID);
-                    pet.tryAgain(gameBoard);
-                }
-                // case: loop - loops back to beginning of code
-                if (direction == "loop") {
-                    i = 0;
-                    return;
+                    pet.tryAgain(gameBoard)
                 }
                 // case this was the last item in the runList and the pet has 
                 // not yet reached the treat
@@ -310,7 +319,7 @@ $(function() {
         // updates the runList when an arrow is removed from a codebox
         for (var i = 0; i < mrSnuffles.runList.length; i++){
             if (ui.draggable[0] == mrSnuffles.runList[i]) {
-                mrSnuffles.runList[i] = null;
+                mrSnuffles.runList[i] = "n";
             }
         }
     };
