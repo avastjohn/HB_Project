@@ -1,10 +1,14 @@
 ##Progress Log
 
 next goals:
-- make multiples of each arrow so that user can use more than one
+- working on arrow regeneration
 - be able to save arrowcode for each user
 - create level changes
-- create registration username check
+
+Nov 25 (Mon):
+- majorly upgraded the style, added logo
+- not planning to do a lot more styling until polishing time
+- attempted to make arrows regenerate
 
 Weekend:
 - fixed message changes (no longer says "Gummy went loop")
