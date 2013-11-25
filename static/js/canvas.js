@@ -32,8 +32,8 @@ var GameBoard = function(level) {
     this.tiles = {
         // G spaces are illegal, p (path) spaces are legal, 
         // g spaces don't have a raison d'être yet
-        "G": "#197c57",
-        "p": "#96b124",
+        "G": "#7150f9",
+        "p": "#f44d74",
         "g": "Gold"
     };
 
@@ -86,7 +86,7 @@ var GameBoard = function(level) {
         context.fillStyle = color;
         context.fill();
         context.lineWidth = 2;
-        context.strokeStyle = "#d35577";
+        context.strokeStyle = "#6736d1";
         context.stroke();
     };
 

@@ -1,12 +1,12 @@
         body {
-            background: url("../img/game_background9.png");
+            background: url("../img/game_background10.png");
             /*background-color: #f7b2ce;*/
         }
 
 
         #message h3 {
             font: 30px "Arial" sans-serif;
-            color: HotPink;
+            color: #FD3F72;
             text-align: center;
             margin-bottom: 40px;
         }
@@ -20,15 +20,14 @@
             margin-top: 80px;
         }
         #codeBoxes {
-            /*margin-left: 30px;*/
             height: 56px;
             width: 374px;
-            background-color: #7AB5F7;
+            background-color: #36cc5d;
         }
         .codeBox {
             height: 50px;
             width: 50px;
-            background-color: #A3D1FF;
+            background-color: #5ffa88;
             float: left;
             margin-top: 3px;
             margin-left: 3px;
@@ -36,8 +35,8 @@
         #arrows {
             height: 160px;
             width: 230px;
-            background-color: #F2A3FF;
-            border: 3px solid #CF80F0;
+            background-color: #44c8e7;
+            border: 3px solid #0caace;
             /*margin-left: 30px;*/
             margin-top: 30px;
             float: left;
@@ -66,10 +65,10 @@
             padding-top: 7px;
         }
         .go {
-            background-color: #bbffbb;
-            border: 3px solid #83EE88;
+            background-color: #5ffa88;
+            border: 3px solid #36cc5d;
         }
         .save {
-            background-color: #A3D1FF;
-            border: 3px solid #7AB5F7;
+            background-color: #ec70f9;
+            border: 3px solid #db00f2;
         }
