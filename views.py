@@ -48,7 +48,7 @@ def createAccount():
     petname = request.form.get("petname")
     user = model.register_new_user(username, pettype, petgender, petname, password)
     level = Level.query.get(1)
-    return redirect(url_for("index"))
+    return render_template("index.html", afterRegMessage="Great! Now sign in and start playing!")
 
 @login_manager.user_loader
 def load_user(user_id):

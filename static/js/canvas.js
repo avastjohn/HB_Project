@@ -54,13 +54,18 @@ var GameBoard = function(level) {
         return gameState;
     };
 
+    var pronouns = {
+        "shehe": ["she", "he"],
+        "herhis": ["her", "his"]
+    };
+
     this.updateMessage = function(pet) {
         // updates message based on gamestate
         gameBoard = this;
         var messages = {
-            "solved": "<h3>You made " + pet.petname + " very happy! Yay!!!!!!</h3>",
-            "valid": "<h3>" + pet.petname + " went " + pet.direction + "</h3>",
-            "notValid": "<h3>Uh-oh, " + pet.petname + " cannot go " + pet.direction + " :(</h3>"
+            "solved": "<h3>Yay! " + pet.petname + " got to " + pronouns["herhis"][pet.gender] + " " + pet.treat + "!</h3>",
+            "valid": "<h3>Going " + pet.direction + "...</h3>",
+            "notValid": "<h3>Uh-oh, " + pet.petname + " can't go " + pet.direction + " :(</h3>"
         };
         if (gameBoard.getGameState(pet) == "tryAgain") {
             return;
@@ -128,11 +133,15 @@ var completeLevel = function() {
 var Pet = function(pettype, petname, gender, level) {
     this.pettype = pettype;
     this.petname = petname;
-    this.gender = gender;
     this.level = level;
     this.currentPos = new Position(level.petStart.x, level.petStart.y);
     this.treatPos = level.treatPos;
     this.runList = [];
+    if (gender == "f") {
+        this.gender = 0;
+    } else {
+        this.gender = 1;
+    }
 
     this.treats = {
         "dog": "bone",
@@ -298,7 +307,7 @@ var Pet = function(pettype, petname, gender, level) {
                 clearInterval(intervalID);
             }
         // interval in ms between each function call
-        },1000);
+        },800);
     };
 };
 
@@ -334,7 +343,26 @@ $(function() {
                          + mrSnuffles.treat + "!</h3>";
 
     // make arrows droppable, snap-to, and revert when dropped in an illegal place
-    $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
+    var arrow = $(".arrow");
+    arrow.draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
+
+////////////////////////////////////////////////////////
+/////////          Arrow Regeneration          /////////
+
+    var arrows = document.getElementById("arrows");
+//note: var arrow = $(".arrow"); from line 346
+
+
+    arrow.click(function() {
+        console.log("arrow was clicked and function was called");
+        if (ui.draggable.hasClass("down")){
+            console.log("down arrow was clicked");
+            arrows.innerHTML += '<div class="d"><img src="../img/arrowdown.png" class="ui-widget-content arrow down"></img></div>'
+        }
+    });
+
+////////////////////////////////////////////////////////
+
     // make arrow box also droppable (so that user can remove arrows)
     $("#arrows").droppable();
     // call run method when user clicks go button

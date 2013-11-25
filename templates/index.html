@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
     {% block body %}
-    <div class="maincontainer">
+    <div class="maincontainer" id="mainContainer">
         <div class="maincontent">
-            <h1><center>fluffyTrails</center></h1>
+            <img id="mainLogo" src="../static/img/logo.png">
 
             <h2 class="signin-heading">Login</h2>
             <p>{{ error }}</p>
+            <p>{{ afterRegMessage }}</p>
             <form action="/login" class="signin" method="POST">
                 Username: <input type="text" class="form-control" name="username"><br>
                 Password: <input type="password" class="form-control" name="password"><br>
@@ -15,6 +16,8 @@
             <br><br>
 
             <h2 class="signin-heading">New to fluffyTrails?</h2>
+            <p></p>
+            <p></p>
             <form action="/register" class="signin" method="POST">
                 <input type="submit" class="btn" value="Sign up and start playing!">
             </form>
