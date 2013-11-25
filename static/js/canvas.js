@@ -33,9 +33,11 @@ var GameBoard = function(level) {
         // G spaces are illegal, p (path) spaces are legal, 
         // g spaces don't have a raison d'être yet
         "G": "#7150f9",
-        "p": "#f44d74",
+        "p": "#a671f3",
         "g": "Gold"
     };
+
+    // berry pink f44d74
 
     this.getGameState = function(pet) {
         // uses the pet's position to determine the gamestate
