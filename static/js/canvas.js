@@ -325,6 +325,9 @@ $(function() {
         // updates the runList when an arrow is dropped into a codebox
         mrSnuffles.runList[event.data.boxNum] = ui.draggable[0];
         ui.draggable.addClass("dropped");
+        $(".box" + event.data.boxNum).html(ui.draggable[0]);
+        drawNewArrow(ui.draggable[0].id);
+        $(ui.draggable).attr("id", "")
     };
 
     function clearArrow(event, ui){
@@ -344,24 +347,18 @@ $(function() {
                          + currentBoard.pronouns["herhis"][mrSnuffles.gender] + " "
                          + mrSnuffles.treat + "!</h3>";
 
-    // make arrows droppable, snap-to, and revert when dropped in an illegal place
-    // var arrow = $(".arrow");
-    // var arrows = document.getElementById("arrows");
-    var arrowDraggable = function(item) {
-        item.draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid", 
-                start: function(event, ui) {
-                    var newArrow = document.createElement("img");
-                    newArrow.src = this.src;
-                    newArrow.className = this.className;
-                    newArrow.style.left = '0px';
-                    newArrow.style.top = '0px';
-                    // newArrow.style.z-index ?????
-                    arrowDraggable($(newArrow));
-                    $("#down").html(newArrow);
-                 } });
+    var drawNewArrow = function(direction) {
+        //draws a new arrow
+        console.log(direction);
+        var arrow = $('<img src="../static/img/arrow' + direction + '.png" id="' + direction + '" class="ui-widget-content arrow ' + direction + '"></img>')
+        arrow.draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid"});
+        $("#holder" + direction).html("");
+        $("#holder" + direction).append(arrow);
     };
 
-    arrowDraggable($(".arrow"));
+    $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid"});
+
+    // arrowDraggable($(".arrow"));
 
     // make arrow box also droppable (so that user can remove arrows)
     $("#arrows").droppable();

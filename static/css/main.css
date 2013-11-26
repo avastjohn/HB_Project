@@ -1,5 +1,5 @@
         body {
-            background: url("../img/game_background10.png");
+            background: url("../img/game_background.png");
             /*background-color: #f7b2ce;*/
         }
         #leftMostLI {
@@ -62,13 +62,37 @@
         .arrow {
             height: 50px;
             width: 50px;
-            /*position: absolute;*/
-            float: left;
+            position: absolute;
+            /*float: left;*/
             margin-left: 20px;
             margin-top: 20px;
+            z-index: 5;
         }
-
-
+/*        #down {
+            top: 0;
+            left: 0;
+        }
+        #up {
+            top: 0;
+            left: 70px;
+        }
+        #loop {
+            top: 0;
+            left: 140px;
+        }
+        #right {
+            top: 70px;
+            left: 0;
+        }
+        #left {
+            top: 70px;
+            left: 70px;
+        }*/
+        #holderup {
+            position: relative;
+            width: 72px;
+            float: left;
+        }
         .button {
             height: 40px;
             width: 82px;
