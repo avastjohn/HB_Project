@@ -353,9 +353,11 @@ $(function() {
                     var newArrow = document.createElement("img");
                     newArrow.src = this.src;
                     newArrow.className = this.className;
-
+                    newArrow.style.left = '0px';
+                    newArrow.style.top = '0px';
+                    // newArrow.style.z-index ?????
                     arrowDraggable($(newArrow));
-                    $("#arrows").append(newArrow);
+                    $("#down").html(newArrow);
                  } });
     };
 
