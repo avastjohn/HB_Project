@@ -358,8 +358,6 @@ $(function() {
 
     $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid"});
 
-    // arrowDraggable($(".arrow"));
-
     // make arrow box also droppable (so that user can remove arrows)
     $("#arrows").droppable();
     // call run method when user clicks go button

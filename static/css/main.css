@@ -62,34 +62,34 @@
         .arrow {
             height: 50px;
             width: 50px;
-            position: absolute;
-            /*float: left;*/
+            position: relative;
+            float: left;
             margin-left: 20px;
             margin-top: 20px;
             z-index: 5;
         }
-/*        #down {
+        #holderdown {
             top: 0;
             left: 0;
         }
-        #up {
+        #holderup {
             top: 0;
             left: 70px;
         }
-        #loop {
+        #holderloop {
             top: 0;
             left: 140px;
         }
-        #right {
+        #holderright {
             top: 70px;
             left: 0;
         }
-        #left {
+        #holderleft {
             top: 70px;
             left: 70px;
-        }*/
+        }
         #holderup {
-            position: relative;
+            /*position: relative;*/
             width: 72px;
             float: left;
         }
