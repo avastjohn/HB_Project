@@ -62,15 +62,12 @@
         .arrow {
             height: 50px;
             width: 50px;
-            position: absolute;
-            /*float: left;*/
+            /*position: absolute;*/
+            float: left;
             margin-left: 20px;
             margin-top: 20px;
         }
-        .down {
-            padding-top: 10px;
-            padding-left: 75px;
-        }
+
 
         .button {
             height: 40px;
