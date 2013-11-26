@@ -41,7 +41,7 @@
                 </div>
                 <div id="arrowsbuttons">
                     <div id="arrows">
-                        <div class="d"><img src="../static/img/arrowdown.png" class="ui-widget-content arrow down"></img></div>
+                        <div class="d"><img src="../static/img/arrowdown.png" class="ui-widget-content arrow down"></img></div>  
                         <div class="u"><img src="../static/img/arrowup.png" class="ui-widget-content arrow up"></img></div>
                         <div class="L"><img src="../static/img/arrowloop.png" class="ui-widget-content arrow loop"></img></div>
                         <div class="r"><img src="../static/img/arrowright.png" class="ui-widget-content arrow right"></img></div>
@@ -61,7 +61,6 @@
             var level = new Level("{{level.map}}", "{{level.petStart}}", "{{level.treatPos}}");
             var mrSnuffles = new Pet("{{user.pettype}}", "{{user.petname}}", "{{user.petgender}}", level);
             var currentBoard = new GameBoard(level);
-            console.log("backmap: " + level.backMap);
         </script>
     </body>
 </html>

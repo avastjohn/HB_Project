@@ -54,7 +54,7 @@ var GameBoard = function(level) {
         return gameState;
     };
 
-    var pronouns = {
+    this.pronouns = {
         "shehe": ["she", "he"],
         "herhis": ["her", "his"]
     };
@@ -63,7 +63,8 @@ var GameBoard = function(level) {
         // updates message based on gamestate
         gameBoard = this;
         var messages = {
-            "solved": "<h3>Yay! " + pet.petname + " got to " + pronouns["herhis"][pet.gender] + " " + pet.treat + "!</h3>",
+            "solved": "<h3>Yay! " + pet.petname + " got to " 
+                    + gameBoard.pronouns["herhis"][pet.gender] + " " + pet.treat + "!</h3>",
             "valid": "<h3>Going " + pet.direction + "...</h3>",
             "notValid": "<h3>Uh-oh, " + pet.petname + " can't go " + pet.direction + " :(</h3>"
         };
@@ -339,29 +340,26 @@ $(function() {
     currentBoard.drawBoard();
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
-    currentBoard.message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to the "
+    currentBoard.message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to "
+                         + currentBoard.pronouns["herhis"][mrSnuffles.gender] + " "
                          + mrSnuffles.treat + "!</h3>";
 
     // make arrows droppable, snap-to, and revert when dropped in an illegal place
-    var arrow = $(".arrow");
-    arrow.draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid" });
+    // var arrow = $(".arrow");
+    // var arrows = document.getElementById("arrows");
+    var arrowDraggable = function(item) {
+        item.draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid", 
+                start: function(event, ui) {
+                    var newArrow = document.createElement("img");
+                    newArrow.src = this.src;
+                    newArrow.className = this.className;
 
-////////////////////////////////////////////////////////
-/////////          Arrow Regeneration          /////////
+                    arrowDraggable($(newArrow));
+                    $("#arrows").append(newArrow);
+                 } });
+    };
 
-    var arrows = document.getElementById("arrows");
-//note: var arrow = $(".arrow"); from line 346
-
-
-    arrow.click(function() {
-        console.log("arrow was clicked and function was called");
-        if (ui.draggable.hasClass("down")){
-            console.log("down arrow was clicked");
-            arrows.innerHTML += '<div class="d"><img src="../img/arrowdown.png" class="ui-widget-content arrow down"></img></div>'
-        }
-    });
-
-////////////////////////////////////////////////////////
+    arrowDraggable($(".arrow"));
 
     // make arrow box also droppable (so that user can remove arrows)
     $("#arrows").droppable();
