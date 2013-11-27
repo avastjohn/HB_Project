@@ -327,7 +327,8 @@ $(function() {
         ui.draggable.addClass("dropped");
         $(".box" + event.data.boxNum).html(ui.draggable[0]);
         drawNewArrow(ui.draggable[0].id);
-        $(ui.draggable).attr("id", "")
+        $(ui.draggable).attr("id", "");
+        $(ui.draggable).attr("style", "");
     };
 
     function clearArrow(event, ui){
@@ -349,11 +350,10 @@ $(function() {
 
     var drawNewArrow = function(direction) {
         //draws a new arrow
-        console.log(direction);
         var arrow = $('<img src="../static/img/arrow' + direction + '.png" id="' + direction + '" class="ui-widget-content arrow ' + direction + '"></img>')
         arrow.draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid"});
-        $("#holder" + direction).html("");
-        $("#holder" + direction).append(arrow);
+        // $("#holder" + direction).html("");
+        $("#holder" + direction).html(arrow);
     };
 
     $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid"});

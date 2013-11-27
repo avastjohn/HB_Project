@@ -29,10 +29,6 @@
             float: left;
             margin-top: 80px;
         }
-        #codeBoxes {
-/*            height: 58px;
-            border-radius: 3px;*/
-        }
         .codeBox {
             height: 50px;
             width: 50px;
@@ -64,34 +60,45 @@
             width: 50px;
             position: relative;
             float: left;
-            margin-left: 20px;
-            margin-top: 20px;
             z-index: 5;
         }
         #holderdown {
             top: 0;
             left: 0;
+            /*border: 2px solid red;*/
+            margin-left: 20px;
+            margin-top: 20px;
+            position: relative;
         }
         #holderup {
             top: 0;
             left: 70px;
+            /*border: 2px solid yellow;*/
+            margin-left: 20px;
+            margin-top: 20px;
+            position: relative;
         }
         #holderloop {
             top: 0;
             left: 140px;
+            margin-left: 20px;
+            margin-top: 20px;
+            position: relative;
         }
         #holderright {
             top: 70px;
             left: 0;
+            /*border: 2px solid silver;*/
+            margin-left: 20px;
+            margin-top: 20px;
+            position: relative;
         }
         #holderleft {
             top: 70px;
             left: 70px;
-        }
-        #holderup {
-            /*position: relative;*/
-            width: 72px;
-            float: left;
+            margin-left: 20px;
+            margin-top: 20px;
+            position: relative;
         }
         .button {
             height: 40px;
