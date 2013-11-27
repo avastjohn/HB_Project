@@ -21,7 +21,6 @@ def index():
 def authenticate():
     form = forms.LoginForm(request.form)
     error = None
-    print str(form)
     if not form.validate(): 
         return render_template("index.html", error="Invalid username or password")
 
@@ -72,6 +71,7 @@ def canvas():
 
 @app.route("/completed")
 def completed():
+    #might use ajax instead to accomplish this
     pass
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ var UNIT_SIZE = 100;
 
 var myCanvas = document.getElementById('myCanvas');
 var context = myCanvas.getContext("2d");
-
+var helptext = document.getElementById('helptext');
 // Position class
 var Position = function(x, y) {
     this.x = x;
@@ -319,7 +319,7 @@ $(function() {
         $(".box"+i).droppable();
         $(".box"+i).on('drop', null, {boxNum:i}, dropResponder);
         $(".box"+i).on('dropout', clearArrow);
-    }  
+    }
 
     function dropResponder(event, ui){
         // updates the runList when an arrow is dropped into a codebox
@@ -344,10 +344,12 @@ $(function() {
     currentBoard.drawBoard();
     mrSnuffles.drawPet([mrSnuffles.currentPos.x, mrSnuffles.currentPos.y]);
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
-    currentBoard.message.innerHTML = "<h3> Help " + mrSnuffles.petname + " get to "
+    currentBoard.message.innerHTML = "<h3>Help " + mrSnuffles.petname + " get to "
                          + currentBoard.pronouns["herhis"][mrSnuffles.gender] + " "
                          + mrSnuffles.treat + "!</h3>";
 
+
+    helptext.innerHTML = "<h4>Your directions for " + mrSnuffles.petname + ":</h4>";
     var drawNewArrow = function(direction) {
         //draws a new arrow
         var arrow = $('<img src="../static/img/arrow' + direction + '.png" id="' + direction 
