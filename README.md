@@ -1,9 +1,17 @@
 ##Progress Log
 
-next goals:
-- working on arrow regeneration
-- be able to save arrowcode for each user
+final goals:
 - create level changes
+- highlight arrows as they are executing
+- fix run button so that it doesn't do anything when it is pressed twice
+
+Nov 27 (Wed):
+- new users go straight to game after registration
+- worked on an instruction page
+
+Nov 26 (Tues):
+- got arrows to regenerate properly!!!
+- that only took several days, several instructors, and one nervous breakdown
 
 Nov 25 (Mon):
 - majorly upgraded the style, added logo
@@ -18,6 +26,7 @@ Weekend:
 Nov 22 (Fri):
 - made it so that arrows moved out of the codebar update the runList also
 - created registration data persistence
+- tried to make arrows regenerate
 
 Nov 21 (Thurs):
 - spent most of the day doing a workshop in class
@@ -50,7 +59,7 @@ Nov 15 (Fri):
 Nov 14 (Thurs):
 - figured out way to make pet try again if arrowcode is unfinished but correct so far
 - made droppable actually do something
-- make the draggable arrows stick to the codeboxes
+- made the draggable arrows stick to the codeboxes
 - fixed the button placements
 
 Nov 13 (Wed):
