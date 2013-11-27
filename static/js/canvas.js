@@ -350,9 +350,9 @@ $(function() {
 
     var drawNewArrow = function(direction) {
         //draws a new arrow
-        var arrow = $('<img src="../static/img/arrow' + direction + '.png" id="' + direction + '" class="ui-widget-content arrow ' + direction + '"></img>')
+        var arrow = $('<img src="../static/img/arrow' + direction + '.png" id="' + direction 
+            + '" class="ui-widget-content arrow ' + direction + '"></img>')
         arrow.draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid"});
-        // $("#holder" + direction).html("");
         $("#holder" + direction).html(arrow);
     };
 
