@@ -73,6 +73,10 @@ def canvas():
         level = Level.query.get(1)
     return render_template("canvas.html", user=user, level=level)
 
+@app.route("/tutorial")
+def tutorial():
+    return render_template("teach_me_to_play.html")
+
 @app.route("/completed")
 def completed():
     #might use ajax instead to accomplish this

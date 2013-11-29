@@ -220,7 +220,7 @@ var Pet = function(pettype, petname, gender, level) {
             gameBoard.drawBoard();
             pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
             pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
-        }, 2200);
+        }, 2700);
     };
 
     this.eatTreat = function(gameBoard) {
@@ -229,6 +229,9 @@ var Pet = function(pettype, petname, gender, level) {
         gameBoard.drawBoard();
         pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
         pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+        setTimeout(function() {
+            $("body").append('<div id="pop-up"></div>');
+        }, 1000);
     };
 
     this.move = function(gameBoard) {
@@ -308,7 +311,7 @@ var Pet = function(pettype, petname, gender, level) {
                 clearInterval(intervalID);
             }
         // interval in ms between each function call
-        },800);
+        },1200);
     };
 };
 

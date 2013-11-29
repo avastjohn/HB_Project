@@ -34,7 +34,7 @@ def load_users():
                     pettype="dog",
                     petname="Winona",
                     petgender="f",
-                    current_level=1)
+                    current_level=4)
     u4.set_password("apples")    
     model.session.add(u4) 
 
@@ -66,6 +66,11 @@ def load_levels():
                     petStart = "0 3",
                     treatPos = "4 0")
     model.session.add(l4)
+
+    # l5 = model.Level(map = "pppGppp pGpppGp",
+    #                 petStart = "0 1",
+    #                 treatPos = "6 0")
+    # model.session.add(l5)
 
 def load_user_levels():
     # pinkie does levels 1 and 2
@@ -112,6 +117,31 @@ def load_user_levels():
                         current_level_input="rur",
                         complete=1)
     model.session.add(u_l7)
+
+    # apple jack does four levels
+    u_l8 = model.UserLevel(user_id=4, 
+                        level_id=1,
+                        current_level_input="rr",
+                        complete=1)
+    model.session.add(u_l8)
+
+    u_l9 = model.UserLevel(user_id=4, 
+                        level_id=2,
+                        current_level_input="rur",
+                        complete=1)
+    model.session.add(u_l9)
+
+    u_l10 = model.UserLevel(user_id=4, 
+                        level_id=3,
+                        current_level_input="ruR",
+                        complete=1)
+    model.session.add(u_l10)
+
+    # u_l11 = model.UserLevel(user_id=4, 
+    #                     level_id=4,
+    #                     current_level_input="urrR",
+    #                     complete=1)
+    # model.session.add(u_l11)
 
 def main():
     model.create_tables()

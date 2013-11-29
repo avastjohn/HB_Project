@@ -15,16 +15,17 @@
             <div class="navbar-inner">
                 <div class="container">
                     <ul class="nav">
-                        <li><a href="{{url_for('logout')}}">Sign Out</a></li>
+                        <li id="left-most-li"><a href="{{url_for('logout')}}">Sign Out</a></li>
                         <li><a href="{{url_for('logout')}}">My Account</a></li>
-                        <li><a href="{{url_for('logout')}}">Teach Me to Play</a></li>
+                        <li><a href="{{url_for('tutorial')}}">Teach Me to Play</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
         <div id="wholeGame">
             <div id="canvasContainer">
-                <canvas id= "myCanvas" width="550" height="500"></canvas>
+                <canvas id= "myCanvas" width="600" height="500"></canvas>
             </div>
             <div id="boxesArrowsButtons">
                 <div id="message"></div>
