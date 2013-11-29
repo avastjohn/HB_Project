@@ -220,7 +220,7 @@ var Pet = function(pettype, petname, gender, level) {
             gameBoard.drawBoard();
             pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
             pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
-        }, 2700);
+        }, 2000);
     };
 
     this.eatTreat = function(gameBoard) {
@@ -232,6 +232,19 @@ var Pet = function(pettype, petname, gender, level) {
         setTimeout(function() {
             $("body").append('<div id="pop-up"><div class="button" id="pop-up-btn-back">replay</div><div class="button" id="pop-up-btn-next">next level</div></div>');
         }, 1000);
+        $("body").click(".pop-up-btn-back", function() {
+            $("#pop-up").remove();
+            gameBoard.drawBoard();
+            pet.currentPos = new Position(pet.level.petStart.x, pet.level.petStart.y);
+            pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
+            pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+            gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to "
+                                 + gameBoard.pronouns["herhis"][pet.gender] + " "
+                                 + pet.treat + "!</h3>";
+            });
+        $("body").click(".pop-up-btn-next", function() {
+            console.log("Finish your eatTreat method!")
+        });
     };
 
     this.move = function(gameBoard) {
@@ -311,7 +324,7 @@ var Pet = function(pettype, petname, gender, level) {
                 clearInterval(intervalID);
             }
         // interval in ms between each function call
-        },1200);
+        },1000);
     };
 };
 
