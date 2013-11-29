@@ -26,13 +26,31 @@
             border-radius: 10px;
         }
         #pop-up {
-            height: 200px;
-            width: 20%;
+            height: 180px;
+            width: 310px;
             margin-top: 200px;
-            background-color: red;
+            background: linear-gradient(0, #FC0044, #FD3F72);
             z-index: 80;
             position: absolute;
-            left: 40%;
+            left: 35%;
+            border-radius: 10px;
+            padding-left: 
+        }
+        #pop-up-btn-next {
+            background: linear-gradient(0, #36cc5d, #5bec84);
+            height: 73px;
+            width: 88px;
+            float: left;
+            margin-top: 15%;
+            padding-top: 10px;
+        }
+        #pop-up-btn-back {
+            background: linear-gradient(0, #7150f9, #a671f3);
+            height: 59px;
+            width: 88px;
+            float: left;
+            margin-top: 15%;
+            padding-top: 24px;
         }
         #message h3 {
             font: 30px "Arial" sans-serif;

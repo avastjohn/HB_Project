@@ -230,7 +230,7 @@ var Pet = function(pettype, petname, gender, level) {
         pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
         pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
         setTimeout(function() {
-            $("body").append('<div id="pop-up"></div>');
+            $("body").append('<div id="pop-up"><div class="button" id="pop-up-btn-back">replay</div><div class="button" id="pop-up-btn-next">next level</div></div>');
         }, 1000);
     };
 
