@@ -232,20 +232,30 @@ var Pet = function(pettype, petname, gender, level) {
         setTimeout(function() {
             $("body").append('<div id="pop-up"><div class="button" id="pop-up-btn-back">replay</div><div class="button" id="pop-up-btn-next">next level</div></div>');
         }, 1000);
-        $("body").click(".pop-up-btn-back", function() {
-            $("#pop-up").remove();
-            gameBoard.drawBoard();
-            pet.currentPos = new Position(pet.level.petStart.x, pet.level.petStart.y);
-            pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
-            pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
-            gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to "
-                                 + gameBoard.pronouns["herhis"][pet.gender] + " "
-                                 + pet.treat + "!</h3>";
-            });
-        $("body").click(".pop-up-btn-next", function() {
-            console.log("Finish your eatTreat method!")
+        $("body").click(function(eventObject) {
+            if ($(eventObject.target).is("#pop-up-btn-back")) {
+                $("#pop-up").remove();
+                gameBoard.drawBoard();
+                pet.currentPos = new Position(pet.level.petStart.x, pet.level.petStart.y);
+                pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
+                pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+                gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to "
+                                     + gameBoard.pronouns["herhis"][pet.gender] + " "
+                                     + pet.treat + "!</h3>";
+            } else if ($(eventObject.target).is("#pop-up-btn-next")) {
+                $("#pop-up").remove();
+                pet.runList = [];
+                $(".dropped").remove();
+                // MAGIC: change the current_level
+
+            }
         });
     };
+
+
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
     this.move = function(gameBoard) {
         // moves the pet to the nextPos
