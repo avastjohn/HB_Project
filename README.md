@@ -2,11 +2,12 @@
 
 final goals:
 - highlight arrows as they are executing
-- fix run button so that it doesn't do anything when it is pressed twice
+- be able to update db with changes to the user's account
 
 Nov 29 (Fri):
 - created pop-up when pet reaches treat
 - used json/ajax to redraw board for next level/update db
+- fixed run button so that it doesn't make the pet run when it isn't supposed to
 
 Nov 28 (Thurs):
 - ate thanksgiving dinner
