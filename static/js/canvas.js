@@ -257,7 +257,7 @@ var Pet = function(pettype, petname, gender, level) {
                 pet.updateLevel(newLevel);
                 currentBoard = new GameBoard(pet.level);
                 currentBoard.drawBoard();
-                pet.redrawPet([pet.petStart.x, pet.petStart.y]);
+                pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
                 pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
                 });
             }

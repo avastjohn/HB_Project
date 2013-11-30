@@ -43,8 +43,8 @@ class User(Base, UserMixin):
     def increment_current_level(self):
         # NOTE: make it so that you can't increment level if on the last level
         if self.current_level <= 5:
-            next_level = self.current_level+=1
-            # self.update()
+            self.current_level+=1
+            session.commit()
         return self.current_level
 
 
