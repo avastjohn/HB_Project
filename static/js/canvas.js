@@ -138,6 +138,7 @@ var Pet = function(pettype, petname, gender, level) {
     this.currentPos = new Position(level.petStart.x, level.petStart.y);
     this.treatPos = level.treatPos;
     this.runList = [];
+    this.running = false;
     if (gender == "f") {
         this.gender = 0;
     } else {
@@ -227,6 +228,7 @@ var Pet = function(pettype, petname, gender, level) {
             gameBoard.drawBoard();
             pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
             pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
+            pet.running = false;
         }, 2000);
     };
 
@@ -248,13 +250,16 @@ var Pet = function(pettype, petname, gender, level) {
                 pet.currentPos = new Position(pet.level.petStart.x, pet.level.petStart.y);
                 pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
                 pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+                pet.running = false;
                 gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to "
-                                     + gameBoard.pronouns["herhis"][pet.gender] + " "
-                                     + pet.treat + "!</h3>";
+                                         + gameBoard.pronouns["herhis"][pet.gender] + " "
+                                         + pet.treat + "!</h3>";
+                
             // move to next level if they press next level btn
             } else if ($(eventObject.target).is("#pop-up-btn-next")) {
                 $("#pop-up").remove();
                 $(".dropped").remove();
+                pet.running = false;
                 $.getJSON("/completed_level", function(data) {
                     // create new Level with json data from ajax
                     newLevel = new Level(data.level_map, data.level_petStart, data.level_treatPos);
@@ -263,8 +268,13 @@ var Pet = function(pettype, petname, gender, level) {
                     currentBoard.drawBoard();
                     pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
                     pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+                    gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to "
+                         + gameBoard.pronouns["herhis"][pet.gender] + " "
+                         + pet.treat + "!</h3>";
                 });
             }
+
+
         });
     };
 
@@ -298,6 +308,7 @@ var Pet = function(pettype, petname, gender, level) {
         // takes a list of movement commands and moves pet accordingly
         var pet = this;
         // iterator
+        pet.running = true;
         var i = 0;
         var movementCode = {
             "r":"right",
@@ -321,6 +332,7 @@ var Pet = function(pettype, petname, gender, level) {
                     if ((pet.nextPos).eq(pet.treatPos)) {
                         pet.eatTreat(gameBoard);
                         clearInterval(intervalID);
+
                         return;
                     }
                 // case: loop - loops back to beginning of code
@@ -343,6 +355,7 @@ var Pet = function(pettype, petname, gender, level) {
             // weird things when the runList is empty)
             } else {
                 clearInterval(intervalID);
+                pet.running = false;
             }
         // interval in ms between each function call
         },1000);
@@ -399,8 +412,12 @@ $(function() {
 
     // make arrow box also droppable (so that user can remove arrows)
     $("#arrows").droppable();
-    // call run method when user clicks go button
-    $(".go").click(function() {
-        mrSnuffles.run(currentBoard)
-    });
+
+});
+
+// call run method when user clicks go button
+$(".go").click(function() {
+    if (!mrSnuffles.running) {
+        mrSnuffles.run(currentBoard);
+    }
 });
