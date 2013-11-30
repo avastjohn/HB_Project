@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="main-logo-container">
+        <img id="main-logo" src="../static/img/logo.png">
+    </div>
+    <div class="main-content">
+        <h2>You finished the game!</h2><br>
+        <p>Well done. You have made {{user.petname}} very happy! Check back later for more levels and features.</p>
+        <img href="../static/img/{{user.pettype}}.png">
+    </div>
+{% endblock %}

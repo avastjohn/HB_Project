@@ -53,18 +53,18 @@ def load_levels():
     model.session.add(l1)
     
     l2 = model.Level(map = "GGGG GppG ppGG GGGG",
-                    petStart = "0 2",
-                    treatPos = "2 1")
+                    petStart = "2 1",
+                    treatPos = "0 2")
     model.session.add(l2)   
 
     l3 = model.Level(map = "GGGp GGpp GppG ppGG",
-                    petStart = "0 3",
-                    treatPos = "3 0")
+                    petStart = "3 0",
+                    treatPos = "0 3")
     model.session.add(l3)
 
-    l4 = model.Level(map = "GGGGp GGppp pppGG pGGGG",
-                    petStart = "0 3",
-                    treatPos = "4 0")
+    l4 = model.Level(map = "pGGGG pppGG GGppp GGGGp",
+                    petStart = "0 0",
+                    treatPos = "4 3")
     model.session.add(l4)
 
     # l5 = model.Level(map = "pppGppp pGpppGp",

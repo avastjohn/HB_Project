@@ -160,12 +160,12 @@ var Pet = function(pettype, petname, gender, level) {
 
     // image sources
     this.images = {
-        "bunny": "http://i.imgur.com/3V353g6.png",
-        "carrot": "http://i.imgur.com/0e4zWUp.png",
-        "dog": "http://i.imgur.com/SImMv4T.png",
-        "bone": "http://i.imgur.com/KXDEPVW.png",
-        "penguin": "http://i.imgur.com/xBJDNUs.png",
-        "fish": "http://i.imgur.com/SxB5DrK.png"
+        "bunny": "../static/img/bunny.png",
+        "carrot": "../static/img/carrot.png",
+        "dog": "../static/img/dog.png",
+        "bone": "../static/img/bone.png",
+        "penguin": "../static/img/penguin.png",
+        "fish": "../static/img/fish.png"
     };
 
     // assigning image sources to the pet and treat, according to pettype
