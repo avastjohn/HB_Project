@@ -89,7 +89,10 @@ def completed():
     # get map, treatpos, petstart for new_level and turn into json dictionary
     return jsonify(level_map = level_obj.map,
         level_petStart = level_obj.petStart,
-        level_treatPos = level_obj.treatPos)
+        level_treatPos = level_obj.treatPos,
+        user_pettype = user.pettype,
+        user_petname = user.petname,
+        user_petgender = user.petgender)
 
 
 if __name__ == "__main__":

@@ -144,6 +144,13 @@ var Pet = function(pettype, petname, gender, level) {
         this.gender = 1;
     }
 
+    this.updateLevel = function(newLevel) {
+        this.level = newLevel;
+        this.currentPos = new Position(this.level.petStart.x, this.level.petStart.y);
+        this.treatPos = this.level.treatPos;
+        this.runList = [];
+    };
+
     this.treats = {
         "dog": "bone",
         "bunny": "carrot",
@@ -244,19 +251,33 @@ var Pet = function(pettype, petname, gender, level) {
                                      + pet.treat + "!</h3>";
             } else if ($(eventObject.target).is("#pop-up-btn-next")) {
                 $("#pop-up").remove();
-                pet.runList = [];
                 $(".dropped").remove();
                 $.getJSON("/completed_level", function(data) {
-                level = new Level(data.level_map, data.level_petStart, data.level_treatPos);
-                mrSnuffles = new Pet("{{user.pettype}}", "{{user.petname}}", "{{user.petgender}}", level);
-                currentBoard = new GameBoard(level);
+                newLevel = new Level(data.level_map, data.level_petStart, data.level_treatPos);
+                pet.updateLevel(newLevel);
+                currentBoard = new GameBoard(pet.level);
                 currentBoard.drawBoard();
+                pet.redrawPet([pet.petStart.x, pet.petStart.y]);
+                pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
                 });
             }
         });
     };
 
-
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 ////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 ////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 ////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
