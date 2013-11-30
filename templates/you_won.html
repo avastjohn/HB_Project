@@ -3,9 +3,24 @@
     <div class="main-logo-container">
         <img id="main-logo" src="../static/img/logo.png">
     </div>
+    <style type="text/css">
+        #pet-pic {
+            height: 100px;
+            width: 100px;
+            margin-top: 40px;
+            margin-left: 90px;
+            float: left;
+        }
+        #heart {
+            height: 50px;
+            width: 50px;
+            margin-top: 65px;
+        }
+    </style>
     <div class="main-content">
         <h2>You finished the game!</h2><br>
         <p>Well done. You have made {{user.petname}} very happy! Check back later for more levels and features.</p>
-        <img href="../static/img/{{user.pettype}}.png">
+        <img id="pet-pic" src="../static/img/{{user.pettype}}.png">
+        <img id="heart" src="../static/img/heart.png">
     </div>
 {% endblock %}

@@ -262,15 +262,19 @@ var Pet = function(pettype, petname, gender, level) {
                 pet.running = false;
                 $.getJSON("/completed_level", function(data) {
                     // create new Level with json data from ajax
-                    newLevel = new Level(data.level_map, data.level_petStart, data.level_treatPos);
-                    pet.updateLevel(newLevel);
-                    currentBoard = new GameBoard(pet.level);
-                    currentBoard.drawBoard();
-                    pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
-                    pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
-                    gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to "
-                         + gameBoard.pronouns["herhis"][pet.gender] + " "
-                         + pet.treat + "!</h3>";
+                    if (data.done) {
+                        window.location = "/you_won";
+                    } else {
+                        newLevel = new Level(data.level_map, data.level_petStart, data.level_treatPos);
+                        pet.updateLevel(newLevel);
+                        currentBoard = new GameBoard(pet.level);
+                        currentBoard.drawBoard();
+                        pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
+                        pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+                        gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to "
+                             + gameBoard.pronouns["herhis"][pet.gender] + " "
+                             + pet.treat + "!</h3>";
+                    }
                 });
             }
 

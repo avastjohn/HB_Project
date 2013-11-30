@@ -83,18 +83,35 @@ def completed():
     user_id = current_user.get_id()
     user = User.query.get(user_id)
     new_level = user.increment_current_level()
-    if new_level < 5:
-        level_obj = Level.query.get(new_level)
-
+    if new_level >= 5:
+        return jsonify(level_map = None,
+            level_petStart = None,
+            level_treatPos = None,
+            user_pettype = user.pettype,
+            user_petname = user.petname,
+            user_petgender = user.petgender,
+            done=True)
+    else:
+        level_obj = Level.query.get(new_level)    
         # get map, treatpos, petstart for new_level and turn into json dictionary
         return jsonify(level_map = level_obj.map,
             level_petStart = level_obj.petStart,
             level_treatPos = level_obj.treatPos,
             user_pettype = user.pettype,
             user_petname = user.petname,
-            user_petgender = user.petgender)
-    else:
+            user_petgender = user.petgender,
+            done=False)
+        
+@app.route("/you_won")
+@login_required
+def you_won():
+    user_id = current_user.get_id()
+    user = User.query.get(user_id)
+    level = user.current_level
+    if level == 5:
         return render_template("you_won.html", user=user)
+    else:
+        return redirect(url_for("canvas"))
 
 if __name__ == "__main__":
     app.run(debug=True)
