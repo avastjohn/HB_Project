@@ -84,7 +84,6 @@ def completed():
     user = User.query.get(user_id)
     new_level = user.increment_current_level()
     level_obj = Level.query.get(new_level)
-    print "Something is happening"
 
     # get map, treatpos, petstart for new_level and turn into json dictionary
     return jsonify(level_map = level_obj.map,

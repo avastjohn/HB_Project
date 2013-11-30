@@ -236,10 +236,12 @@ var Pet = function(pettype, petname, gender, level) {
         gameBoard.drawBoard();
         pet.redrawPet([pet.nextPos.x, pet.nextPos.y]);
         pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+        // after 1000 ms, create pop-up
         setTimeout(function() {
             $("body").append('<div id="pop-up"><div class="button" id="pop-up-btn-back">replay</div><div class="button" id="pop-up-btn-next">next level</div></div>');
         }, 1000);
         $("body").click(function(eventObject) {
+            // if they press back btn, restart same level, but keep arrows in codebar
             if ($(eventObject.target).is("#pop-up-btn-back")) {
                 $("#pop-up").remove();
                 gameBoard.drawBoard();
@@ -249,38 +251,22 @@ var Pet = function(pettype, petname, gender, level) {
                 gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to "
                                      + gameBoard.pronouns["herhis"][pet.gender] + " "
                                      + pet.treat + "!</h3>";
+            // move to next level if they press next level btn
             } else if ($(eventObject.target).is("#pop-up-btn-next")) {
                 $("#pop-up").remove();
                 $(".dropped").remove();
                 $.getJSON("/completed_level", function(data) {
-                newLevel = new Level(data.level_map, data.level_petStart, data.level_treatPos);
-                pet.updateLevel(newLevel);
-                currentBoard = new GameBoard(pet.level);
-                currentBoard.drawBoard();
-                pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
-                pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
+                    // create new Level with json data from ajax
+                    newLevel = new Level(data.level_map, data.level_petStart, data.level_treatPos);
+                    pet.updateLevel(newLevel);
+                    currentBoard = new GameBoard(pet.level);
+                    currentBoard.drawBoard();
+                    pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
+                    pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
                 });
             }
         });
     };
-
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-////\\\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
     this.move = function(gameBoard) {
         // moves the pet to the nextPos
