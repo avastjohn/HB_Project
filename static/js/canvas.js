@@ -246,8 +246,12 @@ var Pet = function(pettype, petname, gender, level) {
                 $("#pop-up").remove();
                 pet.runList = [];
                 $(".dropped").remove();
-                // MAGIC: change the current_level
-
+                $.getJSON("/completed_level", function(data) {
+                level = new Level(data.level_map, data.level_petStart, data.level_treatPos);
+                mrSnuffles = new Pet("{{user.pettype}}", "{{user.petname}}", "{{user.petgender}}", level);
+                currentBoard = new GameBoard(level);
+                currentBoard.drawBoard();
+                });
             }
         });
     };

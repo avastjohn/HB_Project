@@ -3,7 +3,7 @@ import bcrypt
 from datetime import datetime
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, ForeignKey
+from sqlalchemy import create_engine, ForeignKey, update
 from sqlalchemy import Column, Integer, String, DateTime, Text
 
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship, backref
@@ -40,6 +40,12 @@ class User(Base, UserMixin):
         password = password.encode("utf-8")
         return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.pw
 
+    def increment_current_level(self):
+        # NOTE: make it so that you can't increment level if on the last level
+        if self.current_level <= 5:
+            self.current_level+=1
+        return self.current_level
+
 
 class Level(Base):
     __tablename__ = "levels"
@@ -75,6 +81,8 @@ def get_user_id():
         return None
     else:
         return user[0]
+
+
 
 def create_tables():
     Base.metadata.create_all(engine)

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, g, session, url_for, flash
+from flask import Flask, render_template, redirect, request, g, session, url_for, flash, jsonify
 from model import User, Level
 from flask.ext.login import LoginManager,login_required,login_user,current_user,logout_user
 from flaskext.markdown import Markdown
@@ -77,10 +77,20 @@ def canvas():
 def tutorial():
     return render_template("teach_me_to_play.html")
 
-@app.route("/completed")
+@app.route("/completed_level")
+@login_required
 def completed():
-    #might use ajax instead to accomplish this
-    pass
+    user_id = current_user.get_id()
+    user = User.query.get(user_id)
+    new_level = user.increment_current_level()
+    level_obj = Level.query.get(new_level)
+    print "Something is happening"
+
+    # get map, treatpos, petstart for new_level and turn into json dictionary
+    return jsonify(level_map = level_obj.map,
+        level_petStart = level_obj.petStart,
+        level_treatPos = level_obj.treatPos)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
