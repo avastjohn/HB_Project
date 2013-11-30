@@ -1,9 +1,16 @@
 ##Progress Log
 
 final goals:
-- create level changes
 - highlight arrows as they are executing
 - fix run button so that it doesn't do anything when it is pressed twice
+
+Nov 29 (Fri):
+- created pop-up when pet reaches treat
+- used json/ajax to redraw board for next level/update db
+
+Nov 28 (Thurs):
+- ate thanksgiving dinner
+- played dreidel
 
 Nov 27 (Wed):
 - new users go straight to game after registration
