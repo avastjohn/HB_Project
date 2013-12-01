@@ -1,11 +1,11 @@
 ##Progress Log
 
 next goals:
-- fix arrow highlight bug
 - be able to update db with changes to the user's account
 
 Dec 1 (Sun):
 - added border to each arrow as it executes, but css goes wonky
+- fixed css
 
 Nov 30 (Sat):
 - added a page for when the user has completed all levels
