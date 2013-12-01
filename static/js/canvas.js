@@ -34,7 +34,8 @@ var GameBoard = function(level) {
         // g spaces don't have a raison d'être yet
         "G": "#7150f9",
         "p": "#a671f3",
-        "g": "Gold"
+        "g": "Gold",
+        "b": "#0099ff"
     };
 
     // berry pink f44d74

@@ -72,7 +72,7 @@ def load_levels():
                     treatPos = "2 5")
     model.session.add(l5)
 
-    l6 = model.Level(map = "GppG GGpG GppG GpGG GppG GGpG GppG",
+    l6 = model.Level(map = "GpgG GGpG GbpG GpGG GpgG GGpG GbpG",
                     petStart = "1 6",
                     treatPos = "1 0")
     model.session.add(l6)
