@@ -268,6 +268,7 @@ var Pet = function(pettype, petname, gender, level) {
                     if (data.done) {
                         window.location = "/you_won";
                     } else {
+                        myCanvas.width = myCanvas.width;
                         newLevel = new Level(data.level_map, data.level_petStart, data.level_treatPos);
                         pet.updateLevel(newLevel);
                         currentBoard = new GameBoard(pet.level);
