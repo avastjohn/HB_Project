@@ -241,7 +241,9 @@ var Pet = function(pettype, petname, gender, level) {
         // after 1000 ms, create pop-up
         setTimeout(function() {
             $("body").append('<div id="pop-up"><div class="button" id="pop-up-btn-back">replay</div><div class="button" id="pop-up-btn-next">next level</div></div>');
+            $(".codeBox").css({"border": "0px solid red", "margin-top": "4px", "margin-left": "4px"});
         }, 1000);
+
         $("body").click(function(eventObject) {
             // if they press back btn, restart same level, but keep arrows in codebar
             if ($(eventObject.target).is("#pop-up-btn-back")) {
@@ -313,6 +315,7 @@ var Pet = function(pettype, petname, gender, level) {
         var pet = this;
         // iterator
         pet.running = true;
+        var borderColor = "red";
         var i = 0;
         var movementCode = {
             "r":"right",
@@ -326,6 +329,8 @@ var Pet = function(pettype, petname, gender, level) {
         var intervalID = setInterval(function() {
             // determine the direction of the i-th item of the runList
             var direction = movementCode[pet.getDirectionFromArrows(pet.runList[i])];
+            $(".codeBox").css({"border": "0px solid red", "margin-top": "4px", "margin-left": "4px"});
+            $(".box" + i).css({"border": "2px solid " + borderColor, "margin-top": "2px", "margin-left": "2px"});
             if (direction) {
                 pet.getNextPos(direction);
                 gameBoard.updateMessage(pet);
@@ -336,12 +341,13 @@ var Pet = function(pettype, petname, gender, level) {
                     if ((pet.nextPos).eq(pet.treatPos)) {
                         pet.eatTreat(gameBoard);
                         clearInterval(intervalID);
-
                         return;
                     }
                 // case: loop - loops back to beginning of code
                 } else if (direction == "loop") {
+
                     i = 0;
+                    
                     return;
                 // case: this move is not legal
                 } else {

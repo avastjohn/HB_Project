@@ -81,8 +81,6 @@ def get_user_id():
     else:
         return user[0]
 
-
-
 def create_tables():
     Base.metadata.create_all(engine)
 
