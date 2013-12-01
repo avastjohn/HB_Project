@@ -6,6 +6,7 @@ next goals:
 Dec 1 (Sun):
 - added border to each arrow as it executes, but css goes wonky
 - fixed css
+- added two new levels with potential for conditionals
 
 Nov 30 (Sat):
 - added a page for when the user has completed all levels
