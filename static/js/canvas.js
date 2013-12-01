@@ -316,7 +316,7 @@ var Pet = function(pettype, petname, gender, level) {
         var pet = this;
         // iterator
         pet.running = true;
-        var borderColor = "red";
+        var borderColor = "yellow";
         var i = 0;
         var movementCode = {
             "r":"right",

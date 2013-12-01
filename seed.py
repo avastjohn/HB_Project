@@ -67,10 +67,15 @@ def load_levels():
                     treatPos = "4 3")
     model.session.add(l4)
 
-    # l5 = model.Level(map = "pppGppp pGpppGp",
-    #                 petStart = "0 1",
-    #                 treatPos = "6 0")
-    # model.session.add(l5)
+    l5 = model.Level(map = "GpGG GpGG GgpG GGpG GGpG GGpG",
+                    petStart = "1 0",
+                    treatPos = "2 5")
+    model.session.add(l5)
+
+    l6 = model.Level(map = "GppG GGpG GppG GpGG GppG GGpG GppG",
+                    petStart = "1 6",
+                    treatPos = "1 0")
+    model.session.add(l6)
 
 def load_user_levels():
     # pinkie does levels 1 and 2
