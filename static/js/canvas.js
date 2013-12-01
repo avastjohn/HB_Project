@@ -229,6 +229,7 @@ var Pet = function(pettype, petname, gender, level) {
             pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
             pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
             pet.running = false;
+            $(".codeBox").css({"border": "2px solid #1cbade"});
         }, 2000);
     };
 
@@ -241,7 +242,7 @@ var Pet = function(pettype, petname, gender, level) {
         // after 1000 ms, create pop-up
         setTimeout(function() {
             $("body").append('<div id="pop-up"><div class="button" id="pop-up-btn-back">replay</div><div class="button" id="pop-up-btn-next">next level</div></div>');
-            $(".codeBox").css({"border": "0px solid red", "margin-top": "4px", "margin-left": "4px"});
+            $(".codeBox").css({"border": "2px solid #1cbade"});
         }, 1000);
 
         $("body").click(function(eventObject) {
@@ -329,8 +330,8 @@ var Pet = function(pettype, petname, gender, level) {
         var intervalID = setInterval(function() {
             // determine the direction of the i-th item of the runList
             var direction = movementCode[pet.getDirectionFromArrows(pet.runList[i])];
-            $(".codeBox").css({"border": "0px solid red", "margin-top": "4px", "margin-left": "4px"});
-            $(".box" + i).css({"border": "2px solid " + borderColor, "margin-top": "2px", "margin-left": "2px"});
+            $(".codeBox").css({"border": "2px solid #1cbade"});
+            $(".box" + i).css({"border": "2px solid " + borderColor});
             if (direction) {
                 pet.getNextPos(direction);
                 gameBoard.updateMessage(pet);

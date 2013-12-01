@@ -70,7 +70,7 @@
         #boxesArrowsButtons {
             float: left;
             margin-top: 80px;
-            width: 400px;
+            width: 500px;
             height: 400px;
         }
         .codeBox {
@@ -80,10 +80,11 @@
             float: left;
             margin-top: 4px;
             margin-left: 4px;
-            border-radius: 3px;
+            border-radius: 4px;
             -moz-box-shadow:    inset 0 0 10px 0 #0caace;
             -webkit-box-shadow: inset 0 0 10px 0 #0caace;
             box-shadow:         inset 0 0 10px 0 #0caace;
+            border: 2px solid #1cbade;
         }
         #arrows {
             height: 160px;
