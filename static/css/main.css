@@ -114,6 +114,15 @@
             height: 50px;
             float: left;
         }
+        #holdertabs {
+            margin: 4px 0px 0px 0px;
+        }
+        #holdergold {
+            height: 10px;
+        }
+        #holderblue {
+            height: 10px;
+        }
         .button {
             height: 40px;
             width: 82px;
