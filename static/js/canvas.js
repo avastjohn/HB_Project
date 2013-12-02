@@ -155,14 +155,14 @@ var Pet = function(pettype, petname, gender, level) {
 
     this.treats = {
         "dog": "bone",
-        "bunny": "carrot",
+        "koala": "leaf",
         "penguin": "fish"
     };
 
     // image sources
     this.images = {
-        "bunny": "../static/img/bunny.png",
-        "carrot": "../static/img/carrot.png",
+        "koala": "../static/img/koala.png",
+        "leaf": "../static/img/leaf.png",
         "dog": "../static/img/dog.png",
         "bone": "../static/img/bone.png",
         "penguin": "../static/img/penguin.png",

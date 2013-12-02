@@ -39,7 +39,7 @@ def load_users():
     model.session.add(u4) 
 
     u5 = model.User(username="fluttershy", 
-                    pettype="bunny",
+                    pettype="koala",
                     petname="Angel",
                     petgender="m",
                     current_level=3)
