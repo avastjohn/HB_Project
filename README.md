@@ -1,10 +1,10 @@
 ##Fluffy Trails
 
-##A fun way for young girls to learn programming concepts
+###A fun way for young girls to learn programming concepts
 
 ![Alt text](https://raw.github.com/avastjohn/HB_Project/master/misc/screen_shot.jpg "Level Six image")
 
-#How It Works
+###How It Works
 
 Drag and drop arrows into the codeboxes to help your pet reach their treat. Loop arrow makes all previous code repeat. Yellow and Blue tabs are for if statements (ex: if on a yellow square, go right) - this feature coming soon.
 
@@ -15,7 +15,7 @@ Front end: Javascript, jQuery-UI, HTML5 canvas
 
 ###About Me
 
-![Alt text](https://raw.github.com/avastjohn/HB_Project/ava_gandhi.jpg)
+![Alt text](https://raw.github.com/avastjohn/misc/HB_Project/ava_gandhi.jpg)
 
 Ava St. John
 avasaintjohn@gmail.com
