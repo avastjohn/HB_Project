@@ -20,7 +20,7 @@ My educational background is in Developmental Psychology, Math, and Education. I
 I am a full stack software developer currently seeking my next opportunity. I genuinely enjoy both front end and back end development, and I am open to trying just about anything as long as I am working with a great team!
 
 <p align="center">
-  <img src="https://raw.github.com/avastjohn/HB_Project/master/misc/ava_gandhi.jpg">
+  <img src="https://raw.github.com/avastjohn/HB_Project/master/misc/ava_gandhi.jpg"><br>
   Me with my dog Gandhi
 </p>
 
