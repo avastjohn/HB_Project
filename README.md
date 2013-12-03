@@ -1,4 +1,5 @@
-##Fluffy Trails
+
+<h1 align="center">Fluffy Trails</h1>
 
 ###A fun way for young girls to learn programming concepts
 
