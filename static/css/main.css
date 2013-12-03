@@ -43,6 +43,7 @@
             float: left;
             margin-top: 15%;
             padding-top: 10px;
+            cursor: pointer;
         }
         #pop-up-btn-back {
             background: linear-gradient(0, #7150f9, #a671f3);
@@ -51,6 +52,7 @@
             float: left;
             margin-top: 15%;
             padding-top: 24px;
+            cursor: pointer;
         }
         #message h3 {
             font: 30px "Arial" sans-serif;
@@ -149,6 +151,7 @@
             margin-left: 40px;
             color: black;
             padding-top: 7px;
+            cursor: pointer;
         }
         .go {
             background: linear-gradient(0, #36cc5d, #5bec84);
