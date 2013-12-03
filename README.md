@@ -19,7 +19,7 @@ My educational background is in Developmental Psychology, Math, and Education. I
 
 I am a full stack software developer currently seeking my next opportunity. I genuinely enjoy both front end and back end development, and I am open to trying just about anything as long as I am working with a great team!
 
-![Alt text](https://raw.github.com/avastjohn/HB_Project/master/misc/ava_john_dogs.jpg)
+![Alt text](https://raw.github.com/avastjohn/HB_Project/master/misc/ava_john_dogs.JPG)
 
 Me with my husband and dogs, John, Gandhi, and Jabba
 
