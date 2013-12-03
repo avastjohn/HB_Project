@@ -1,4 +1,4 @@
-![Alt text](/misc/screen_shot.png "Level Six image")
+![Alt text](/misc/screen_shot.jpg "Level Six image")
 
 
 
