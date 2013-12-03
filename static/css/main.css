@@ -86,17 +86,14 @@
             box-shadow:         inset 0 0 10px 0 #0caace;
             border: 2px solid #1cbade;
         }
-/*        #code-box-tabs {
+        #code-box-tabs {
             width: 410px;
             height: 30px;
             margin-top: 55px;
-            background-color: purple;
-            z-index: -100;
-        }*/
+        }
         .box-tab {
             height: 20px;
             width: 50px;
-            background-color: blue;
             float: left;
             margin-left: 4px;
             border: 2px solid transparent;
@@ -111,7 +108,7 @@
             background: linear-gradient(0, #0caace, #44c8e7);
         }
         .tab {
-            margin: -5px 0px 0px 0px;
+            margin: 0px 0px 0px 0px;
         }
         #buttons {
             float: left;
@@ -131,6 +128,9 @@
             height: 50px;
             float: left;
         }
+    /*    #holdertabs {
+            margin: 0px;
+        }*/
         #holdergold {
             height: 20px;
             margin-top: 10px;

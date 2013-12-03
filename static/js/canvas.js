@@ -424,7 +424,7 @@ $(function() {
     $("#arrows").droppable();
 
     // make tabs draggable
-    $(".tab").draggable({snap: ".ui-widget-header", snapMode: "outer"});
+    $(".tab").draggable({snap: "ui-widget-header", snapMode: "inner", revert: "invalid"});
 
 });
 
