@@ -15,7 +15,7 @@ Front end: Javascript, jQuery-UI, HTML5 canvas
 
 ###About Me
 
-![Alt text](https://raw.github.com/avastjohn/misc/HB_Project/ava_gandhi.jpg)
+![Alt text](https://raw.github.com/avastjohn/HB_Project/master/misc/HB_Project/ava_gandhi.jpg)
 
 Ava St. John
 avasaintjohn@gmail.com
