@@ -15,12 +15,11 @@ Front end: Javascript, jQuery-UI, HTML5 canvas
 
 ###About Me
 
-![Alt text](https://raw.github.com/avastjohn/HB_Project/master/misc/ava_gandhi.jpg)
-
-Ava St. John
-avasaintjohn@gmail.com
-@avastjohn
-
 My educational background is in Developmental Psychology, Math, and Education. I love teaching, mentoring, and sharing my knowledge with anyone who can use it. 
 
 I am a full stack software developer currently seeking my next opportunity. I genuinely enjoy both front end and back end development, and I am open to trying just about anything as long as I am working with a great team!
+
+![Alt text](https://raw.github.com/avastjohn/HB_Project/master/misc/ava_john_dogs.jpg)
+
+Me with my husband and dogs, John, Gandhi, and Jabba
+
