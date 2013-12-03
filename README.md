@@ -21,5 +21,5 @@ I am a full stack software developer currently seeking my next opportunity. I ge
 
 ![Alt text](https://raw.github.com/avastjohn/HB_Project/master/misc/ava_gandhi.jpg)
 
-Me with my husband and dogs, John, Gandhi, and Jabba
+Me with my dog Gandhi
 
