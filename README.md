@@ -1,3 +1,7 @@
+![Alt text](/misc/screen_shot.png "Level Six image")
+
+
+
 ##Progress Log
 
 next goals:
