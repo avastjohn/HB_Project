@@ -1,4 +1,4 @@
-![Alt text](/misc/screen_shot.jpg "Level Six image")
+![Alt text](https://raw.github.com/avastjohn/HB_Project/master/misc/screen_shot.jpg "Level Six image")
 
 
 
