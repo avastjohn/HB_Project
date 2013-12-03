@@ -127,10 +127,6 @@ var GameBoard = function(level) {
     };
 };
 
-var completeLevel = function() {
-    return;
-};
-
 // Pet class
 var Pet = function(pettype, petname, gender, level) {
     this.pettype = pettype;
@@ -382,6 +378,7 @@ $(function() {
         $(".box"+i).droppable();
         $(".box"+i).on('drop', null, {boxNum:i}, dropResponder);
         $(".box"+i).on('dropout', clearArrow);
+        $(".tab"+i).droppable();
     }
 
     function dropResponder(event, ui){
@@ -425,6 +422,9 @@ $(function() {
 
     // make arrow box also droppable (so that user can remove arrows)
     $("#arrows").droppable();
+
+    // make tabs draggable
+    $(".tab").draggable({snap: ".ui-widget-header", snapMode: "outer"});
 
 });
 
