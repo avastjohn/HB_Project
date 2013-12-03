@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
     <div class="main-logo-container">
-        <img id="main-logo" src="../static/img/logo.png">
+        <img id="main-logo" src="../static/img/clouds.png">
     </div>
     <style type="text/css">
         #pet-pic {
             height: 100px;
             width: 100px;
-            margin-top: 40px;
-            margin-left: 90px;
+            margin-top: 30px;
+            margin-left: 55px;
             float: left;
         }
         #heart {
@@ -17,7 +17,7 @@
             margin-top: 65px;
         }
     </style>
-    <div class="main-content">
+    <div class="main-content" id="you-won-text">
         <h2>You finished the game!</h2><br>
         <p>Well done. You have made {{user.petname}} very happy! Check back later for more levels and features.</p>
         <img id="pet-pic" src="../static/img/{{user.pettype}}.png">
