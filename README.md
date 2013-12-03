@@ -3,6 +3,13 @@
 next goals:
 - be able to update db with changes to the user's account
 
+Dec 3 (Tues):
+- made demo version with only two levels
+
+Dec 2 (Mon):
+- upgraded graphics
+- made tabs draggable/droppable, but they don't do anything yet
+
 Dec 1 (Sun):
 - added border to each arrow as it executes, but css goes wonky
 - fixed css
