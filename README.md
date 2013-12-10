@@ -9,9 +9,11 @@
 
 Drag and drop arrows into the codeboxes to help your pet reach their treat. Loop arrow makes all previous code repeat. Yellow and Blue tabs are for if statements (ex: if on a yellow square, go right) - this feature coming soon.
 
+<a href="fluffytrails.heroku.com">Play Now!</a>
+
 ###Technology Used
 
-- Back end: PostgreSQL, Python, Flask
+- Back end: Python, Flask, SQLAlchemy
 - Front end: Javascript, jQuery-UI, HTML5 canvas
 
 ###About Me
