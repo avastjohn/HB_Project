@@ -9,7 +9,7 @@
 
 Drag and drop arrows into the codeboxes to help your pet reach their treat. Loop arrow makes all previous code repeat. Yellow and Blue tabs are for if statements (ex: if on a yellow square, go right) - this feature coming soon.
 
-<a href="fluffytrails.herokuapp.com">Play Now!</a>
+<a href="http://fluffytrails.herokuapp.com">Play Now!</a>
 
 ###Technology Used
 
