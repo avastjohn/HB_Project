@@ -48,30 +48,30 @@ def load_users():
     # model.session.add(u5) 
     
 def load_levels():
-    # l1 = model.Level(map = "GGG ppp GGG",
-    #                 petStart = "0 1",
-    #                 treatPos = "2 1")
-    # model.session.add(l1)
+    l1 = model.Level(map = "GGG ppp GGG",
+                    petStart = "0 1",
+                    treatPos = "2 1")
+    model.session.add(l1)
     
-    # l2 = model.Level(map = "GGGG pppG GGpp GGGG",
-    #                 petStart = "0 1",
-    #                 treatPos = "3 2")
-    # model.session.add(l2)   
+    l2 = model.Level(map = "GGGG pppG GGpp GGGG",
+                    petStart = "0 1",
+                    treatPos = "3 2")
+    model.session.add(l2)   
 
-    # l3 = model.Level(map = "ppGG GppG GGpp GGGp",
-    #                 petStart = "3 3",
-    #                 treatPos = "0 0")
-    # model.session.add(l3)
+    l3 = model.Level(map = "ppGG GppG GGpp GGGp",
+                    petStart = "3 3",
+                    treatPos = "0 0")
+    model.session.add(l3)
 
     l4 = model.Level(map = "pGGGG pppGG GGppp GGGGp",
                     petStart = "0 0",
                     treatPos = "4 3")
     model.session.add(l4)
 
-    # l5 = model.Level(map = "GpGG GpGG GgpG GGpG GGpG GGpG",
-    #                 petStart = "1 0",
-    #                 treatPos = "2 5")
-    # model.session.add(l5)
+    l5 = model.Level(map = "GpGG GpGG GgpG GGpG GGpG GGpG",
+                    petStart = "1 0",
+                    treatPos = "2 5")
+    model.session.add(l5)
 
     l6 = model.Level(map = "GpgG GGpG GbpG GpGG GpgG GGpG GbpG",
                     petStart = "1 6",

@@ -83,7 +83,7 @@ def completed():
     user_id = current_user.get_id()
     user = User.query.get(user_id)
     new_level = user.increment_current_level()
-    if new_level >= 3:
+    if new_level >= 7:
         return jsonify(level_map = None,
             level_petStart = None,
             level_treatPos = None,
@@ -108,7 +108,7 @@ def you_won():
     user_id = current_user.get_id()
     user = User.query.get(user_id)
     level = user.current_level
-    if level == 3:
+    if level == 7:
         return render_template("you_won.html", user=user)
     else:
         return redirect(url_for("canvas"))
