@@ -314,6 +314,8 @@ var Pet = function(pettype, petname, gender, level) {
     this.run = function(gameBoard) {
         // takes a list of movement commands and moves pet accordingly
         var pet = this;
+        console.log(pet.runList);
+        console.log(pet.conditionals);
         // iterator
         pet.running = true;
         var borderColor = "yellow";
@@ -355,7 +357,7 @@ var Pet = function(pettype, petname, gender, level) {
                     clearInterval(intervalID);
                     pet.tryAgain(gameBoard)
                 }
-                // case this was the last item in the runList and the pet has 
+                // case: this was the last item in the runList and the pet has 
                 // not yet reached the treat
                 if (i >= (pet.runList.length - 1)) {
                     clearInterval(intervalID);
