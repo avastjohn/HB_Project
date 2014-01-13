@@ -135,6 +135,7 @@ var Pet = function(pettype, petname, gender, level) {
     this.currentPos = new Position(level.petStart.x, level.petStart.y);
     this.treatPos = level.treatPos;
     this.runList = [];
+    this.conditionals = [];
     this.running = false;
     if (gender == "f") {
         this.gender = 0;
@@ -147,6 +148,7 @@ var Pet = function(pettype, petname, gender, level) {
         this.currentPos = new Position(this.level.petStart.x, this.level.petStart.y);
         this.treatPos = this.level.treatPos;
         this.runList = [];
+        this.conditionals = [];
     };
 
     this.treats = {
@@ -379,6 +381,7 @@ $(function() {
         $(".box"+i).on('drop', null, {boxNum:i}, dropResponder);
         $(".box"+i).on('dropout', clearArrow);
         $(".tab"+i).droppable();
+        $(".tab"+i).on('drop', null, {boxNum:i}, tabDropResponder);
     }
 
     function dropResponder(event, ui){
@@ -389,6 +392,16 @@ $(function() {
         drawNewArrow(ui.draggable[0].id);
         $(ui.draggable).attr("id", "");
         $(ui.draggable).attr("style", "");
+    };
+
+    function tabDropResponder(event, ui){
+        // updates the runList when a tab is dropped
+        mrSnuffles.conditionals[event.data.boxNum] = ui.draggable[0];
+        ui.draggable.addClass("dropped");
+        $(".tab" + event.data.boxNum).html(ui.draggable[0]);
+        drawNewTab(ui.draggable[0].id);
+        $(ui.draggable).attr("id", "");
+        $(ui.draggable).attr("style", "");        
     };
 
     function clearArrow(event, ui){
@@ -418,6 +431,14 @@ $(function() {
         $("#holder" + direction).html(arrow);
     };
 
+    var drawNewTab = function(color) {
+        // draws a new tab
+        var tab = $('<img src="../static/img/tab' + color + '.png" id="' + color 
+            + '" class="ui-widget-content tab ' + color + '"></img>')
+        tab.draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid"});
+        $("#holder" + color).html(tab);
+    };
+
     $(".arrow").draggable({ snap: ".ui-widget-header", snapMode: "inner", revert: "invalid"});
 
     // make arrow box also droppable (so that user can remove arrows)
@@ -425,7 +446,6 @@ $(function() {
 
     // make tabs draggable
     $(".tab").draggable({snap: "ui-widget-header", snapMode: "inner", revert: "invalid"});
-
 });
 
 // call run method when user clicks go button
