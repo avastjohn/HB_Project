@@ -67,7 +67,8 @@ var GameBoard = function(level) {
             "solved": "<h3>Yay! " + pet.petname + " got to " 
                     + gameBoard.pronouns["herhis"][pet.gender] + " " + pet.treat + "!</h3>",
             "valid": "<h3>Going " + pet.direction + "...</h3>",
-            "notValid": "<h3>Uh-oh, " + pet.petname + " can't go " + pet.direction + " :(</h3>"
+            "notValid": "<h3>Uh-oh, " + pet.petname + " can't go " + pet.direction + " :(</h3>",
+            "validConditional": "Go " + pet.direction + " if on a " + pet.conditional + " square..."
         };
         if (gameBoard.getGameState(pet) == "tryAgain") {
             return;
@@ -311,6 +312,17 @@ var Pet = function(pettype, petname, gender, level) {
         }
     };
 
+    this.getColorFromTabs = function(image) {
+        image = $(image)
+        if (image.hasClass("blue")) {
+            return "b";
+        } else if (image.hasClass("gold")) {
+            return "g";
+        } else {
+            return "N";
+        }
+    };
+
     this.run = function(gameBoard) {
         // takes a list of movement commands and moves pet accordingly
         var pet = this;
@@ -332,38 +344,47 @@ var Pet = function(pettype, petname, gender, level) {
         var intervalID = setInterval(function() {
             // determine the direction of the i-th item of the runList
             var direction = movementCode[pet.getDirectionFromArrows(pet.runList[i])];
+            pet.conditional = pet.getColorFromTabs(pet.conditionals[i]);
             $(".codeBox").css({"border": "2px solid #1cbade"});
             $(".box" + i).css({"border": "2px solid " + borderColor});
             if (direction) {
-                pet.getNextPos(direction);
-                gameBoard.updateMessage(pet);
-                // case: this move is legal
-                if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
-                    pet.move(gameBoard)
-                    // case: this move also means the pet has reached the treat
-                    if ((pet.nextPos).eq(pet.treatPos)) {
-                        pet.eatTreat(gameBoard);
-                        clearInterval(intervalID);
-                        return;
-                    }
-                // case: loop - loops back to beginning of code
-                } else if (direction == "loop") {
-
-                    i = 0;
-                    
-                    return;
-                // case: this move is not legal
+                console.log("cond:");
+                console.log(conditional);
+                // if there is a conditional and it isn't valid for this move
+                // then just move to the next arrow
+                if ((conditional != "N") && (conditional != gameBoard.getSquare(pet.currentPos.x, pet.currentPos.y))) {
+                    i += 1
+                    return
                 } else {
-                    clearInterval(intervalID);
-                    pet.tryAgain(gameBoard)
-                }
-                // case: this was the last item in the runList and the pet has 
-                // not yet reached the treat
-                if (i >= (pet.runList.length - 1)) {
-                    clearInterval(intervalID);
-                    pet.tryAgain(gameBoard);
+                    pet.getNextPos(direction);
+                    gameBoard.updateMessage(pet);
+                    // case: this move is legal
+                    if (gameBoard.authorize(pet.nextPos.x, pet.nextPos.y)) {
+                        pet.move(gameBoard)
+                        // case: this move also means the pet has reached the treat
+                        if ((pet.nextPos).eq(pet.treatPos)) {
+                            pet.eatTreat(gameBoard);
+                            clearInterval(intervalID);
+                            return;
+                        }
+                    // case: loop - loops back to beginning of code
+                    } else if (direction == "loop") {
+                        i = 0;
+                        return;
+                    // case: this move is not legal
+                    } else {
+                        clearInterval(intervalID);
+                        pet.tryAgain(gameBoard)
+                    }
+                    // case: this was the last item in the runList and the pet has 
+                    // not yet reached the treat
+                    if (i >= (pet.runList.length - 1)) {
+                        clearInterval(intervalID);
+                        pet.tryAgain(gameBoard);
+                    }
                 }
                 i+=1;
+
             // if there isn't a direction (to prevent the run button from doing 
             // weird things when the runList is empty)
             } else {
