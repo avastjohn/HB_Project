@@ -67,8 +67,7 @@ var GameBoard = function(level) {
             "solved": "<h3>Yay! " + pet.petname + " got to " 
                     + gameBoard.pronouns["herhis"][pet.gender] + " " + pet.treat + "!</h3>",
             "valid": "<h3>Going " + pet.direction + "...</h3>",
-            "notValid": "<h3>Uh-oh, " + pet.petname + " can't go " + pet.direction + " :(</h3>",
-            "validConditional": "Go " + pet.direction + " if on a " + pet.conditional + " square..."
+            "notValid": "<h3>Uh-oh, " + pet.petname + " can't go " + pet.direction + " :(</h3>"
         };
         if (gameBoard.getGameState(pet) == "tryAgain") {
             return;
@@ -326,8 +325,6 @@ var Pet = function(pettype, petname, gender, level) {
     this.run = function(gameBoard) {
         // takes a list of movement commands and moves pet accordingly
         var pet = this;
-        console.log(pet.runList);
-        console.log(pet.conditionals);
         // iterator
         pet.running = true;
         var borderColor = "yellow";
@@ -348,11 +345,9 @@ var Pet = function(pettype, petname, gender, level) {
             $(".codeBox").css({"border": "2px solid #1cbade"});
             $(".box" + i).css({"border": "2px solid " + borderColor});
             if (direction) {
-                console.log("cond:");
-                console.log(conditional);
                 // if there is a conditional and it isn't valid for this move
                 // then just move to the next arrow
-                if ((conditional != "N") && (conditional != gameBoard.getSquare(pet.currentPos.x, pet.currentPos.y))) {
+                if ((pet.conditional != "N") && (pet.conditional != gameBoard.getSquare(pet.currentPos.x, pet.currentPos.y))) {
                     i += 1
                     return
                 } else {
@@ -363,6 +358,7 @@ var Pet = function(pettype, petname, gender, level) {
                         pet.move(gameBoard)
                         // case: this move also means the pet has reached the treat
                         if ((pet.nextPos).eq(pet.treatPos)) {
+                            gameBoard.updateMessage(pet);
                             pet.eatTreat(gameBoard);
                             clearInterval(intervalID);
                             return;
@@ -405,33 +401,41 @@ $(function() {
         $(".box"+i).on('dropout', clearArrow);
         $(".tab"+i).droppable();
         $(".tab"+i).on('drop', null, {boxNum:i}, tabDropResponder);
+        $(".tab"+i).on('dropout', clearTab);
     }
 
-    function dropResponder(event, ui){
+    function dropResponder(event, ui) {
         // updates the runList when an arrow is dropped into a codebox
         mrSnuffles.runList[event.data.boxNum] = ui.draggable[0];
         ui.draggable.addClass("dropped");
         $(".box" + event.data.boxNum).html(ui.draggable[0]);
         drawNewArrow(ui.draggable[0].id);
-        $(ui.draggable).attr("id", "");
         $(ui.draggable).attr("style", "");
     };
 
-    function tabDropResponder(event, ui){
+    function tabDropResponder(event, ui) {
         // updates the runList when a tab is dropped
         mrSnuffles.conditionals[event.data.boxNum] = ui.draggable[0];
         ui.draggable.addClass("dropped");
         $(".tab" + event.data.boxNum).html(ui.draggable[0]);
         drawNewTab(ui.draggable[0].id);
-        $(ui.draggable).attr("id", "");
         $(ui.draggable).attr("style", "");        
     };
 
-    function clearArrow(event, ui){
+    function clearArrow(event, ui) {
         // updates the runList when an arrow is removed from a codebox
-        for (var i = 0; i < mrSnuffles.runList.length; i++){
+        for (var i = 0; i < mrSnuffles.runList.length; i++) {
             if (ui.draggable[0] == mrSnuffles.runList[i]) {
                 mrSnuffles.runList[i] = "n";
+            }
+        }
+    };
+
+    function clearTab(event, ui) {
+        // updates conditionals list when tab is removed from a tab box
+        for (var i = 0; i < mrSnuffles.conditionals.length; i++) {
+            if (ui.draggable[0] == mrSnuffles.conditionals[i]) {
+                mrSnuffles.conditionals[i] = "N";
             }
         }
     };
@@ -445,7 +449,7 @@ $(function() {
                          + mrSnuffles.treat + "!</h3>";
 
 
-    helptext.innerHTML = "<h4>Your directions for " + mrSnuffles.petname + ":</h4>";
+    // helptext.innerHTML = "<h4>Your directions for " + mrSnuffles.petname + ":</h4>";
     var drawNewArrow = function(direction) {
         //draws a new arrow
         var arrow = $('<img src="../static/img/arrow' + direction + '.png" id="' + direction 
@@ -475,5 +479,22 @@ $(function() {
 $(".go").click(function() {
     if (!mrSnuffles.running) {
         mrSnuffles.run(currentBoard);
+    }
+});
+
+$(".clear").click(function() {
+    if (!mrSnuffles.running) {
+        for (var i = 0; i < mrSnuffles.runList.length; i++) {
+            if (mrSnuffles.runList[i]) {
+                mrSnuffles.runList[i].src = "";
+            }
+        }
+        for (var i = 0; i < mrSnuffles.conditionals.length; i++) {
+            if (mrSnuffles.conditionals[i]) {
+                mrSnuffles.conditionals[i].src = "";
+            }
+        }
+        mrSnuffles.runList = [];
+        mrSnuffles.conditionals = [];
     }
 });

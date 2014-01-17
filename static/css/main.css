@@ -62,10 +62,11 @@
             cursor: pointer;
         }
         #message h3 {
-            font: 30px "Arial" sans-serif;
+            font: 24px "Arial" sans-serif;
             color: #FD3F72;
-            text-align: center;
+            text-align: left;
             margin-bottom: 40px;
+            margin-left: 5px;
         }
         #helptext {
             margin-left: 5px;
@@ -163,6 +164,6 @@
         .go {
             background: linear-gradient(0, #36cc5d, #5bec84);
         }
-        .save {
+        .clear {
             background: linear-gradient(0, #7150f9, #a671f3);
         }
