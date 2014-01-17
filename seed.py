@@ -68,14 +68,14 @@ def load_levels():
                     treatPos = "4 3")
     model.session.add(l4)
 
-    l5 = model.Level(map = "GpGG GpGG GgpG GGpG GGpG GGpG",
+    l5 = model.Level(map = "GpGG GgpG GGpG GGpG GGpG",
                     petStart = "1 0",
-                    treatPos = "2 5")
+                    treatPos = "2 4")
     model.session.add(l5)
 
-    l6 = model.Level(map = "GpgG GGpG GbpG GpGG GpgG GGpG GbpG",
-                    petStart = "1 6",
-                    treatPos = "1 0")
+    l6 = model.Level(map = "GbpG GpGG GpgG GGpG GbpG",
+                    petStart = "1 4",
+                    treatPos = "2 0")
     model.session.add(l6)
 
 def load_user_levels():

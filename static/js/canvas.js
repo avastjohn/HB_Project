@@ -482,6 +482,7 @@ $(".go").click(function() {
     }
 });
 
+// clear all arrows/tabs when user clicks clear button; reset runList, conditionals
 $(".clear").click(function() {
     if (!mrSnuffles.running) {
         for (var i = 0; i < mrSnuffles.runList.length; i++) {
@@ -494,6 +495,9 @@ $(".clear").click(function() {
                 mrSnuffles.conditionals[i].src = "";
             }
         }
+        //////////////////////// trying to fix tabs reloading when put in code boxes
+        $("#blue").src = "../static/img/tabblue.png";
+        $("#gold").src = "../static/img/tabgold.png";
         mrSnuffles.runList = [];
         mrSnuffles.conditionals = [];
     }
