@@ -4,21 +4,23 @@
         <img id="main-logo" src="../static/img/clouds.png">
     </div>
     <div class="main-content">
-        <h2 class="signin-heading">Login</h2>
-        <p>{{ error }}</p>
-        <p>{{ afterRegMessage }}</p>
-        <form action="/login" class="signin" method="POST">
-            Username: <input type="text" class="form-control" name="username"><br>
-            Password: <input type="password" class="form-control" name="password"><br>
-            <input type="submit" class="btn" value="Sign In">
-        </form>
-        <br><br>
-        <h2 class="signin-heading mini-logo-and-text">New to Fluffy Trails?</h2>
-        <p></p>
-        <p></p>
-        <form action="/register" class="signin" method="POST">
-            <input type="submit" class="btn" value="Sign up and start playing!">
-        </form>
+        <div class="floating-info">
+            <h2 class="signin-heading">Login</h2>
+            <p>{{ error }}</p>
+            <p>{{ afterRegMessage }}</p>
+            <form action="/login" class="signin" method="POST">
+                Username: <input type="text" class="form-control" name="username"><br>
+                Password: <input type="password" class="form-control" name="password"><br>
+                <input type="submit" class="btn" value="Sign In">
+            </form>
+        </div>
+        <div class="floating-info">
+            <h2 class="signin-heading mini-logo-and-text">New to Fluffy Trails?</h2>
+            <p></p>
+            <p></p>
+            <form action="/register" class="signin" method="POST">
+                <input type="submit" class="btn" value="Sign up and start playing!">
+            </form>
         </div>
     </div>
     {% endblock %}
