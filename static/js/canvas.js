@@ -69,7 +69,7 @@ var GameBoard = function(level) {
             "valid": "<h3>Going " + pet.direction + "...</h3>",
             "notValid": "<h3>Uh-oh, " + pet.petname + " can't go " + pet.direction + " :(</h3>"
         };
-        if (gameBoard.getGameState(pet) == "tryAgain") {
+        if ((gameBoard.getGameState(pet) == "tryAgain")||(gameBoard.getGameState(pet) == "valid")) {
             return;
         }
         gameBoard.message.innerHTML = messages[gameBoard.getGameState(pet)];
