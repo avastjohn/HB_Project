@@ -40,16 +40,21 @@ def goToRegPage():
 
 @app.route("/create_account", methods=["POST"])
 def createAccount():
+    error = None
     username = request.form.get("username")
     password = request.form.get("password")
     pettype = request.form.get("pettype")
     petgender = request.form.get("petgender")
     petname = request.form.get("petname")
-    user = model.register_new_user(username, pettype, petgender, petname, password)
-    level = Level.query.get(1)
-    user = User.query.filter_by(username=username).first()
-    login_user(user)
-    return redirect(url_for("canvas"))
+    if username and password and pettype and petgender and petname:
+        user = model.register_new_user(username, pettype, petgender, petname, password)
+        level = Level.query.get(1)
+        user = User.query.filter_by(username=username).first()
+        login_user(user)
+        return redirect(url_for("canvas"))
+    else:
+        return render_template("register.html", error="** All Fields Required **")
+
 
 #afterRegMessage="Great! Now sign in and start playing!"
 
