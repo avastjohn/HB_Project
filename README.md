@@ -1,6 +1,9 @@
 
 <h1 align="center">Fluffy Trails</h1>
 
+<img src="https://api.keen.io/3.0/projects/<project_id>/events/repo_loaded?api_key=1c776262b0e547a678aeac8e4c1bb6c20a2e1c69bc660d50ab0457e1682224457da5c44dc0f1aca929819ead6706a99dec903d29310c292c2390a7bf60978e19734fa07948f7e14a54a2b35be41a7a6078bf9f63a0e640719730c6c2f060d4590b29417afcf15314d4288748f6eaba42&data=eyJwb25pZXMiOiB0cnVlfTs="></img>
+
+
 ###A fun way for young girls to learn programming concepts
 
 ![Alt text](https://raw.github.com/avastjohn/HB_Project/master/misc/screen_shot.jpg "Level Six image")
