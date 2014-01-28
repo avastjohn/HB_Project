@@ -1,9 +1,14 @@
+"""
+Game logic for Fluffy Trails
+"""
+
+
 // length and width in pixels of the squares on the map
 var UNIT_SIZE = 100;
 
 var myCanvas = document.getElementById('myCanvas');
 var context = myCanvas.getContext("2d");
-var helptext = document.getElementById('helptext');
+
 // Position class
 var Position = function(x, y) {
     this.x = x;

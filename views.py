@@ -113,7 +113,7 @@ def you_won():
     user_id = current_user.get_id()
     user = User.query.get(user_id)
     level = user.current_level
-    if level == 7:
+    if level >= 7:
         return render_template("you_won.html", user=user)
     else:
         return redirect(url_for("canvas"))
