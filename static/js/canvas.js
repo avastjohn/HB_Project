@@ -1,6 +1,5 @@
-"""
-Game logic for Fluffy Trails
-"""
+//Game logic for Fluffy Trails
+
 
 
 // length and width in pixels of the squares on the map
