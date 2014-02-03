@@ -78,7 +78,7 @@
         <script type="text/javascript">
             var currentLevel = {{user.current_level}};
             var level = new Level("{{level.map}}", "{{level.petStart}}", "{{level.treatPos}}");
-            var mrSnuffles = new Pet("{{user.pettype}}", "{{user.petname}}", "{{user.petgender}}", level);
+            var mrSnuffles = new Pet("{{user.pettype}}", "{{user.petname}}", level);
             var currentBoard = new GameBoard(level);
         </script>
     </body>

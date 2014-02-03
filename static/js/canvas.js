@@ -59,11 +59,6 @@ var GameBoard = function(level) {
         return gameState;
     };
 
-    this.pronouns = {
-        "shehe": ["she", "he"],
-        "herhis": ["her", "his"]
-    };
-
     this.updateMessage = function(pet) {
         // updates message based on gamestate
         gameBoard = this;
@@ -131,7 +126,7 @@ var GameBoard = function(level) {
 };
 
 // Pet class
-var Pet = function(pettype, petname, gender, level) {
+var Pet = function(pettype, petname, level) {
     this.pettype = pettype;
     this.petname = petname;
     this.level = level;
