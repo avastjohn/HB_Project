@@ -24,7 +24,6 @@ class User(Base, UserMixin):
     username = Column(String(64), nullable=False)
     pettype = Column(String(64), nullable=False)
     petname = Column(String(64), nullable=False)
-    petgender = Column(String(64), nullable=False)
     salt = Column(String(64), nullable=False)
     pw = Column(String(64), nullable=False)
     current_level = Column(Integer, default=1)
@@ -67,8 +66,8 @@ class UserLevel(Base):
     levels = relationship("Level")
 
 
-def register_new_user(username, pettype, petgender, petname, pw):
-    new_user = User(username = username, pettype = pettype, petgender = petgender, 
+def register_new_user(username, pettype, petname, pw):
+    new_user = User(username = username, pettype = pettype, 
                     petname = petname)
     new_user.set_password(pw)
     session.add(new_user)
