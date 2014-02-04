@@ -24,7 +24,6 @@ class User(Base, UserMixin):
     username = Column(String(64), nullable=False)
     pettype = Column(String(64), nullable=False)
     petname = Column(String(64), nullable=False)
-    ##petgender = Column(String(64), nullable=False)
     salt = Column(String(64), nullable=False)
     pw = Column(String(64), nullable=False)
     current_level = Column(Integer, default=1)
@@ -41,7 +40,6 @@ class User(Base, UserMixin):
         return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.pw
 
     def increment_current_level(self):
-        # NOTE: make it so that you can't increment level if on the last level
         self.current_level+=1
         session.commit()
         return self.current_level
@@ -67,9 +65,9 @@ class UserLevel(Base):
     levels = relationship("Level")
 
 
-def register_new_user(username, pettype, petname, pw): ##, petgender
+def register_new_user(username, pettype, petname, pw):
     new_user = User(username = username, pettype = pettype, 
-                    petname = petname) ##, petgender = petgender
+                    petname = petname) 
     new_user.set_password(pw)
     session.add(new_user)
     session.commit()

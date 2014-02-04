@@ -59,11 +59,6 @@ var GameBoard = function(level) {
         return gameState;
     };
 
-    // this.pronouns = {
-    //     "shehe": ["she", "he"],
-    //     "herhis": ["her", "his"]
-    // };
-
     this.updateMessage = function(pet) {
         // updates message based on gamestate
         gameBoard = this;
@@ -71,7 +66,7 @@ var GameBoard = function(level) {
             "solved": "<h3>Yay! " + pet.petname + " got to the " + pet.treat + "!</h3>",
             "valid": "<h3>Going " + pet.direction + "...</h3>",
             "notValid": "<h3>Uh-oh, " + pet.petname + " can't go " + pet.direction + " :(</h3>"
-        };  // + gameBoard.pronouns["herhis"][pet.gender]
+        };
         if ((gameBoard.getGameState(pet) == "tryAgain")||(gameBoard.getGameState(pet) == "valid")) {
             return;
         }
@@ -140,11 +135,6 @@ var Pet = function(pettype, petname, level) {
     this.runList = [];
     this.conditionals = [];
     this.running = false;
-    // if (gender == "f") {
-    //     this.gender = 0;
-    // } else {
-    //     this.gender = 1;
-    // }
 
     this.updateLevel = function(newLevel) {
         this.level = newLevel;
@@ -257,7 +247,7 @@ var Pet = function(pettype, petname, level) {
                 pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
                 pet.running = false;
                 gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to the "
-                                         + pet.treat + "!</h3>"; //+ gameBoard.pronouns["herhis"][pet.gender]
+                                         + pet.treat + "!</h3>";
                 
             // move to next level if they press next level btn
             } else if ($(eventObject.target).is("#pop-up-btn-next")) {
@@ -277,7 +267,7 @@ var Pet = function(pettype, petname, level) {
                         pet.redrawPet([pet.currentPos.x, pet.currentPos.y]);
                         pet.redrawTreat([pet.treatPos.x, pet.treatPos.y]);
                         gameBoard.message.innerHTML = "<h3>Help " + pet.petname + " get to the "
-                             + pet.treat + "!</h3>"; //+ gameBoard.pronouns["herhis"][pet.gender]
+                             + pet.treat + "!</h3>";
                     }
                 });
             }
@@ -447,7 +437,6 @@ $(function() {
     mrSnuffles.drawTreat([mrSnuffles.treatPos.x, mrSnuffles.treatPos.y]);
     currentBoard.message.innerHTML = "<h3>Help " + mrSnuffles.petname + " get to the "
                          + mrSnuffles.treat + "!</h3>";
-// + gameBoard.pronouns["herhis"][pet.gender]
 
     // helptext.innerHTML = "<h4>Your directions for " + mrSnuffles.petname + ":</h4>";
     var drawNewArrow = function(direction) {
