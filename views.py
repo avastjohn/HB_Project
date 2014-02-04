@@ -76,7 +76,11 @@ def canvas():
         level = Level.query.get(user.current_level)
     else:
         level = Level.query.get(1)
-    return render_template("canvas.html", user=user, level=level)
+    print "* * * * * * * * * * * * * * * * * * * * * * LEVEL: ", level
+    if level is None:
+        return render_template("you_won.html", user=user)
+    else:
+        return render_template("canvas.html", user=user, level=level)
 
 @app.route("/tutorial")
 def tutorial():
