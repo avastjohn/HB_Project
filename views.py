@@ -44,10 +44,10 @@ def createAccount():
     username = request.form.get("username")
     password = request.form.get("password")
     pettype = request.form.get("pettype")
-    petgender = request.form.get("petgender")
+    ## petgender = request.form.get("petgender")
     petname = request.form.get("petname")
-    if username and password and pettype and petgender and petname:
-        user = model.register_new_user(username, pettype, petgender, petname, password)
+    if username and password and pettype and petname: ##and petgender 
+        user = model.register_new_user(username, pettype, petname, password) ##, petgender
         level = Level.query.get(1)
         user = User.query.filter_by(username=username).first()
         login_user(user)
@@ -98,7 +98,7 @@ def completed():
             level_treatPos = None,
             user_pettype = user.pettype,
             user_petname = user.petname,
-            user_petgender = user.petgender,
+            ## user_petgender = user.petgender,
             done=True)
     else:
         level_obj = Level.query.get(new_level)    
@@ -108,7 +108,7 @@ def completed():
             level_treatPos = level_obj.treatPos,
             user_pettype = user.pettype,
             user_petname = user.petname,
-            user_petgender = user.petgender,
+            ## user_petgender = user.petgender,
             done=False)
         
 @app.route("/you_won")

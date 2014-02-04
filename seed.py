@@ -10,7 +10,7 @@ def load_users():
     # u1 = model.User(username="pinkiepie", 
     #                 pettype="dog",
     #                 petname="Gummy",
-    #                 petgender="m",
+    ##                 petgender="m",
     #                 current_level=2)
     # u1.set_password("balloons")    
     # model.session.add(u1)
@@ -18,7 +18,7 @@ def load_users():
     # u2 = model.User(username="rainbowdash", 
     #                 pettype="penguin",
     #                 petname="Tank",
-    #                 petgender="m",
+    ##                 petgender="m",
     #                 current_level=1)
     # u2.set_password("lightning")    
     # model.session.add(u2)
@@ -26,7 +26,7 @@ def load_users():
     # u3 = model.User(username="twilightsparkle", 
     #                 pettype="penguin",
     #                 petname="Owlewiscious",
-    #                 petgender="m",
+    ##                 petgender="m",
     #                 current_level=4)
     # u3.set_password("stars")    
     # model.session.add(u3) 
@@ -34,7 +34,7 @@ def load_users():
     # u4 = model.User(username="applejack", 
     #                 pettype="dog",
     #                 petname="Winona",
-    #                 petgender="f",
+    ##                 petgender="f",
     #                 current_level=4)
     # u4.set_password("apples")    
     # model.session.add(u4) 
@@ -42,7 +42,7 @@ def load_users():
     # u5 = model.User(username="fluttershy", 
     #                 pettype="koala",
     #                 petname="Angel",
-    #                 petgender="m",
+    ##                 petgender="m",
     #                 current_level=3)
     # u5.set_password("butterflies")    
     # model.session.add(u5) 
